@@ -258,7 +258,11 @@ Usage: bs3-methyl_display.py -h [options]
 
 --meta=META        Plot metagene plot
 ```
-
+**Output**
+* Example Meta-gene Plot
+![meta] (https://github.com/khuang28jhu/bs3/blob/master/metaplot.png)
+* Example Quality Control Plot
+![qclot] (https://github.com/khuang28jhu/bs3/blob/master/QC_Plot.png)
 Use the script **bs3-unconversion.py** to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil in an ideal situation. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
 <br / ><br / >**Usage:**
 ```
@@ -269,6 +273,9 @@ Usage: bs3-unconversion.py -h [options]
 
 -g GENOME         The path to the genome file.
 ```
+**Output**
+* Example Unconversion Rate Plot
+![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 #<a name="Example Use Case"></a>Example Use Case
 
 
