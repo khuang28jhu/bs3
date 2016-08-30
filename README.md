@@ -109,8 +109,8 @@ Relevant Aligner Options:
 --snap-h             MaxHits, (default: 250 on the Mac version, 300 on Linux) a SNAP option; There 
                      are often patterns that occur within multiple locations of a genome. Processing
                      the hashtable index hits with seeds that match these patterns is time-consuming. 
-                     This option sets a threshold on the number of locations that a seed can match to. 
-                     Seeds matching to locations more than this number are considered never existed 
+                     This option sets a threshold on the number of locations that a seed can match to 
+                     .Seeds matching to locations more than this number are considered never existed 
                      during the alignment step.
                      
 Methylation Rate Statistics Display Option:
