@@ -26,7 +26,7 @@ Type the following commands in an Unix Terminal:
 
 ### Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
-**Usage:**<br / >
+####**Usage:**<br / >
 ```$ python bs3-build.py -h ```<br / >
 ```Usage: bs3-build.py -h [options] ```<br />
 -f                   Path to the reference genome; the reference genome should be in fasta format <br /><br />
