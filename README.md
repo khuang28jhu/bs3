@@ -20,23 +20,23 @@ BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accura
 * Plots Quality Control Graph, Meta-gene Plot, and Bisulfite Unconversion Rate Histogram
     * Allows better visualization of the methylation data
 
-#System Requirements
+#<a name="System Requirements"></a>System Requirements
 * Linux or Mac OS Environment
 * Python2 (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python2 could be downloaded from http://www.python.org/download/ )
 * Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
 <br /> ``` pip install pysam ``` <br /> ```   pip install metplolib ``` <br />
 
-#Running BS-Seeker3
+#<a name="Running BS-Seeker3"></a>Running BS-Seeker3
 BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should adjust some parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
 
-### Download BS-Seeker3
+###<a name="Download BS-Seeker3"></a>Download BS-Seeker3
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
 <br />```git clone https://github.com/khuang28jhu/bs3/bs3-mac ```
 * To download the Linux version:
 <br />```git clone https://github.com/khuang28jhu/bs3/bs3-linux ```
 
-### Index Buidling
+###<a name="Index Building"></a>Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
 
 **Usage:**<br / >
@@ -59,7 +59,7 @@ Usage: bs3-build.py -h [options]
                      location size should be used; for example, to build an index based on the human 
                      genome, a location size of 5 bytes is recommended. 
 ```
-### Alignment
+###<a name="Alignment"></a>Alignment
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input:**<br / >
 * BS reads file in fastq
@@ -136,7 +136,7 @@ Methylated C in mapped reads
 SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAATTGAATGGAATTATTGAATGGATTTGAATGGAATAATTATTGAATGGAATTGAATGGAA	IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII	PG:Z:SNAP	NM:i:3	RG:Z:FASTQ	PL:Z:Illumina	PU:Z:pu	LB:Z:lb	SM:Z:sm
 ```
 
-### Methylation Rate Calculation
+###<a name="Methylation Rate Calculation"></a>Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input**
 * SAM file from the previous step
@@ -231,7 +231,7 @@ Options:
 
 
 
-### Methylation Rate Statistics Display
+###<a name="Methylation Rate Statistics Display"></a>Methylation Rate Statistics Display
 Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / > 
 
 **Input**
