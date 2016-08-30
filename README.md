@@ -10,6 +10,8 @@ BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accura
    - [Methylation Rate Calculation](#Methylation Rate Calculation)
    - [Methylation Rate Statistics Display](#Methylation Rate Statistics Display)
 - [Example Use Case](#Example Use Case)
+
+
 #New Features
 * Implements Improved Indexing, Fast Alignment with SNAP, and Highly Optimized SNAP Output Post-Processing
     * Produces an ultra-fast bisulfite read maping pipeline
