@@ -127,7 +127,8 @@ Methylation Rate Statistics Display Option:
 ### Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input**
-* SAM file from the previous step<br / >
+* SAM file from the previous step
+
 **Output**
 
 - wig file
