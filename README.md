@@ -153,8 +153,8 @@ Options:
 
 -o OUTFILE,         The output prefix to create the CGmap, ATCGmap and wiggle files
 
---sorted,           Specify when the input bam file is already sorted, the sorting step will be skipped
-                    [Default: False]
+--sorted,           Specify when the input bam file is already sorted, the sorting step will be 
+                    skipped [Default: False]
 ```
 **Output**
 
