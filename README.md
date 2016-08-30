@@ -140,6 +140,7 @@ SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAAT
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input**
 * SAM file from the previous step
+
 **Usage:**
 ```
 $ python bs3-call_methylation.py -h 
