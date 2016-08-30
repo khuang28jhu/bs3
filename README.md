@@ -48,8 +48,7 @@ Usage: bs3-build.py -h [options]
 ```
 ### Alignment
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
-Input: fastq or fasta
-Output: SAM
+
 **Usage:**
 ```
 $ python bs3-align.py -h 
@@ -114,7 +113,7 @@ Options:
 ```
 
 ### Methylation Rate Statistics Display
-Use the script bs3-methyl_display.py to plot the meta-gene file or the quality control plot.<br / ><br / >  
+Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / >  
 **Usage:**
 ```
 $ python bs3-methyl_display.py -h 
@@ -133,7 +132,7 @@ Usage: bs3-methyl_display.py -h [options]
 --meta=META        Plot metagene plot
 ```
 
-Use the script bs3-unconversion.py to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil if the bisulfite conversion step is done perfectly. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
+Use the script **bs3-unconversion.py** to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil if the bisulfite conversion step is done perfectly. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
 <br / ><br / >**Usage:**
 ```
 $ python bs3-unconversion.py -h
