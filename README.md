@@ -220,7 +220,13 @@ Options:
 ```
 
 ### Methylation Rate Statistics Display
-Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / >  
+Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / > 
+
+**Input**
+* 'CGmap' file from the 'Methylation Rate Calculation' step
+* For a Metagene Plot based on a paritcular genomic structure (gene or transposon), the gene annotation file (in gff3); [Description of the fields in a gff3 file](http://gmod.org/wiki/GFF3#GFF3_Format)
+* * For a QC Plot, the .qc file from the 'Alignment' step; 
+
 **Usage:**
 ```
 $ python bs3-methyl_display.py -h 
@@ -229,7 +235,7 @@ Usage: bs3-methyl_display.py -h [options]
 -m MET             Supply the single-base resolution methylation level file generated during the 
                    methylation rate calculation (in CG format)
                    
--a ANNOTATION      Suppply the gene annotation file to build the meta-plot
+-a ANNOTATION      Suppply the gene annotation file to build the meta-plot (in gff3 format)
 
 -r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot, transposon or gene. 
                    Select each with the option ```-r gene``` or ```-r transposon```; (default: gene)
