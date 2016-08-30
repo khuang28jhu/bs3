@@ -1,1 +1,2 @@
-bs3
+
+BS Seeker performs accurate and fast mapping of bisulfite-treated short reads. It is able to align reads generated from the Cokus et al's library protocol (with tags) or the Lister et al's library protocol (with no tags). Among the software tested, BS Seeker has the highest accuracy, the least biased mapping, and the greatest coverage in Arabidopsis mapping. It is also the only bisulfite aligner feasible for mapping large genomes such as human.
