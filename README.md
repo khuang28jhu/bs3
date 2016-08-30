@@ -252,7 +252,8 @@ Usage: bs3-methyl_display.py -h [options]
 -r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot, transposon or gene. 
                    Select each with the option ```-r gene``` or ```-r transposon```; (default: gene)
                    
--q QC_F            Plot Quality Control Graph, supply the .qc file generated during the alignment step
+-q QC_F            Plot Quality Control Graph, supply the .qc file generated during the alignment 
+                   step
 
 --meta=META        Plot metagene plot
 ```
