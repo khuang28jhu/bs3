@@ -276,7 +276,8 @@ Usage: bs3-unconversion.py -h [options]
 **Output**
 * Example Unconversion Rate Plot
 ![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
-#<a name="Example Use Case"></a>Example Use Case
+
+# <a name="Example Use Case"></a>Example Use Case
 
 
 
