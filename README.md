@@ -267,6 +267,7 @@ Usage: bs3-unconversion.py -h [options]
 
 -g GENOME         The path to the genome file.
 ```
+#<a name="Example Use Case"></a>Example Use Case
 
 
 
