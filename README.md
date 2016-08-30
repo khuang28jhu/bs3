@@ -1,2 +1,2 @@
-
-BS Seeker 3 is the latest version of BS Seeker, a software that performs accurate and fast mapping of bisulfite-treated short reads. It incorpaortes new implementation features that enable it to acheive significantly faster speed and accuracy with respect to other bisulfite reads aligners. BS Seeker 3 also provides additional anlysis tool to further investigate and visualize the methylation data after alignment. 
+\b BS-Seeker2 \b
+BS Seeker 3 is the latest version of BS Seeker, a software that performs accurate and fast mapping of bisulfite-treated short reads. It incorpaortes new implementation features that enable it to acheive significantly faster speed and accuracy with respect to other available bisulfite reads aligners. BS Seeker 3 also provides additional anlysis to further investigate and visualize the raw mapped read data after alignment. 
