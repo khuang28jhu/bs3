@@ -80,18 +80,18 @@ Important General options:
 
 Relevant Aligner Options:
 
---snap-h             MaxHits, (default: 250 on the Mac version, 300 on Linux) a SNAP option; There are
-                     often patterns that occur within multiple locations of a genome. Processing the 
-                     hashtable index hits with seeds that match these patterns is time-consuming. This
-                     option sets a threshold on the number of locations that a seed can match to. Seeds
-                     matching to locations more than this number are considered never existed during 
-                     the alignment step.
+--snap-h             MaxHits, (default: 250 on the Mac version, 300 on Linux) a SNAP option; There 
+                     are often patterns that occur within multiple locations of a genome. Processing
+                     the hashtable index hits with seeds that match these patterns is time-consuming. 
+                     This option sets a threshold on the number of locations that a seed can match to. 
+                     Seeds matching to locations more than this number are considered never existed 
+                     during the alignment step.
                      
 Methylation Rate Statistics Display Option:
 
 --qcf=QC_F           Supply the length of the raw bisulfite reads to plot a quality control plot. A 
-                     quality control plot tabulates the average rate of mismatches of each position on 
-                     a raw read.
+                     quality control plot tabulates the average rate of mismatches of each position 
+                     on a raw read.
 ```
 
 ### Methylation Rate Calculation
@@ -125,8 +125,8 @@ Usage: bs3-methyl_display.py -h [options]
                    
 -a ANNOTATION      Suppply the gene annotation file to build the meta-plot
 
--r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot, transposon or gene. Select
-                   each with the option ```-r gene``` or ```-r transposon```; (default: gene)
+-r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot, transposon or gene. 
+                   Select each with the option ```-r gene``` or ```-r transposon```; (default: gene)
                    
 -q QC_F            Plot Quality Control Graph, supply the .qc file generated during the alignment step
 
@@ -134,7 +134,7 @@ Usage: bs3-methyl_display.py -h [options]
 ```
 
 Use the script bs3-unconversion.py to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil if the bisulfite conversion step is done perfectly. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
-**Usage:**
+<br / ><br / >**Usage:**
 ```
 $ python bs3-unconversion.py -h
 Usage: bs3-unconversion.py -h [options]
