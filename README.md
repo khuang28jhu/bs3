@@ -15,7 +15,7 @@ BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accura
 <br /> ``` pip install pysam ``` <br /> ```   pip install metplolib ``` <br />
 
 #Running BS-Seeker3
-BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should supply different parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
+BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should adjust some parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
 
 ### Download BS-Seeker3
 Type the following commands in an Unix Terminal:
@@ -25,7 +25,10 @@ Type the following commands in an Unix Terminal:
 <br />```git clone https://github.com/khuang28jhu/bs3/bs3-linux ```
 
 ### Index Buidling
-Use the script **bs_seeker2-build.py** to build an index from a reference genome. <br / >
-**Usage:**
+Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
+**Usage:**```
+$ python bs3-build.py -h
+Usage: bs3-build.py -h [options]
+-s       Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data strucutre. It builds its index by breaking the reference genome into seqeunces (seed) of a specific length. This option determines the length of each seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of 20 is recommended for bisulfite reads of 100 bp long; a longer size should be used for raw reads of longer length.
 
 
