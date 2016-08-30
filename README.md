@@ -15,7 +15,7 @@ BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accura
 <br /> ``` pip install pysam ``` <br /> ```   pip install metplolib ``` <br />
 
 #Running BS-Seeker3
-## Download BS-Seeker3
+### Download BS-Seeker3
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
 <br />```git clone https://github.com/khuang28jhu/bs3/bs3-mac ```
