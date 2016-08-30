@@ -7,17 +7,19 @@ BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accura
     * Achieves high mappability and accuracy
 * Plots Quality Control Graph, Meta-gene Plot, and Bisulfite Unconversion Rate Histogram
     * Allows better visualization of the methylation data
+
 #System Requirements
 * Linux or Mac OS Environment
 * Python2 (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python2 could be downloaded from http://www.python.org/download/ )
 * Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
 <br /> ``` pip install pysam ``` <br /> ```   pip install metplolib ``` <br />
+
 #Running BS-Seeker3
 ## Download BS-Seeker3
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
-```git clone https://github.com/khuang28jhu/bs3/bs3-mac ```
+<br />```git clone https://github.com/khuang28jhu/bs3/bs3-mac ```
 * To download the Linux version:
-```git clone https://github.com/khuang28jhu/bs3/bs3-linux ```
+<br />```git clone https://github.com/khuang28jhu/bs3/bs3-linux ```
 
 
