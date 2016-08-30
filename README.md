@@ -64,6 +64,27 @@ Options:
 -o OUTFILE, The output prefix to create ATCGmap and wiggle files
 --sorted, Specify when the input bam file is already sorted, the sorting step will be skipped [Default: False]
 
+### Methylation Rate Statistics Display
+Use the script bs3-methyl_display.py to plot the meta-gene file or the quality control plot.  
+**Usage:**<br / >
+```$ python bs3-methyl_display.py -h ```<br / >
+```Usage: bs3-methyl_display.py -h [options] ```<br />
+
+-m MET   Supply the single-base resolution methylation level file generated during the methylation rate calculation (in CG format)
+-a ANNOTATION      Suppply the gene annotation file to build the meta-plot
+-r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot, transposon or gene. Select each with the option ```-r gene``` or ```-r transposon```; (default: gene)
+-q QC_F            Plot Quality Control Graph, supply the .qc file generated during the alignment step
+--meta=META        Plot metagene plot
+
+Use the script bs3-unconversion.py to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil if the bisulfite conversion step is done perfectly. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
+**Usage:**<br / >
+```$ python bs3-unconversion.py -h```<br / >
+```Usage: bs3-unconversion.py -h [options] ```<br />
+-f INPUT    The path to the raw bisulfite read file.
+-g GENOME   The path to the genome file.
+
+
+
 
 
 
