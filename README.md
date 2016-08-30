@@ -225,7 +225,7 @@ Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quali
 **Input**
 * 'CGmap' file from the 'Methylation Rate Calculation' step
 * For a Metagene Plot based on a paritcular genomic structure (gene or transposon), the gene annotation file (in gff3); [Description of the fields in a gff3 file](http://gmod.org/wiki/GFF3#GFF3_Format)
-* * For a QC Plot, the .qc file from the 'Alignment' step; 
+* For a QC Plot, the '.qc' file from the 'Alignment' step; 
 
 **Usage:**
 ```
