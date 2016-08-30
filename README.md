@@ -50,53 +50,99 @@ Usage: bs3-build.py -h [options]
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 Input: fastq or fasta
 Output: SAM
-**Usage:**<br / >
-```$ python bs3-align.py -h ```<br / >
-```Usage: bs3-align.py -h [options] ```<br />
+**Usage:**
+```
+$ python bs3-align.py -h 
+Usage: bs3-align.py -h [options] 
+
 For single end reads:
--i INFILE, --input=INFILE Input read file (FORMAT:  fasta, fastq). Ex: read.fa or read.fa.gz
+
+-i INFILE,           Input read file (FORMAT:  fasta, fastq). Ex: read.fa or read.fa.gz
+
 For pair end reads:
--1 FILE, --input_1=FILE  Input read file, mate 1 (FORMAT: fasta, fastq)
--2 FILE, --input_2=FILE  Input read file, mate 2 (FORMAT: fasta, fastq)
+
+-1 FILE,             Input read file, mate 1 (FORMAT: fasta, fastq)
+
+-2 FILE,             Input read file, mate 2 (FORMAT: fasta, fastq)
+
 Important General options:
--g GENOME, --genome=GENOME Name of the reference genome (should be the same as "-f" in bs_seeker2-build.py ) [ex. chr21_hg18.fa]
--m NO_MISMATCHES, --mismatches=NO_MISMATCHES Number(>=1)/Percentage([0, 1)) of mismatches in one read. Ex: 4 (allow 8 mismatches) or 0.08 (allow 8% mismatches) [Default: 12]
--l INT, --split_line=INT Number of lines per split (the read file will be split into small files for mapping. The result will be merged. [Default: 12800000]
--o OUTFILE, --output=OUTFILE The name of output file 
+
+-g GENOME,           Name of the reference genome (should be the same as "-f" in bs3-build.py ) [ex.
+                     chr21_hg18.fa]
+
+-m NO_MISMATCHES,    Set the number(>=1)/percentage([0, 1)) of mismatches in a read. Ex: 4 (allow 8 
+                     mismatches) or 0.08 (allow 8% mismatches) [Default: 12]
+                     
+-l INT,              Split the input file into smaller files based on this number. Each smaller file 
+                     is processed in paralell. The result is then merged. [Default: 12800000]
+                     
+-o OUTFILE           The name of output file 
+
 Relevant Aligner Options:
---snap-h MaxHits, (default: 250 on the Mac version, 300 on Linux) a SNAP option; There are often patterns that occur within multiple locations of a genome. Processing the hashtable index hits with seeds that match these patterns is time-consuming. This option sets a threshold on the number of locations that a seed can match to. Seeds matching to locations more than this number are considered never existed during the alignment step.
-Methylation Level Statistics Display Option:
---qcf=QC_F        Supply the length of the raw bisulfite reads to plot a quality control plot. A quality control plot tabulates the average rate of mismatches of each position along a raw read.
+
+--snap-h             MaxHits, (default: 250 on the Mac version, 300 on Linux) a SNAP option; There are
+                     often patterns that occur within multiple locations of a genome. Processing the 
+                     hashtable index hits with seeds that match these patterns is time-consuming. This
+                     option sets a threshold on the number of locations that a seed can match to. Seeds
+                     matching to locations more than this number are considered never existed during 
+                     the alignment step.
+                     
+Methylation Rate Statistics Display Option:
+
+--qcf=QC_F           Supply the length of the raw bisulfite reads to plot a quality control plot. A 
+                     quality control plot tabulates the average rate of mismatches of each position on 
+                     a raw read.
+```
 
 ### Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
-**Usage:**<br / >
-```$ python bs3-call_methylation.py -h ```<br / >
-```Usage: bs3-call_methylation.py -h [options] ```<br />
+**Usage:**
+```
+$ python bs3-call_methylation.py -h 
+Usage: bs3-call_methylation.py -h [options]
+
 Options:
--i INFILE, SAM output from bs3-align.py
--d DBPATH, Path to the reference genome library (generated in index buidling) (optional)
--o OUTFILE, The output prefix to create ATCGmap and wiggle files
---sorted, Specify when the input bam file is already sorted, the sorting step will be skipped [Default: False]
+
+-i INFILE,          Input alinged reads file in SAM format; output from bs3-align.py
+
+-d DBPATH,          Path to the reference genome library (generated during index-buidling) (optional)
+
+-o OUTFILE,         The output prefix to create the CGmap, ATCGmap and wiggle files
+
+--sorted,           Specify when the input bam file is already sorted, the sorting step will be skipped
+                    [Default: False]
+```
 
 ### Methylation Rate Statistics Display
-Use the script bs3-methyl_display.py to plot the meta-gene file or the quality control plot.  
-**Usage:**<br / >
-```$ python bs3-methyl_display.py -h ```<br / >
-```Usage: bs3-methyl_display.py -h [options] ```<br />
+Use the script bs3-methyl_display.py to plot the meta-gene file or the quality control plot.<br / ><br / >  
+**Usage:**
+```
+$ python bs3-methyl_display.py -h 
+Usage: bs3-methyl_display.py -h [options] 
 
--m MET   Supply the single-base resolution methylation level file generated during the methylation rate calculation (in CG format)
+-m MET             Supply the single-base resolution methylation level file generated during the 
+                   methylation rate calculation (in CG format)
+                   
 -a ANNOTATION      Suppply the gene annotation file to build the meta-plot
--r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot, transposon or gene. Select each with the option ```-r gene``` or ```-r transposon```; (default: gene)
+
+-r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot, transposon or gene. Select
+                   each with the option ```-r gene``` or ```-r transposon```; (default: gene)
+                   
 -q QC_F            Plot Quality Control Graph, supply the .qc file generated during the alignment step
+
 --meta=META        Plot metagene plot
+```
 
 Use the script bs3-unconversion.py to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil if the bisulfite conversion step is done perfectly. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
-**Usage:**<br / >
-```$ python bs3-unconversion.py -h```<br / >
-```Usage: bs3-unconversion.py -h [options] ```<br />
--f INPUT    The path to the raw bisulfite read file.
--g GENOME   The path to the genome file.
+**Usage:**
+```
+$ python bs3-unconversion.py -h
+Usage: bs3-unconversion.py -h [options]
+
+-f INPUT          The path to the raw bisulfite read file.
+
+-g GENOME         The path to the genome file.
+```
 
 
 
