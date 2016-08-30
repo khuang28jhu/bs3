@@ -44,6 +44,13 @@ TCTGTAGACGGGTCGAATGGGGAGTTCATAGGGGGG
 **Output:**<br / >
 1. Alignment Summary in .stat file
 ```
+Number of reads in total: 10000000
+Number of unique-hits reads (before post-filtering): 9359751.0
+Number of reads mapped after post-filtering 3343919.0
+Methylated C in mapped reads
+ mCG  0.685%
+ mCHG  0.031%
+ mCHH  0.030%
 
 ```
 **Usage:**<br / >
