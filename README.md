@@ -26,9 +26,9 @@ Type the following commands in an Unix Terminal:
 
 ### Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
-**Usage:**```
-$ python bs3-build.py -h <br / >
-Usage: bs3-build.py -h [options] <br / >
--s       Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data strucutre. It builds its index by breaking the reference genome into seqeunces (seed) of a specific length. This option determines the length of each seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of 20 is recommended for bisulfite reads of 100 bp long; a longer size should be used for raw reads of longer length.```
+**Usage:**<br / >
+```$ python bs3-build.py -h ```<br / >
+```Usage: bs3-build.py -h [options] ```<br / >
+```-s       Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data strucutre. It builds its index by breaking the reference genome into seqeunces (seed) of a specific length. This option determines the length of each seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of 20 is recommended for bisulfite reads of 100 bp long; a longer size should be used for raw reads of longer length.```
 
 
