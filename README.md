@@ -35,6 +35,8 @@ Use the script **bs3-build.py** to build an index from a reference genome. <br /
 
 ### Alignment
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
+Input: fastq or fasta
+Output: SAM
 **Usage:**<br / >
 ```$ python bs3-align.py -h ```<br / >
 ```Usage: bs3-align.py -h [options] ```<br />
