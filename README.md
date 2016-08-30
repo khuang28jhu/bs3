@@ -27,14 +27,14 @@ Type the following commands in an Unix Terminal:
 ### Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
 **Input:**<br / >
-1. BS reads file in fastq
+* BS reads file in fastq
 ```
 @SRR019072.2842 HWI-EAS365_1060:4:1:51:313 length=87
 TAATTAGATTTGTGTTATAGATTATTTGTAAAGAAAGTAATTATTAAAGGAAATGTTAGTTTTTATTTGATATATGATAAGAGAACG
 +SRR019072.2842 HWI-EAS365_1060:4:1:51:313 length=87
 BBBCC@)8ABA/<2>CB:=.:?BBABB1-:@74@B@?=@@ABB@B7@@5/98<;)<>56:?>:;A?A?A@>=AABB@A<3(@@=086
 ```
-2. BS reads file in fasta
+* BS reads file in fasta
 ```
 >read1
 TCCATTATACCGTAACCCAATACAAAAATTATTTAT
@@ -42,7 +42,7 @@ TCCATTATACCGTAACCCAATACAAAAATTATTTAT
 TCTGTAGACGGGTCGAATGGGGAGTTCATAGGGGGG
 ```
 **Output:**<br / >
-1. Alignment Summary in .stat file
+* Alignment Summary in .stat file
 ```
 Number of reads in total: 10000000
 Number of unique-hits reads (before post-filtering): 9359751.0
@@ -52,11 +52,12 @@ Methylated C in mapped reads
  mCHG  0.031%
  mCHH  0.030%
 ```
-2. List of Aligned Reads in SAM Format
-**Usage:**<br / >
+* List of Aligned Reads in SAM Format (SAM Fields Description)
+
 ```
 SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAATTGAATGGAATTATTGAATGGATTTGAATGGAATAATTATTGAATGGAATTGAATGGAA	IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII	PG:Z:SNAP	NM:i:3	RG:Z:FASTQ	PL:Z:Illumina	PU:Z:pu	LB:Z:lb	SM:Z:sm
 ```
+**Usage:**<br / >
 ```
 $ python bs3-build.py -h 
 Usage: bs3-build.py -h [options]
