@@ -11,6 +11,6 @@ BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accura
 #System Requirements
 * Linux or Mac OS Environment
 * Python (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python could be downloaded from http://www.python.org/download/ )
-* Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on a UNIX terminal:
-<br /> ``` 'pip install pysam'   'pip install metplolib' ```
+* Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
+<br /> ``` 'pip install pysam' ``` <br /> ```   'pip install metplolib' ```
 
