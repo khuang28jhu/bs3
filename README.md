@@ -263,6 +263,8 @@ Usage: bs3-methyl_display.py -h [options]
 ![meta] (https://github.com/khuang28jhu/bs3/blob/master/metaplot.png)
 * Example Quality Control Plot
 ![qclot] (https://github.com/khuang28jhu/bs3/blob/master/QC_Plot.png)
+
+
 Use the script **bs3-unconversion.py** to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil in an ideal situation. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
 <br / ><br / >**Usage:**
 ```
