@@ -138,7 +138,7 @@ SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAAT
 
 ###<a name="Methylation Rate Calculation"></a>Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
-**Input**
+**Input:**
 * SAM file from the previous step
 
 **Usage:**
@@ -157,7 +157,7 @@ Options:
 --sorted,           Specify when the input bam file is already sorted, the sorting step will be 
                     skipped [Default: False]
 ```
-**Output**
+**Output:**
 
 - wig file
 
@@ -235,7 +235,7 @@ Options:
 ###<a name="Methylation Rate Statistics Display"></a>Methylation Rate Statistics Display
 Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / > 
 
-**Input**
+**Input:**
 * 'CGmap' file from the 'Methylation Rate Calculation' step
 * For a Metagene Plot based on a paritcular genomic structure (gene or transposon), the gene annotation file (in gff3); [Description of the fields in a gff3 file](http://gmod.org/wiki/GFF3#GFF3_Format)
 * For a QC Plot, the '.qc' file from the 'Alignment' step; 
