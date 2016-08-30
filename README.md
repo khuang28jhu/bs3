@@ -126,6 +126,78 @@ Methylation Rate Statistics Display Option:
 
 ### Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
+**Output files**
+
+- wig file
+
+    Sample:
+
+        variableStep chrom=chr1
+        3000419	0.000000
+        3000423	-0.2
+        3000440	0.000000
+        3000588	0.5
+        3000593	-0.000000
+
+
+        Format descriptions:
+        WIG file format. Negative value for 2nd column indicate a Cytosine on minus strand.
+
+
+- CGmap file
+
+    Sample:
+
+        chr1	G	3000851	CHH	CC	0.1	1	10
+        chr1	C	3001624	CHG	CA	0.0	0	9
+        chr1	C	3001631	CG	CG	1.0	5	5
+
+    Format descriptions:
+
+        (1) chromosome
+        (2) nucleotide on Watson (+) strand
+        (3) position
+        (4) context (CG/CHG/CHH)
+        (5) dinucleotide-context (CA/CC/CG/CT)
+        (6) methylation-level = #_of_C / (#_of_C + #_of_T).
+        (7) #_of_C (methylated C, the count of reads showing C here)
+        (8) = #_of_C + #_of_T (all Cytosines, the count of reads showing C or T here)
+
+
+- ATCGmap file
+
+    Sample:
+
+        chr1	T	3009410	--	--	0	10	0	0	0	0	0	0	0	0	na
+        chr1	C	3009411	CHH	CC	0	10	0	0	0	0	0	0	0	0	0.0
+        chr1	C	3009412	CHG	CC	0	10	0	0	0	0	0	0	0	0	0.0
+        chr1	C	3009413	CG	CG	0	10	50	0	0	0	0	0	0	0	0.83
+
+
+    Format descriptions:
+
+        (1) chromosome
+        (2) nucleotide on Watson (+) strand
+        (3) position
+        (4) context (CG/CHG/CHH)
+        (5) dinucleotide-context (CA/CC/CG/CT)
+
+        (6) - (10) plus strand
+        (6) # of reads from Watson strand mapped here, support A on Watson strand
+        (7) # of reads from Watson strand mapped here, support T on Watson strand
+        (8) # of reads from Watson strand mapped here, support C on Watson strand
+        (9) # of reads from Watson strand mapped here, support G on Watson strand
+        (10) # of reads from Watson strand mapped here, support N
+
+        (11) - (15) minus strand
+        (11) # of reads from Crick strand mapped here, support A on Watson strand and T on Crick strand
+        (12) # of reads from Crick strand mapped here, support T on Watson strand and A on Crick strand
+        (13) # of reads from Crick strand mapped here, support C on Watson strand and G on Crick strand
+        (14) # of reads from Crick strand mapped here, support G on Watson strand and C on Crick strand
+        (15) # of reads from Crick strand mapped here, support N
+
+        (16) methylation_level = #C/(#C+#T) = C8/(C7+C8) for Watson strand, =C14/(C11+C14) for Crick strand;
+        "nan" means none reads support C/T at this position.
 **Usage:**
 ```
 $ python bs3-call_methylation.py -h 
