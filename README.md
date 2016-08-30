@@ -12,7 +12,7 @@ BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accura
 - [Example Use Case](#Example Use Case)
 
 
-#New Features
+#<a name="New Features"></a>New Features
 * Implements Improved Indexing, Fast Alignment with SNAP, and Highly Optimized SNAP Output Post-Processing
     * Produces an ultra-fast bisulfite read maping pipeline
 * Executes Local Alignment through the Unnoken Algorithm
