@@ -33,5 +33,38 @@ Use the script **bs3-build.py** to build an index from a reference genome. <br /
 -s                   Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data strucutre. It builds its index by breaking the reference genome into seqeunces (seed) of a specific length. This option determines the length of each seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of 20 is recommended for bisulfite reads of 100 bp long; a longer size should be used for raw reads of longer length. <br / ><br / >
 -locationSize        (default: 4), a SNAP option specific to the Linux implementation; This options determines the byte size used to store the location of each seed along the reference genome. It ranges from 4 to 8 bytes. For larger genomes, a larger location size should be used; for example, to build an index based on the human genome, a location size of 5 bytes is recommended.  <br / ><br / >
 
+### Alignment
+Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
+**Usage:**<br / >
+```$ python bs3-align.py -h ```<br / >
+```Usage: bs3-align.py -h [options] ```<br />
+For single end reads:
+-i INFILE, --input=INFILE Input read file (FORMAT:  fasta, fastq). Ex: read.fa or read.fa.gz
+For pair end reads:
+-1 FILE, --input_1=FILE  Input read file, mate 1 (FORMAT: fasta, fastq)
+-2 FILE, --input_2=FILE  Input read file, mate 2 (FORMAT: fasta, fastq)
+Important General options:
+-g GENOME, --genome=GENOME Name of the reference genome (should be the same as "-f" in bs_seeker2-build.py ) [ex. chr21_hg18.fa]
+-m NO_MISMATCHES, --mismatches=NO_MISMATCHES Number(>=1)/Percentage([0, 1)) of mismatches in one read. Ex: 4 (allow 8 mismatches) or 0.08 (allow 8% mismatches) [Default: 12]
+-l INT, --split_line=INT Number of lines per split (the read file will be split into small files for mapping. The result will be merged. [Default: 12800000]
+-o OUTFILE, --output=OUTFILE The name of output file 
+Relevant Aligner Options:
+--snap-h MaxHits, (default: 250 on the Mac version, 300 on Linux) a SNAP option; There are often patterns that occur within multiple locations of a genome. Processing the hashtable index hits with seeds that match these patterns is time-consuming. This option sets a threshold on the number of locations that a seed can match to. Seeds matching to locations more than this number are considered never existed during the alignment step.
+Methylation Level Statistics Display Option:
+--qcf=QC_F        Supply the length of the raw bisulfite reads to plot a quality control plot. A quality control plot tabulates the average rate of mismatches of each position along a raw read.
+
+### Methylation Rate Calculation
+Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
+**Usage:**<br / >
+```$ python bs3-call_methylation.py -h ```<br / >
+```Usage: bs3-call_methylation.py -h [options] ```<br />
+Options:
+-i INFILE, SAM output from bs3-align.py
+-d DBPATH, Path to the reference genome library (generated in index buidling) (optional)
+-o OUTFILE, The output prefix to create ATCGmap and wiggle files
+--sorted, Specify when the input bam file is already sorted, the sorting step will be skipped [Default: False]
+
+
+
 
 
