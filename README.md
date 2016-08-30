@@ -41,6 +41,11 @@ TCCATTATACCGTAACCCAATACAAAAATTATTTAT
 >read2
 TCTGTAGACGGGTCGAATGGGGAGTTCATAGGGGGG
 ```
+**Output:**<br / >
+1. Alignment Summary in .stat file
+```
+
+```
 **Usage:**<br / >
 ```
 $ python bs3-build.py -h 
