@@ -1,5 +1,15 @@
 #BS-Seeker3 
-BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accurate and fast mapping of bisulfite-treated short reads. It incorpaortes several new implementation features that enable it to acheive significantly faster speed and accuracy with respect to other available bisulfite reads aligners. BS-Seeker3 also provides additional anlysis to further investigate and visualize the raw mapped read data after alignment. 
+BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accurate and fast mapping of bisulfite-treated short reads. It incorpaortes several new implementation features that enable it to acheive significantly faster speed and accuracy with respect to other available bisulfite reads aligners. BS-Seeker3 also provides additional anlysis to further investigate and visualize the raw mapped read data after alignment.
+#Table of Contents
+-[New Features](#New Features)
+-[System Requirements](#System Requirements)
+-[BS-Seeker3 Usage](#Running BS-Seeker3)
+   -[Download BS-Seeker3](#Download BS-Seeker3)
+   -[Index Buidling](#Index Buidling)
+   -[Alignment](#Alignment)
+   -[Methylation Rate Calculation](#Methylation Rate Calculation)
+   -[Methylation Rate Statistics Display](#Methylation Rate Statistics Display)
+-[Example Use Case](#Example Use Case)
 #New Features
 * Implements Improved Indexing, Fast Alignment with SNAP, and Highly Optimized SNAP Output Post-Processing
     * Produces an ultra-fast bisulfite read maping pipeline
@@ -64,22 +74,6 @@ TCCATTATACCGTAACCCAATACAAAAATTATTTAT
 >read2
 TCTGTAGACGGGTCGAATGGGGAGTTCATAGGGGGG
 ```
-**Output:**<br / >
-* Alignment Summary in .stat file
-```
-Number of reads in total: 10000000
-Number of unique-hits reads (before post-filtering): 9359751.0
-Number of reads mapped after post-filtering 3343919.0
-Methylated C in mapped reads
- mCG  0.685%
- mCHG  0.031%
- mCHH  0.030%
-```
-* List of Aligned Reads in SAM Format ([SAM Fields Description](https://samtools.github.io/hts-specs/SAMv1.pdf))
-
-```
-SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAATTGAATGGAATTATTGAATGGATTTGAATGGAATAATTATTGAATGGAATTGAATGGAA	IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII	PG:Z:SNAP	NM:i:3	RG:Z:FASTQ	PL:Z:Illumina	PU:Z:pu	LB:Z:lb	SM:Z:sm
-```
 **Usage:**
 ```
 $ python bs3-align.py -h 
@@ -123,12 +117,43 @@ Methylation Rate Statistics Display Option:
                      quality control plot tabulates the average rate of mismatches of each position 
                      on a raw read.
 ```
+**Output:**<br / >
+* Alignment Summary in .stat file
+```
+Number of reads in total: 10000000
+Number of unique-hits reads (before post-filtering): 9359751.0
+Number of reads mapped after post-filtering 3343919.0
+Methylated C in mapped reads
+ mCG  0.685%
+ mCHG  0.031%
+ mCHH  0.030%
+```
+* List of Aligned Reads in SAM Format ([SAM Fields Description](https://samtools.github.io/hts-specs/SAMv1.pdf))
+
+```
+SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAATTGAATGGAATTATTGAATGGATTTGAATGGAATAATTATTGAATGGAATTGAATGGAA	IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII	PG:Z:SNAP	NM:i:3	RG:Z:FASTQ	PL:Z:Illumina	PU:Z:pu	LB:Z:lb	SM:Z:sm
+```
 
 ### Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input**
 * SAM file from the previous step
+**Usage:**
+```
+$ python bs3-call_methylation.py -h 
+Usage: bs3-call_methylation.py -h [options]
 
+Options:
+
+-i INFILE,          Input alinged reads file in SAM format; output from bs3-align.py
+
+-d DBPATH,          Path to the reference genome library (generated during index-buidling) (optional)
+
+-o OUTFILE,         The output prefix to create the CGmap, ATCGmap and wiggle files
+
+--sorted,           Specify when the input bam file is already sorted, the sorting step will be skipped
+                    [Default: False]
+```
 **Output**
 
 - wig file
@@ -202,22 +227,7 @@ Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
         (16) methylation_level = #C/(#C+#T) = C8/(C7+C8) for Watson strand, =C14/(C11+C14) for Crick strand;
         "nan" means none reads support C/T at this position.
 
-**Usage:**
-```
-$ python bs3-call_methylation.py -h 
-Usage: bs3-call_methylation.py -h [options]
 
-Options:
-
--i INFILE,          Input alinged reads file in SAM format; output from bs3-align.py
-
--d DBPATH,          Path to the reference genome library (generated during index-buidling) (optional)
-
--o OUTFILE,         The output prefix to create the CGmap, ATCGmap and wiggle files
-
---sorted,           Specify when the input bam file is already sorted, the sorting step will be skipped
-                    [Default: False]
-```
 
 ### Methylation Rate Statistics Display
 Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / > 
