@@ -15,11 +15,15 @@ BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accura
 <br /> ``` pip install pysam ``` <br /> ```   pip install metplolib ``` <br />
 
 #Running BS-Seeker3
+BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should supply different parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
+
 ### Download BS-Seeker3
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
 <br />```git clone https://github.com/khuang28jhu/bs3/bs3-mac ```
 * To download the Linux version:
 <br />```git clone https://github.com/khuang28jhu/bs3/bs3-linux ```
+
+### Download BS-Seeker3
 
 
