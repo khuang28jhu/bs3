@@ -26,6 +26,29 @@ Type the following commands in an Unix Terminal:
 
 ### Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
+
+**Usage:**<br / >
+```
+$ python bs3-build.py -h 
+Usage: bs3-build.py -h [options]
+
+-f                   Path to the reference genome; the reference genome should be in fasta format
+
+-s                   Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data 
+                     strucutre. It builds its index by breaking the reference genome into seqeunces
+                     (seed) of a specific length. This option determines the length of each 
+                     seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of
+                     20 is recommended for bisulfite reads of 100 bp long; a longer size should be
+                     used for raw reads of longer length. 
+                     
+-locationSize        (default: 4), a SNAP option specific to the Linux implementation; This options 
+                     determines the byte size used to store the location of each seed along the 
+                     reference genome. It ranges from 4 to 8 bytes. For larger genomes, a larger 
+                     location size should be used; for example, to build an index based on the human 
+                     genome, a location size of 5 bytes is recommended. 
+```
+### Alignment
+Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input:**<br / >
 * BS reads file in fastq
 ```
@@ -57,29 +80,6 @@ Methylated C in mapped reads
 ```
 SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAATTGAATGGAATTATTGAATGGATTTGAATGGAATAATTATTGAATGGAATTGAATGGAA	IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII	PG:Z:SNAP	NM:i:3	RG:Z:FASTQ	PL:Z:Illumina	PU:Z:pu	LB:Z:lb	SM:Z:sm
 ```
-**Usage:**<br / >
-```
-$ python bs3-build.py -h 
-Usage: bs3-build.py -h [options]
-
--f                   Path to the reference genome; the reference genome should be in fasta format
-
--s                   Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data 
-                     strucutre. It builds its index by breaking the reference genome into seqeunces
-                     (seed) of a specific length. This option determines the length of each 
-                     seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of
-                     20 is recommended for bisulfite reads of 100 bp long; a longer size should be
-                     used for raw reads of longer length. 
-                     
--locationSize        (default: 4), a SNAP option specific to the Linux implementation; This options 
-                     determines the byte size used to store the location of each seed along the 
-                     reference genome. It ranges from 4 to 8 bytes. For larger genomes, a larger 
-                     location size should be used; for example, to build an index based on the human 
-                     genome, a location size of 5 bytes is recommended. 
-```
-### Alignment
-Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
-
 **Usage:**
 ```
 $ python bs3-align.py -h 
