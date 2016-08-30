@@ -126,7 +126,9 @@ Methylation Rate Statistics Display Option:
 
 ### Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
-**Output files**
+**Input**
+* SAM file from the previous step
+**Output**
 
 - wig file
 
@@ -198,6 +200,7 @@ Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 
         (16) methylation_level = #C/(#C+#T) = C8/(C7+C8) for Watson strand, =C14/(C11+C14) for Crick strand;
         "nan" means none reads support C/T at this position.
+
 **Usage:**
 ```
 $ python bs3-call_methylation.py -h 
