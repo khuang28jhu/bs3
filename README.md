@@ -24,6 +24,7 @@ Type the following commands in an Unix Terminal:
 * To download the Linux version:
 <br />```git clone https://github.com/khuang28jhu/bs3/bs3-linux ```
 
-### Download BS-Seeker3
+### Index Buidling
+Use the script **bs_seeker2-build.py** to build an index from a reference genome. **
 
 
