@@ -26,6 +26,21 @@ Type the following commands in an Unix Terminal:
 
 ### Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
+**Input:**<br / >
+1. BS reads file in fastq
+```
+@SRR019072.2842 HWI-EAS365_1060:4:1:51:313 length=87
+TAATTAGATTTGTGTTATAGATTATTTGTAAAGAAAGTAATTATTAAAGGAAATGTTAGTTTTTATTTGATATATGATAAGAGAACG
++SRR019072.2842 HWI-EAS365_1060:4:1:51:313 length=87
+BBBCC@)8ABA/<2>CB:=.:?BBABB1-:@74@B@?=@@ABB@B7@@5/98<;)<>56:?>:;A?A?A@>=AABB@A<3(@@=086
+```
+2. BS reads file in fasta
+```
+>read1
+TCCATTATACCGTAACCCAATACAAAAATTATTTAT
+>read2
+TCTGTAGACGGGTCGAATGGGGAGTTCATAGGGGGG
+```
 **Usage:**<br / >
 ```
 $ python bs3-build.py -h 
