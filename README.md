@@ -1,5 +1,5 @@
 #BS-Seeker3 
-BS-Seeker3 is the latest iteration of BS-Seeker, a software that performs accurate and fast mapping of bisulfite-treated short reads. It incorpaortes several new implementation features that enable it to acheive significantly faster speed and accuracy with respect to other available bisulfite reads aligners. BS-Seeker3 also provides additional anlysis to further investigate and visualize the raw mapped read data after alignment.
+BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. It incorporates a series of new features to achieve significantly faster speed and better accuracy compared to other available bisulfite reads aligners. It is 1.5 time faster than BSMAP and 10 times faster than Bismark and maps twice the reads than both aligners. BS-Seeker3 also offers additional analysis of bisulphite read data to further investigate and visualize the methylation pattern after alignment.
 #Table of Contents
 - [New Features](#New Features)
 - [System Requirements](#System Requirements)
@@ -280,6 +280,7 @@ Usage: bs3-unconversion.py -h [options]
 ![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="Example Use Case"></a>Example Use Case
+done by tmr
 
 
 
