@@ -31,8 +31,10 @@ class Species:
 
 
                 for line in cg_raw:
-			#print line
+			
                         tmp = line.split()
+                        if len(tmp) != 8:
+				continue 
                         chromosome = tmp[0]
 			strand = tmp[1]
                         position = int(tmp[2])
@@ -150,8 +152,10 @@ class Species:
                 fig, ax = plt.subplots()
 		for i, mtype in enumerate(self.methyl_level):
                         ax.plot(numpy.array(self.methyl_level[mtype]), annot[i], label=mtype)
-			
-                plt.ylabel('CG Methylation Level', fontsize=14)
+		axes = plt.gca()
+		#axes.set_xlim([xmin,xmax])
+		axes.set_ylim([0, 1])	
+                plt.ylabel('CG Methylation Level', fontsize=16)
 		plt.tick_params(
     			axis='x',          # changes apply to the x-axis
     			which='both',      # both major and minor ticks are affected
@@ -160,8 +164,8 @@ class Species:
     			labelbottom='off')
                 plt.axvline(20, color='k', linestyle='dashed', linewidth=2)
                 plt.axvline(60, color='k', linestyle='dashed', linewidth=2)
-		plt.xlabel('Upstream------------|-----------------Gene Body-------------------|--------Downstream')
-		legend = ax.legend(loc='upper right', shadow=True, fontsize=14)
+		plt.xlabel('Upstream-----|----------Gene Body-------------|-Downstream', fontsize=16)
+		legend = ax.legend(shadow=True, fontsize=16)
 		fig.savefig('metaplot.png', dpi=600)
 		
 	def tabulate_rate_gene_map(self, region, mlevel, nlevel, nbin):
@@ -267,16 +271,21 @@ def unconversion(file):
 	unconverted = []
 	for line in open(file):
 		tmp = line.split()
-                unconverted.append(float(tmp[6]) / (tmp[6] + tmp[7]))
+                if len(tmp) > 7:
+                        unconverted.append(float(tmp[6]) / (float(tmp[7])))
         
 	unconverted = np.array(unconverted)	
-	print unconverted
-	plt.hist(unconverted, bins=[float(i) * .01 for i in xrange(0, 105, 5)])
+	
+        axes = plt.gca()
+        axes.set_xlim([0, 1])
+        #axes.set_ylim([0, 1]) 
+	plt.hist(unconverted, bins=[float(i) * .01 for i in xrange(0, 102, 2)], color=(1.0,0.5,0.62))
         print np.average(unconverted) 
-	plt.title("Unconversion Rate by Phage Control: " + str(round(np.average(unconverted) * 100, 2)) + '%', fontsize=14)
-	plt.xlabel("mCH/CH", fontsize=14)
-	plt.ylabel("Frequency ", fontsize=14)
-	plt.savefig('Unconversion_Rate.png')
+	plt.title("Unconversion Rate by Phage Control: " + str(round(np.average(unconverted) * 100, 2)) + '%', fontsize=16)
+	plt.xlabel("mCH/CH", fontsize=16)
+	plt.ylabel("Counts", fontsize=16)
+        plt.yscale('log')
+	plt.savefig('Unconversion_Rate.png', dpi=600)
 
 def qc(file):
 
@@ -291,11 +300,11 @@ def qc(file):
                 qc.append(float(tmp.strip()) / all_mapped_passed)
 
         qc = np.array(qc)
-        plt.plot(qc)
-        plt.title("Mismatches Distribution per Read", fontsize=14)
-        plt.xlabel("Single BP Position", fontsize=14)
-        plt.ylabel("Average Freuency per Read ", fontsize=14)
-        plt.savefig('QC_Plot')
+        plt.bar(range(np.size(qc)), qc, 1/1.5, color=(0.2588,0.4433,1.0))
+        plt.title("Mismatches Distribution per Read", fontsize=16)
+        plt.xlabel("Single BP Position", fontsize=16)
+        plt.ylabel("Average Freuency per Read ", fontsize=16)
+        plt.savefig('QC_Plot', dpi=600)
 
 
 def main():
@@ -315,8 +324,9 @@ def main():
 	if options.isunconversion == 'y':
                 if 'gz' == options.met[len(options.met) - 2 : len(options.met)]:
 			subprocess.call('gunzip -k ' + options.met, shell=True)
-		unconversion(options.met[0:len(options.met) -3])
-    
+		        options.met = options.met[0:len(options.met) -3]
+                unconversion(options.met)
+
         if options.qc_f != '':
                 qc(options.qc_f)
 
@@ -324,7 +334,7 @@ def main():
             
 		if 'gz' == options.met[len(options.met) - 2 : len(options.met)]:
                         subprocess.call('gunzip -k ' + options.met, shell=True)
-                options.met = options.met[0:len(options.met) -3]
+                        options.met = options.met[0:len(options.met) -3]
                 
 	        if options.annotation == 'None':
         	        test = Species(options.met, None, False, False)
