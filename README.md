@@ -24,7 +24,12 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 * Linux or Mac OS Environment
 * Python2 (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python2 could be downloaded from http://www.python.org/download/ )
 * Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
-<br /> ``` pip install pysam ``` <br /> ```   pip install metplolib ``` <br />
+```
+pip install pysam
+``` 
+```
+pip install metplolib
+```
 
 #<a name="Running BS-Seeker3"></a>Running BS-Seeker3
 BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should adjust some parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
@@ -32,9 +37,13 @@ BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfit
 ###<a name="Download BS-Seeker3"></a>Download BS-Seeker3
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
-<br />```git clone https://github.com/khuang28jhu/bs3/bs3-mac ```
+```
+git clone https://github.com/khuang28jhu/bs3/bs3-mac
+```
 * To download the Linux version:
-<br />```git clone https://github.com/khuang28jhu/bs3/bs3-linux ```
+```
+git clone https://github.com/khuang28jhu/bs3/bs3-linux
+```
 
 ###<a name="Index Building"></a>Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
@@ -280,6 +289,7 @@ Usage: bs3-unconversion.py -h [options]
 ![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="Example Use Case"></a>Example Use Case
+1. Download BS-Seeker3 with instructions over here [Download BS-Seeker3](#Download BS-Seeker3)
 ```
 ./bs3-build -f test_data/genome.fa --aligner=snap
 ```
