@@ -4,7 +4,7 @@ import sys
 
 parser = OptionParser()
 parser.add_option('-f', action="store", dest="input", type="string", help="Please supply input file path")
-parser.add_option('-g', action="store", dest="genome", type="string", help="Please supply input file path")
+parser.add_option('-g', action="store", dest="genome", type="string", help="Please supply genome file path")
 options, args = parser.parse_args()
         
 

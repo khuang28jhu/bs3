@@ -118,35 +118,19 @@ def find_location(program):
 
     return None
 
-BOWTIE = 'bowtie'
-BOWTIE2 = 'bowtie2'
-SOAP = 'soap'
-RMAP = 'rmap'
+
 SNAP = 'snap'
 
 supported_aligners = [
-                      BOWTIE,
-                      BOWTIE2,
-                      SOAP,
-                      RMAP,
                       SNAP
                     ]
 
-aligner_options_prefixes = { BOWTIE  : '--bt-',
-                             BOWTIE2 : '--bt2-',
-                             SOAP    : '--soap-',
-                             RMAP    : '--rmap-',
+aligner_options_prefixes = {
 			     SNAP : '--snap-'}
 
-#aligner_path = dict((aligner, os.path.expanduser(find_location(aligner) or default_path))
-#                    for aligner, default_path in
-#                           [(BOWTIE,'~/bowtie/'),
-#                            (BOWTIE2, '~/bowtie2/'),
-#                            (SOAP, '~/soap/'),
-#                            (RMAP, '~/rmap/bin')
-#                            ])
+
 aligner_path = dict((aligner, os.path.expanduser(find_location(aligner) or "None"))
-                    for aligner in [(BOWTIE), (BOWTIE2), (SOAP), (RMAP),(SNAP)])
+                    for aligner in [(SNAP)])
 
 reference_genome_path = os.path.join(os.path.split(globals()['__file__'])[0],'reference_genomes')
 
