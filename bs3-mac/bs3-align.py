@@ -21,13 +21,13 @@ if __name__ == '__main__':
     parser = OptionParser(usage="Usage: %prog {-i <single> | -1 <mate1> -2 <mate2>} -g <genome.fa> [options]")
     # option group 1
     opt_group = OptionGroup(parser, "For single end reads")
-    opt_group.add_option("-i", "--input", type="string", dest="infilename",help="Input read file (FORMAT: sequences, qseq, fasta, fastq). Ex: read.fa or read.fa.gz", metavar="INFILE")
+    opt_group.add_option("-i", "--input", type="string", dest="infilename",help="Input read file (FORMAT:  fasta, fastq). Ex: read.fa or read.fa.gz", metavar="INFILE")
     parser.add_option_group(opt_group)
 
     # option group 2
     opt_group = OptionGroup(parser, "For pair end reads")
-    opt_group.add_option("-1", "--input_1", type="string", dest="infilename_1",help="Input read file, mate 1 (FORMAT: sequences, qseq, fasta, fastq)", metavar="FILE")
-    opt_group.add_option("-2", "--input_2", type="string", dest="infilename_2",help="Input read file, mate 2 (FORMAT: sequences, qseq, fasta, fastq)", metavar="FILE")
+    opt_group.add_option("-1", "--input_1", type="string", dest="infilename_1",help="Input read file, mate 1 (FORMAT:  fasta, fastq)", metavar="FILE")
+    opt_group.add_option("-2", "--input_2", type="string", dest="infilename_2",help="Input read file, mate 2 (FORMAT:  fasta, fastq)", metavar="FILE")
     opt_group.add_option("-I", "--minins",type = "int",dest = "min_insert_size", help="The minimum insert size for valid paired-end alignments [Default: %default]", default = 0)
     opt_group.add_option("-X", "--maxins",type = "int",dest = "max_insert_size", help="The maximum insert size for valid paired-end alignments [Default: %default]", default = 500)
     parser.add_option_group(opt_group)
@@ -172,8 +172,7 @@ if __name__ == '__main__':
     # path for aligner
     aligner_exec = os.path.expanduser( os.path.join(options.aligner_path or aligner_path[options.aligner], options.aligner) )
     
-    if options.aligner == 'bowtie2':
-    	aligner_exec = './bowtie2'
+
 
     # -g
     if options.genome is None:
@@ -201,52 +200,17 @@ if __name__ == '__main__':
     db_path = os.path.expanduser(os.path.join(options.dbpath, genome_subdir + '_' + options.aligner))
     
     if not os.path.isdir(db_path):
-        error('Index DIR \"' + genome_subdir + '..\" cannot be found in ' + options.dbpath +'.\n\tPlease run the bs_seeker2-build.py '
+        error('Index DIR \"' + genome_subdir + '..\" cannot be found in ' + options.dbpath +'.\n\tPlease run bs3-build.py '
                             'to create it with the correct parameters for -g, -r, --low, --up and --aligner.')
 
     # default aligner options
     aligner_options_defaults = {
-                                BOWTIE  : { '-e'              : 40*int_no_mismatches,
-                                            '--nomaqround'    : True,
-                                            '--norc'          : True,
-                                            #'-k'              : 2,
-                                            # -k=2; report two best hits, and filter by error rates
-                                            '--quiet'         : True,
-                                            '--best'          : True,
-#                                            '--suppress'      : '2,5,6',
-                                            '--sam'           : True,
-                                            '--sam-nohead'    : True,
-                                            '-p'              : 2
-                                },
-                                BOWTIE2 : {
-                                            #'-M'              : 5,
-                                            '--norc'          : True,
-                                            '--quiet'         : True,
-                                            '-p'              : 2,
-                                            '--sam-nohead'    : True,
-                                            # run bowtie2 in local mode by default
-                                            '--local' : '--end-to-end' not in aligner_options,
-                                            #'--mm'            : True,
-                                            #'-k'              : 2
-                                },
-                                SOAP    : { '-v' : int_no_mismatches,
-                                            '-p' : 2,
-                                            '-r' : 2,
-                                            '-M' : 4
-                                          },
-                                RMAP    : { '-M' : 2
-                                            # to do # control for only mapping on + strand
-                                          },
                                 
                                 SNAP : { }
 
                                 }
 
-    if '--end-to-end' not in aligner_options:
-        aligner_options_defaults[BOWTIE2].update({'-D' : 50})
-        #aligner_options_defaults[BOWTIE2].update({'-D' : 50, '-R': 3, '-N': 0, '-L': 15, '-i' : 'S,1,0.50'})
-    else:
-        aligner_options_defaults[BOWTIE2].update({'-D' : 50, '-L': 15, '--score-min': 'L,-0.6,-0.6' })
+    
 
     aligner_options = dict(aligner_options_defaults[options.aligner], **aligner_options)
 
@@ -279,25 +243,13 @@ if __name__ == '__main__':
     logfilename = os.path.expanduser(logfilename)
     outfile = output.outfile(outfilename, options.output_format, deserialize(os.path.join(db_path, 'refname')), ' '.join(sys.argv), options.no_SAM_header)
 
-    open_log(logfilename+'.bs_seeker2_log')
+    open_log(logfilename+'.bs3_log')
 
     aligner_title = options.aligner
-    if options.aligner == BOWTIE2 :
-        if '--end-to-end' in aligner_options :
-            aligner_title = aligner_title + "-e2e"
-        else:
-            aligner_title = aligner_title + "-local"
-
-    if options.aligner == BOWTIE :
-        logm("Mode: Bowtie")
-    elif options.aligner == BOWTIE2 :
-        if '--end-to-end' not in aligner_options :
-            logm("Mode: Bowtie2, local alignment")
-        else :
-            logm("Mode: Bowtie2, end-to-end alignment")
 
 
-    tmp_path = tempfile.mkdtemp(prefix='bs_seeker2_%s_-%s-TMP-' % (os.path.split(outfilename)[1], aligner_title ), dir = options.temp_dir)
+
+    tmp_path = tempfile.mkdtemp(prefix='bs3_%s_-%s-TMP-' % (os.path.split(outfilename)[1], aligner_title ), dir = options.temp_dir)
 
 
     (XS_x, XS_y) = options.XS_filter.split(",")
@@ -310,10 +262,8 @@ if __name__ == '__main__':
 
 
         if options.aligner == 'snap':
-            #aligner_command = './snap single %(reference_genome)s -fastq %(input_file)s -o -sam %(output_file)s -t 32 -b' +  aligner_options_string() linux
-            aligner_command = './snap single %(reference_genome)s %(input_file)s -o %(output_file)s -t 32 -b' +  aligner_options_string()           
-
-
+            aligner_command = './snap single %(reference_genome)s %(input_file)s -o %(output_file)s -t 32 -b' +  aligner_options_string() 
+        
 
 
         if options.rrbs: # RRBS scan
@@ -434,7 +384,7 @@ if __name__ == '__main__':
             
             for c in sorted(chrom_len):
                 f.write('@SQ\tSN:' + str(int(c) + 1) +'\tLN:' + str(chrom_len[c])+'\n')
-            f.write('@PG\tID:1\tPN:BS Seeker 2\tCL:'+ '\"' + cmd_line+'\"' + '\n')
+            f.write('@PG\tID:1\tPN:BS Seeker 3\tCL:'+ '\"' + cmd_line+'\"' + '\n')
             f.close()
 
  	
@@ -455,7 +405,7 @@ if __name__ == '__main__':
         
 
         if options.aligner == 'snap':
-            aligner_command = './snap paired %(reference_genome)s -fastq %(input_file_1)s   %(input_file_2)s -o -sam  %(output_file)s' + aligner_options_string()
+            aligner_command = './snap paired %(reference_genome)s %(input_file_1)s   %(input_file_2)s -o %(output_file)s ' + aligner_options_string() + ' s ' + str(min_insert_size) + ' ' + str(max_insert_size)
 
         input_fname = os.path.split(options.infilename)[1]
         tmp_d = lambda fname: os.path.join(tmp_path, fname)
@@ -559,7 +509,7 @@ if __name__ == '__main__':
         cmd_line = ' '.join(sys.argv)
         for c in sorted(chrom_len):
             f.write('@SQ\tSN:' + str(c) +'\tLN:' + str(chrom_len[c])+'\n')
-        f.write('@PG\tID:1\tPN:BS Seeker 2\tCL:'+ '\"' + cmd_line+'\"' + '\n')
+        f.write('@PG\tID:1\tPN:BS Seeker 3\tCL:'+ '\"' + cmd_line+'\"' + '\n')
         f.close()
 
 
