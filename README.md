@@ -50,8 +50,8 @@ Use the script **bs3-build.py** to build an index from a reference genome. <br /
 
 **Usage:**<br / >
 ```
-$ python bs3-build.py -h 
-Usage: bs3-build.py -h [options]
+$ ./bs3-build -h 
+Usage: ./bs3-build -h [options]
 
 -f                   Path to the reference genome; the reference genome should be in fasta format
 
@@ -87,8 +87,8 @@ TCTGTAGACGGGTCGAATGGGGAGTTCATAGGGGGG
 ```
 **Usage:**
 ```
-$ python bs3-align.py -h 
-Usage: bs3-align.py -h [options] 
+$ ./bs3-align -h 
+Usage: ./bs3-align -h [options] 
 
 For single end reads:
 
@@ -152,8 +152,8 @@ Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 
 **Usage:**
 ```
-$ python bs3-call_methylation.py -h 
-Usage: bs3-call_methylation.py -h [options]
+$ ./bs3-call_methylation -h 
+Usage: ./bs3-call_methylation -h [options]
 
 Options:
 
@@ -252,8 +252,8 @@ Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quali
 
 **Usage:**
 ```
-$ python bs3-methyl_display.py -h 
-Usage: bs3-methyl_display.py -h [options] 
+$ ./bs3-methyl_display -h 
+Usage: ./bs3-methyl_display -h [options] 
 
 -m MET             Supply the single-base resolution methylation level file generated during the 
                    methylation rate calculation (in CG format)
@@ -278,8 +278,8 @@ Usage: bs3-methyl_display.py -h [options]
 Use the script **bs3-unconversion.py** to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil in an ideal situation. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
 <br / ><br / >**Usage:**
 ```
-$ python bs3-unconversion.py -h
-Usage: bs3-unconversion.py -h [options]
+$ ./bs3-unconversion -h
+Usage: ./bs3-unconversion -h [options]
 
 -f INPUT          The path to the raw bisulfite read file.
 
