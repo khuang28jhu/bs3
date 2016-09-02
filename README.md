@@ -307,6 +307,15 @@ Usage: ./bs3-unconversion -h [options]
 ```
    This will produce the genome-wide methylation report of the data, ```output.wig.gz```,```output.ATCGmap.gz``` and ```output.CGmap.gz```; Description of the file formats is [here](#Outputaa).
 ####  Plot QC Plot and Metagene Graph for the Sample Reads
+```
+./bs3-methyl_display --meta y -m output.CGmap.gz
+```
+This returns the average chromosomal distribution of the methylation level for the reads (the annotation file is not supplied ).
+```
+./bs3-align -i test_data/WGBS.fa --aligner=snap -o WGBS -f sam -g test_data/genome.fa --qcf 100
+./bs3-methyl_display -q WGBS.qc
+```
+This returns the qc plot of the reads based on number of mismatches.
 #### Calculate the Unconversion Rate of the Data 
 ```
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa
