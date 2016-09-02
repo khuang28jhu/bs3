@@ -289,10 +289,12 @@ Usage: bs3-unconversion.py -h [options]
 ![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="Example Use Case"></a>Example Use Case
-1. [Download BS-Seeker3 over here](#Download BS-Seeker3)
+1. [Download BS-Seeker3](#Download BS-Seeker3) over here
+2. Build indexes for the reference genome:
 ```
 ./bs3-build -f test_data/genome.fa --aligner=snap
 ```
+   This will build SNAP indexes in the directory bs_align/bs_utils/reference_genomes/genome.fa_snap 
 ```
 ./bs3-align -i test_data/WGBS.fa --aligner=snap -o WGBS.bam -f sam -g test_data/genome.fa
 ```
