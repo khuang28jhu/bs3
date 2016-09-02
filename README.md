@@ -297,8 +297,9 @@ Usage: bs3-unconversion.py -h [options]
    This will build SNAP indexes in the directory bs_align/bs_utils/reference_genomes/genome.fa_snap
 #### Map the Sample Reads 
 ```
-./bs3-align -i test_data/WGBS.fa --aligner=snap -o WGBS.bam -f sam -g test_data/genome.fa
+./bs3-align -i test_data/WGBS.fa --aligner=snap -o WGBS -f sam -g test_data/genome.fa
 ```
+   This will produce the output file ``` WGBS.sam ```, which contains the aligned reads in SAM format ([SAM Fields Description](https://samtools.github.io/hts-specs/SAMv1.pdf))
 #### Return Genome-wide Methylation Report for the Sample Reads 
 ```
 ./bs3-call_methylation -i lamda_unconversion -o lamda_unconversion  --dbbs_align/bs_utils/reference_genomes/genome.fa_snap/
