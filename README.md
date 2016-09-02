@@ -286,7 +286,7 @@ Usage: bs3-unconversion.py -h [options]
 -g GENOME         The path to the genome file.
 ```
 **Output**
-* Example Unconversion Rate Plot
+* <a name="Example"></a>Example Unconversion Rate Plot
 ![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="Example Use Case"></a>Example Use Case
@@ -310,6 +310,7 @@ Usage: bs3-unconversion.py -h [options]
 ```
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa
 ```
+   This will map the sample reads against the lamda phage library and output the [graph](#Example) ```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
 
 
 
