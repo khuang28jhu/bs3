@@ -166,7 +166,8 @@ Options:
 --sorted,           Specify when the input bam file is already sorted, the sorting step will be 
                     skipped [Default: False]
 ```
-**Output:**
+
+<a name="Output:"></a>**Output:**
 
 - wig file
 
@@ -304,7 +305,7 @@ Usage: bs3-unconversion.py -h [options]
 ```
 ./bs3-call_methylation -i lamda_unconversion -o lamda_unconversion  --dbbs_align/bs_utils/reference_genomes/genome.fa_snap/
 ```
-   This will produce a genome-wide methylation report, **
+   This will produce the genome-wide methylation report of the data, ```output.ATCGmap.gz``` and ```output.CGmap.gz```; Description of the file formats is [here](#Output:).
 #### Calculate the Unconversion Rate of the Data 
 ```
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa
