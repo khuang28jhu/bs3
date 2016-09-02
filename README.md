@@ -280,10 +280,18 @@ Usage: bs3-unconversion.py -h [options]
 ![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="Example Use Case"></a>Example Use Case
-```./bs3-build -f test_data/genome.fa --aligner=snap```<br />
-```./bs3-align -i test_data/WGBS.fa --aligner=snap -o WGBS.bam -f sam -g test_data/genome.fa```<br />
-```./bs3-call_methylation -i lamda_unconversion -o lamda_unconversion  --db bs_align/bs_utils/reference_genomes/genome.fa_snap/```<br />
-```./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa```<br />
+```
+./bs3-build -f test_data/genome.fa --aligner=snap
+```
+```
+./bs3-align -i test_data/WGBS.fa --aligner=snap -o WGBS.bam -f sam -g test_data/genome.fa
+```
+```
+./bs3-call_methylation -i lamda_unconversion -o lamda_unconversion  --dbbs_align/bs_utils/reference_genomes/genome.fa_snap/
+```
+```
+./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa
+```
 
 
 
