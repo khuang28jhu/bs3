@@ -53,7 +53,7 @@ Usage: bs3-build.py -h [options]
                      20 is recommended for bisulfite reads of 100 bp long; a longer size should be
                      used for raw reads of longer length. 
                      
--locationSize        (default: 4), a SNAP option specific to the Linux implementation; This options 
+-L                   (default: 4), a SNAP option specific to the Linux implementation; This options 
                      determines the byte size used to store the location of each seed along the 
                      reference genome. It ranges from 4 to 8 bytes. For larger genomes, a larger 
                      location size should be used; for example, to build an index based on the human 
