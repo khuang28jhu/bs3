@@ -306,6 +306,7 @@ Usage: ./bs3-unconversion -h [options]
 ./bs3-call_methylation -i lamda_unconversion -o lamda_unconversion  --dbbs_align/bs_utils/reference_genomes/genome.fa_snap/
 ```
    This will produce the genome-wide methylation report of the data, ```output.wig.gz```,```output.ATCGmap.gz``` and ```output.CGmap.gz```; Description of the file formats is [here](#Outputaa).
+####  Plot QC Plot and Metagene Graph for the Sample Reads
 #### Calculate the Unconversion Rate of the Data 
 ```
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa
