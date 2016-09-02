@@ -304,6 +304,7 @@ Usage: bs3-unconversion.py -h [options]
 ```
 ./bs3-call_methylation -i lamda_unconversion -o lamda_unconversion  --dbbs_align/bs_utils/reference_genomes/genome.fa_snap/
 ```
+   This will produce a genome-wide methylation report, **
 #### Calculate the Unconversion Rate of the Data 
 ```
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa
