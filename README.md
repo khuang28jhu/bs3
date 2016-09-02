@@ -289,18 +289,21 @@ Usage: bs3-unconversion.py -h [options]
 ![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="Example Use Case"></a>Example Use Case
-1. [Download BS-Seeker3](#Download BS-Seeker3) over here
-2. Build indexes for the reference genome:
+*** [Download BS-Seeker3](#Download BS-Seeker3) *** 
+*** Build Indexes for the Reference Genome ***
 ```
 ./bs3-build -f test_data/genome.fa --aligner=snap
 ```
-   This will build SNAP indexes in the directory bs_align/bs_utils/reference_genomes/genome.fa_snap 
+   This will build SNAP indexes in the directory bs_align/bs_utils/reference_genomes/genome.fa_snap
+*** Map the Sample Reads ***
 ```
 ./bs3-align -i test_data/WGBS.fa --aligner=snap -o WGBS.bam -f sam -g test_data/genome.fa
 ```
+*** Return Genome-wide Methylation Report for the Sample Reads ***
 ```
 ./bs3-call_methylation -i lamda_unconversion -o lamda_unconversion  --dbbs_align/bs_utils/reference_genomes/genome.fa_snap/
 ```
+*** Calculate the Unconversion Rate of the Data ***
 ```
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa
 ```
