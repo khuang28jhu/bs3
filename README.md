@@ -38,11 +38,15 @@ BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfit
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
 ```
-git clone https://github.com/khuang28jhu/bs3/bs3-mac
+git clone https://github.com/khuang28jhu/bs3
+mv bs3/bs3-mac .
+rm -r bs3
 ```
 * To download the Linux version:
 ```
 git clone https://github.com/khuang28jhu/bs3/bs3-linux
+mv bs3/bs3-linux .
+rm -r bs3
 ```
 
 ###<a name="Index Building"></a>Index Buidling
