@@ -40,13 +40,13 @@ Type the following commands in an Unix Terminal:
 ```
 git clone https://github.com/khuang28jhu/bs3
 mv bs3/bs3-mac .
-rm -r bs3
+cd bs3-mac
 ```
 * To download the Linux version:
 ```
 git clone https://github.com/khuang28jhu/bs3/bs3-linux
 mv bs3/bs3-linux .
-rm -r bs3
+cd bs3-linux
 ```
 
 ###<a name="Index Building"></a>Index Buidling
@@ -294,7 +294,7 @@ Usage: ./bs3-unconversion -h [options]
 ![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="Example Use Case"></a>Example Use Case
-#### [Download BS-Seeker3](#Download BS-Seeker3) 
+#### [Download BS-Seeker3](#Download BS-Seeker3)
 #### Build Indexes for the Reference Genome
 ```
 ./bs3-build -f test_data/genome.fa --aligner=snap
