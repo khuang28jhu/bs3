@@ -9,9 +9,10 @@ options, args = parser.parse_args()
         
 
 align_cmd = 'python bs3-align.py -i ' + options.input  + '  --aligner=snap -o lamda_unconversion -g ' +   options.genome
-call_methyl_cmd = 'python bs3-call_methylation.py -i lamda_unconversion -o lamda_unconversion  --db bs_align/bs_utils/reference_genomes/lambda.fa_snap/'
+call_methyl_cmd = 'python bs3-call_methylation.py -i lamda_unconversion -o lamda_unconversion  --db bs_align/bs_utils/reference_genomes/lamdba.fa_snap/'
 print_graph_cmd =  'python bs3-methyl_display.py -u y -m lamda_unconversion.CGmap.gz'
 
+subprocess.call('./bs3-build -f test_data/lamdba.fa --aligner=snap', shell=True)
 print 'Aligning the Reads to the Lamda Phage Genome'
 subprocess.call(align_cmd, shell = True)
 print 'Generating the Single Base Resolution CG Levl File'
