@@ -290,7 +290,7 @@ def unconversion(file):
 def qc(file):
 
 	qc_p = open(file)
-	all_mapped_passed = int(qc_p.readline().strip()) 
+	all_mapped_passed = int(float(qc_p.readline().strip())) 
         qc = []
 
         while True:
