@@ -44,7 +44,7 @@ cd bs3-mac
 ```
 * To download the Linux version:
 ```
-git clone https://github.com/khuang28jhu/bs3/bs3-linux
+git clone https://github.com/khuang28jhu/bs3
 mv bs3/bs3-linux .
 cd bs3-linux
 ```
