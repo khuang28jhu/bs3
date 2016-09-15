@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser = OptionParser()
     
     parser.add_option("-f", "--file", dest="filename", help="Input your reference genome file (fasta)", metavar="FILE")
-    parser.add_option("-s", "--seed", dest="seed", help="Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data strucutre. It builds its index by breaking the reference genome into seqeunces (seed) of a specific length. This option determines the length of each seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of 20 is recommended for bisulfite reads of 100 bp long; a longer size should be used for raw reads of longer length. ")
+    parser.add_option("-s", "--seed", dest="seed", help="Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data strucutre. It builds its index by breaking the reference genome into seqeunces (seed) of a specific length. This option determines the length of each seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of 20 is recommended for bisulfite reads of 100 bp long; a longer size should be used for raw reads of longer length. ", default = ' 20 ')
     parser.add_option("--aligner", dest="aligner", help="Aligner program to perform the analysis: " + ', '.join(supported_aligners) + " [Default: %default]", metavar="ALIGNER", default = SNAP)
     parser.add_option("-v", "--version", action="store_true", dest="version", help="show version of BS-Seeker2", default=False)
     parser.add_option("-L", "--locationSize", dest="locationSize", help="(default: 5), a SNAP option specific to the Linux implementation; This options determines the byte size used to store the location of each seed along the reference genome. It ranges from 4 to 8 bytes. For larger genomes, a larger location size should be used; for example, to build an index based on the human genome, a location size of 5 bytes is recommended. ", default = '5')
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     if not os.path.isfile( builder_exec ) :
         error("Cannot file program %s for execution." % builder_exec)
 
-    ref_path = reference_genome_path + '/../../bs_align/reference_genomes'
+    ref_path = reference_genome_path + '/../../bs_align/bs_utils/reference_genomes'
 
     if os.path.exists(ref_path):
         if not os.path.isdir(ref_path):
