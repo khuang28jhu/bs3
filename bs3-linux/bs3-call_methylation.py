@@ -102,11 +102,20 @@ if __name__ == '__main__':
         sorted_input_filename = options.infilename
     else :
         logm('sorting BS-Seeker alignments')
-        pysam.view("-Sb", "-o%s" % options.infilename.split('.')[0], options.infilename)
-        sorted_input_filename = options.infilename.split('.')[0]+'_sorted'
-        pysam.sort(options.infilename.split('.')[0], sorted_input_filename)
-        sorted_input_filename = sorted_input_filename + '.bam'
-
+        intermediate = options.infilename.split('.')[0] + '.sam'
+        sorted_input_filename = intermediate+'_sorted'
+        #print intermediate
+        fh = open(sorted_input_filename, 'w')
+	fh.write('')
+	fh.close()
+	#print options.infilename
+        #samfile = pysam.AlignmentFile(options.infilename, "rb") 
+	pysam.sort("-o", sorted_input_filename, options.infilename)
+        #pysam.sort(options.infilename, sorted_input_filename)
+        #sorted_input_filename += '.sam'
+    # end_of if
+        #subprocess.call('samtools view -Sb ' + options.infilename + '  >  ' + intermediate, shell = True)
+        #subprocess.call('samtools sort ' + intermediate + ' -o ' + sorted_input_filename, shell = True)
     logm('indexing sorted alignments')
     pysam.index(sorted_input_filename)
 

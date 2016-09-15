@@ -1,1 +1,1 @@
-python bs3-call_methylation.py $*
+python bs3-methyl_display.py $*
