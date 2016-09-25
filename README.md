@@ -307,7 +307,7 @@ Usage: ./bs3-unconversion -h [options]
    This will produce the output file ``` WGBS.sam ```, which contains the aligned reads in SAM format ([SAM Fields Description](https://samtools.github.io/hts-specs/SAMv1.pdf))
 #### Return Genome-wide Methylation Report for the Sample Reads 
 ```
-./bs3-call_methylation -i WGBS.sam -o output  --db bs_align/bs_utils/reference_genomes/genome.fa_snap/
+./bs3-call_methylation -i WGBS -o output  --db bs_align/bs_utils/reference_genomes/genome.fa_snap/
 ```
    This will produce a genome-wide methylation report of the data, ```output.wig.gz```,```output.ATCGmap.gz``` and ```output.CGmap.gz```; Description of the file formats is [here](#Outputaa).
 ####  Plot QC Plot and Metagene Graph for the Sample Reads
