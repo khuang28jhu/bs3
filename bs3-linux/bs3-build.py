@@ -74,7 +74,7 @@ if __name__ == '__main__':
     if not os.path.isfile( builder_exec ) :
         error("Cannot file program %s for execution." % builder_exec)
 
-    ref_path = 'bs_align/bs_utils/reference_genomes'
+    ref_path = 'bs_align/reference_genomes'
 
     if os.path.exists(ref_path):
         if not os.path.isdir(ref_path):
