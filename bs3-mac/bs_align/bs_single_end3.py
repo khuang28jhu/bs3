@@ -10,6 +10,7 @@ from functools import partial
 import sys
 import b4utils
 import os
+import pickle
 #----------------------------------------------------------------
 # Read from the mapped results, return lists of unique / multiple-hit reads
 # The function suppose at most 2 hits will be reported in single file
@@ -49,7 +50,17 @@ def extract_mapping1(ali_file, unique_hits):
             continue
         no_mismatch = 0
         #no_mismatch = int([buf[i][5:] for i in xrange(11, len(buf)) if buf[i][:5] == 'NM:i:'][0])
-        header = buf[QNAME]
+        #header = buf[QNAME]
+        try:
+		temp_header = buf[QNAME]
+		overflow = temp_header[1000]
+		continue
+
+	except IndexError:
+		header = temp_header		
+			
+        #if len(header) > 100:
+	#	print header[len(header) - 100 : len(header)]
         chrom_inf = buf[RNAME].split('_')
         chr = chrom_inf[0]
         location = int(buf[POS]) - 1
@@ -132,7 +143,7 @@ def extract_mapping2(ali_file, unique_hits):
         isComplementary = chrom_inf[1]
         line = buf[0 : 2] + [str(int(chr) + 1)] + buf[3:buf_len]
         line = '\t'.join(line) + '\n'
-        print line
+        #print line
         
         #------------------------------
         if header != header0:
@@ -169,13 +180,16 @@ def extract_mapping2(ali_file, unique_hits):
 
 
 
-def process_reads_organize(name, info, original_bs_reads, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag):
-    
+def process_reads_organize(name, info, original_bs_reads, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag, K):
+     
+    print K    
     if asktag == 'N':
-        b4utils.process_reads(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr))
-
+                
+        b4utils.process_reads(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), int(K))
+        
     elif asktag == 'Y':
-        b4utils.process_reads2(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr))
+	print 'fuck2'
+        b4utils.process_reads2(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), int(K))
   
 
 def main():
@@ -206,7 +220,7 @@ def main():
     show_multiple_hit = sys.argv[16]
     show_unmapped_hit = sys.argv[17]
     qc_len = int(sys.argv[19])
-
+    K = int(float(sys.argv[20]))
 
     if show_multiple_hit == 'None':
         show_multiple_hit = None
@@ -301,7 +315,7 @@ def main():
     except IOError :
         print "Cannot open file: %s" % read_file
         exit(-1)
-            
+               
 
     oneline = read_inf.readline()
     if oneline[0]=="@":
@@ -317,7 +331,7 @@ def main():
         exit(-1)
 
     read_inf.close()
-	    
+    #CC2T = 'DAFADFAAFADSFDSF.sam'	    
 
     subprocess.call( aligner_command % {'reference_genome' : os.path.join(db_path,'W_C2T'), 'input_file' : outfile2, 'output_file' : CC2T},  shell = True)
     if asktag=="Y":
@@ -358,7 +372,7 @@ def main():
 
     qc = [0 for x in range(qc_len)]
 
-    partition = [(RC_C2T_uniq_lst[ section * len(RC_C2T_uniq_lst) // numjob : (section + 1) * len(RC_C2T_uniq_lst) // numjob ],RC_C2T_U, original_bs_reads, db_path, int(float(max_mismatch_no)), int(XS_count), float(XS_pct), chr_info, int(1), qc, outfilename +'_stat' + '-' + str(section + 1), outfilename + '_sam' + '-' + str(section + 1), len(chr_info), asktag) for section in range(numjob)]
+    partition = [(RC_C2T_uniq_lst[ section * len(RC_C2T_uniq_lst) // numjob : (section + 1) * len(RC_C2T_uniq_lst) // numjob ],RC_C2T_U, original_bs_reads, db_path, int(float(max_mismatch_no)), int(XS_count), float(XS_pct), chr_info, int(1), qc, outfilename +'_stat' + '-' + str(section + 1), outfilename + '_sam' + '-' + str(section + 1), len(chr_info), asktag, K) for section in range(numjob)]
 	    
     for info in partition:
         p = multiprocessing.Process(target=process_reads_organize, args=(info))

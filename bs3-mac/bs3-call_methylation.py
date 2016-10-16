@@ -52,10 +52,12 @@ def context_calling(seq, position):
 
 
 if __name__ == '__main__':
-
+    reference_genome_path = 'bs_align/reference_genomes/' 
     parser = OptionParser()
     parser.add_option("-i", "--input", type="string", dest="infilename",help="BAM output from bs_seeker2-align.py", metavar="INFILE")
     parser.add_option("-d", "--db", type="string", dest="dbpath",help="Path to the reference genome library (generated in preprocessing genome) [Default: %default]" , metavar="DBPATH", default = reference_genome_path)
+    print reference_genome_path
+    #print options.dbpath 
     parser.add_option("-o", "--output-prefix", type="string", dest="output_prefix",help="The output prefix to create ATCGmap and wiggle files [INFILE]", metavar="OUTFILE")
     parser.add_option("--sorted", action="store_true", dest="sorted",help="Specify when the input bam file is already sorted, the sorting step will be skipped [Default: %default]", default = False)
 
@@ -72,7 +74,7 @@ if __name__ == '__main__':
     parser.add_option("-v", "--version", action="store_true", dest="version",help="show version of BS-Seeker2", metavar="version", default = False)
 
     (options, args) = parser.parse_args()
-
+    print options.dbpath
 
     # if no options were given by the user, print help and exit
     if len(sys.argv) == 1:
@@ -132,7 +134,7 @@ if __name__ == '__main__':
 
         CGmap_fname = options.CGmap_file or ((options.output_prefix or options.infilename) + '.CGmap.gz')
         CGmap = gzip.open(CGmap_fname, 'wb')
-
+    
     # to improve the performance
     options_RM_CCGG = options.RM_CCGG
     options_read_no = options.read_no
@@ -177,7 +179,7 @@ if __name__ == '__main__':
     #for col in PileUp:
 
     cnts = lambda d: '\t'.join(str(d[n]) for n in nucs)
-
+    #print chrom
     for col in sorted_input.pileup():
         col_chrom = sorted_input.getrname(col.tid)
         col_pos = col.pos

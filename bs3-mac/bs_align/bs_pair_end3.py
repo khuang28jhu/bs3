@@ -120,10 +120,10 @@ def extract_mapping1(ali_file, unique_hits):
 
 
 
-def process_reads_organize(name, info, original_bs_reads1, original_bs_reads2, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag):
+def process_reads_organize(name, info, original_bs_reads1, original_bs_reads2, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag, K):
 
     if asktag == 'N':
-        b4utils.b4utils_process_pair_reads(name, info, original_bs_reads1, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), original_bs_reads2)
+        b4utils.b4utils_process_pair_reads(name, info, original_bs_reads1, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), original_bs_reads2, K)
 
   
 
@@ -156,6 +156,7 @@ def main():
     show_unmapped_hit = sys.argv[17]
     main_read_file1 = sys.argv[18]
     qc_len = int(sys.argv[20])
+    K = int(sys.argv[21])
 
     if show_multiple_hit == 'None':
         show_multiple_hit = None
@@ -306,7 +307,7 @@ def main():
     chr_info = deserialize(os.path.join(db_path, 'refname'))
         
     qc = [0 for x in range(qc_len)]
-    partition = [(RC_C2T_uniq_lst[ section * len(RC_C2T_uniq_lst) // numjob : (section + 1) * len(RC_C2T_uniq_lst) // numjob ],RC_C2T_U, original_bs_reads[0], original_bs_reads[1], db_path, int(float(max_mismatch_no)), int(XS_count), float(XS_pct), chr_info, int(1), qc, outfilename +'_stat' + '-' + str(section + 1), outfilename + '_sam' + '-' + str(section + 1), len(chr_info), asktag) for section in range(numjob)]
+    partition = [(RC_C2T_uniq_lst[ section * len(RC_C2T_uniq_lst) // numjob : (section + 1) * len(RC_C2T_uniq_lst) // numjob ],RC_C2T_U, original_bs_reads[0], original_bs_reads[1], db_path, int(float(max_mismatch_no)), int(XS_count), float(XS_pct), chr_info, int(1), qc, outfilename +'_stat' + '-' + str(section + 1), outfilename + '_sam' + '-' + str(section + 1), len(chr_info), asktag, K) for section in range(numjob)]
 	    
     for info in partition:
         p = multiprocessing.Process(target=process_reads_organize, args=(info))

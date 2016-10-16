@@ -68,7 +68,8 @@ if __name__ == '__main__':
                                      SNAP     : ' index    %(fname)s.fa %(fname)s '
                                 }[options.aligner] + ' -s ' + options.seed
 
-
+    build_command += ' -O200'
+    #print build_command
     #---------------------------------------------------------------
 
     if not os.path.isfile( builder_exec ) :
@@ -86,6 +87,7 @@ if __name__ == '__main__':
         rrbs_build(fasta_file, build_command, ref_path, options.low_bound, options.up_bound, options.aligner, options.cut_format)
     else: # Whole genome preprocessing
 	start_time = time.time()
+        #print build_command, fasta_file
         wg_build(fasta_file, build_command, ref_path, options.aligner)
 	print("Build Whole genome preprocessing \n--- %s seconds ---" % (time.time() - start_time))
 	
