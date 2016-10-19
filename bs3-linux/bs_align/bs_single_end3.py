@@ -205,7 +205,7 @@ def main():
     adapter_mismatch = int(sys.argv[15])
     show_multiple_hit = sys.argv[16]
     show_unmapped_hit = sys.argv[17]
-    qc_len = int(sys.argv[19])
+    qc_len = int(float(sys.argv[19]))
     K = int(float(sys.argv[20]))
 
     if show_multiple_hit == 'None':
