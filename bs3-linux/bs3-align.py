@@ -42,6 +42,7 @@ if __name__ == '__main__':
 
     # option group 4
     opt_group = OptionGroup(parser, "General options")
+    opt_group.add_option("-K", "--alignment_length", dest="K", help="Neglect the alignments with length below this value", type = "int", default = 70)
     opt_group.add_option("-t", "--tag", type="string", dest="taginfo",help="[Y]es for undirectional lib, [N]o for directional [Default: %default]", metavar="TAG", default = 'N')
     opt_group.add_option("-s","--start_base",type = "int",dest = "cutnumber1", help="The first cycle of the read to be mapped [Default: %default]", default = 1)
     opt_group.add_option("-e","--end_base",type = "int",dest = "cutnumber2", help="The last cycle of the read to be mapped [Default: %default]", default = 200)
@@ -51,10 +52,10 @@ if __name__ == '__main__':
     opt_group.add_option("--am",type = "int",dest = "adapter_mismatch", help="Number of mismatches allowed in adapter [Default: %default]", default = 0)
     opt_group.add_option("-g", "--genome", type="string", dest="genome",help="Name of the reference genome (should be the same as \"-f\" in bs_seeker2-build.py ) [ex. chr21_hg18.fa]")
     opt_group.add_option("-m", "--mismatches",type = "float", dest="no_mismatches",help="Number(>=1)/Percentage([0, 1)) of mismatches in one read. Ex: 4 (allow 8 mismatches) or 0.08 (allow 8% mismatches) [Default: %default]", default = 8)
-    opt_group.add_option("--aligner", dest="aligner",help="Aligner program for short reads mapping: " + ', '.join(supported_aligners) + " [Default: %default]", metavar="ALIGNER", default = SNAP)
-    opt_group.add_option("-p", "--path", dest="aligner_path", help="Path to the aligner program. Detected: " +' '*70+ '\t'.join(('%s: %s '+' '*70) % (al, aligner_path[al]) for al in sorted(supported_aligners)),
-        metavar="PATH"
-    )
+    #opt_group.add_option("--aligner", dest="aligner",help="Aligner program for short reads mapping: " + ', '.join(supported_aligners) + " [Default: %default]", metavar="ALIGNER", default = SNAP)
+    #opt_group.add_option("-p", "--path", dest="aligner_path", help="Path to the aligner program. Detected: " +' '*70+ '\t'.join(('%s: %s '+' '*70) % (al, aligner_path[al]) for al in sorted(supported_aligners)),
+    #    metavar="PATH"
+    #)
     reference_genome_path = reference_genome_path + '/../../../bs_align/reference_genomes'
     opt_group.add_option("-d", "--db", type="string", dest="dbpath",help="Path to the reference genome library (generated in preprocessing genome) [Default: %default]" , metavar="DBPATH", default = reference_genome_path)
     opt_group.add_option("-l", "--split_line",type = "int", dest="no_split",help="Number of lines per split (the read file will be split into small files for mapping. The result will be merged. [Default: %default]", default = 12800000, metavar="INT")
@@ -70,7 +71,7 @@ if __name__ == '__main__':
     opt_group.add_option("-M", "--multiple-hit", metavar="FileName", type="string", dest="Output_multiple_hit", default = None, help = 'File to store reads with multiple-hits')
     opt_group.add_option("-u", "--unmapped", metavar="FileName", type="string", dest="Output_unmapped_hit", default = None, help = 'File to store unmapped reads')
 
-    opt_group.add_option("-v", "--version", action="store_true", dest="version",help="show version of BS-Seeker2", metavar="version", default = False)
+    opt_group.add_option("-v", "--version", action="store_true", dest="version",help="show version of BS-Seeker3", metavar="version", default = False)
 
     parser.add_option_group(opt_group)
 
@@ -78,7 +79,7 @@ if __name__ == '__main__':
     opt_group = OptionGroup(parser, "Aligner Options",
         "You may specify any additional options for the aligner. You just have to prefix them with " +
         ', '.join('%s for %s' % (aligner_options_prefixes[aligner], aligner) for aligner in supported_aligners)+
-        ', and BS-Seeker2 will pass them on. Below are some of the options what would alter BSseeker peroformacnce using SNAP:\n\t-d   maximum edit distance allowed per read or pair (default: 14)\n-n   number of seeds to use per read\n-sc  Seed coverage (i.e., readSize/seedSize).  Floating point.  Exclusive with -n.  (default uses -n)\n-h   maximum hits to consider per seed (default: 300)')
+        ', and BS-Seeker3 will pass them on. Below are some of the options what would alter BSseeker peroformacnce using SNAP:\n\t-d   maximum edit distance allowed per read or pair (default: 14)\n-n   number of seeds to use per read\n-sc  Seed coverage (i.e., readSize/seedSize).  Floating point.  Exclusive with -n.  (default uses -n)\n-h   maximum hits to consider per seed (default: 300)')
     parser.add_option_group(opt_group)
 
     # option group 6
@@ -167,10 +168,10 @@ if __name__ == '__main__':
     if asktag not in 'YN':
         error('-t option should be either Y or N, not %s' % asktag)
     # -a
-    if options.aligner not in supported_aligners:
-        error('-a option should be: %s' % ' ,'.join(supported_aligners)+'.')
+    #if options.aligner not in supported_aligners:
+    #    error('-a option should be: %s' % ' ,'.join(supported_aligners)+'.')
     # path for aligner
-    aligner_exec = os.path.expanduser( os.path.join(options.aligner_path or aligner_path[options.aligner], options.aligner) )
+    #aligner_exec = os.path.expanduser( os.path.join(options.aligner_path or aligner_path[options.aligner], options.aligner) )
     
 
 
@@ -197,7 +198,7 @@ if __name__ == '__main__':
                       'Please, specify the options \"--low\" and \"--up\" that you used at the index-building step.\n'
                       'Possible choices are:\n' + '\n'.join([pr.split('_rrbs_')[-1].replace('_',', ') for pr in possible_refs]))
 
-    db_path = os.path.expanduser(os.path.join(options.dbpath, genome_subdir + '_' + options.aligner))
+    db_path = os.path.expanduser(os.path.join(options.dbpath, genome_subdir + '_' + 'snap'))
     
     if not os.path.isdir(db_path):
         error('Index DIR \"' + genome_subdir + '..\" cannot be found in ' + options.dbpath +'.\n\tPlease run the bs_seeker2-build.py '
@@ -213,7 +214,7 @@ if __name__ == '__main__':
 
 
 
-    aligner_options = dict(aligner_options_defaults[options.aligner], **aligner_options)
+    aligner_options = dict(aligner_options_defaults['snap'], **aligner_options)
 
     aligner_options_string = lambda : ' %s ' % (' '.join(opt_key +
                                                          (' ' + ' '.join(map(str,opt_val)) # join all values if the value is an array
@@ -246,7 +247,7 @@ if __name__ == '__main__':
 
     open_log(logfilename+'.bs3_log')
 
-    aligner_title = options.aligner
+    aligner_title = 'snap'
 
 
 
@@ -262,13 +263,13 @@ if __name__ == '__main__':
        
 
 
-        if options.aligner == 'snap':
-            aligner_command = './snap single %(reference_genome)s -fastq %(input_file)s -o -sam %(output_file)s -t 32 -b' +  aligner_options_string() 
+        #if options.aligner == 'snap':
+        aligner_command = './snap single %(reference_genome)s -fastq %(input_file)s -o -sam %(output_file)s -t 32 -b' +  aligner_options_string() 
         
 
 
         if options.rrbs: # RRBS scan
-            bs_rrbs(options.aligner, options.infilename,
+            bs_rrbs('snap', options.infilename,
                     asktag,
                     options.adapter_file,
                     int(options.cutnumber1),
@@ -300,7 +301,7 @@ if __name__ == '__main__':
 	    	    
                 all_raw_reads += raw_reads
                 cmd = ['python bs_single_end3.py ',
-                            options.aligner,
+                            'snap',
                             'temp-' + options.outfilename + '-' + str(j + 1), 
 			    read_file,  
 			    asktag,
@@ -316,7 +317,7 @@ if __name__ == '__main__':
                             str(XS_count) ,
                             str(options.adapter_mismatch) ,
                             str(options.Output_multiple_hit) ,
-                            str(options.Output_unmapped_hit), str(j), options.qc_f ]
+                            str(options.Output_unmapped_hit), str(j), options.qc_f, str(options.K)]
                	
                 j += 1
 	        with open('command', 'w') as fh:
@@ -405,8 +406,8 @@ if __name__ == '__main__':
         # pair end specific default options
         
 
-        if options.aligner == 'snap':
-            aligner_command = './snap paired %(reference_genome)s -fastq %(input_file_1)s   %(input_file_2)s -o -sam  %(output_file)s ' + aligner_options_string() + ' s ' + str(min_insert_size) + ' ' + str(max_insert_size)
+        #if options.aligner == 'snap':
+        aligner_command = './snap paired %(reference_genome)s -fastq %(input_file_1)s   %(input_file_2)s -o -sam  %(output_file)s ' + aligner_options_string() + ' s ' + str(min_insert_size) + ' ' + str(max_insert_size)
 
         input_fname = os.path.split(options.infilename)[1]
         tmp_d = lambda fname: os.path.join(tmp_path, fname)
@@ -424,7 +425,7 @@ if __name__ == '__main__':
                 all_raw_reads += raw_reads
 
                 cmd = ['python bs_pair_end3.py ',
-                       options.aligner,
+                       'snap',
                        'temp-' + options.outfilename + '-' + str(j + 1),
                        read_file1,
                        asktag,
@@ -441,7 +442,7 @@ if __name__ == '__main__':
                        str(options.adapter_mismatch) ,
                        str(options.Output_multiple_hit) ,
                        str(options.Output_unmapped_hit), str(j),
-		       readfile2, options.qc_f
+		       readfile2, options.qc_f, str(options.K)
                        ]
                     
                 j += 1

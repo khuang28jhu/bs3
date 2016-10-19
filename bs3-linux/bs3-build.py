@@ -66,7 +66,7 @@ if __name__ == '__main__':
                                 
     build_command = builder_exec + {
                                      SNAP     : ' index    %(fname)s.fa %(fname)s '
-                                }[options.aligner] + ' -s ' + options.seed + ' -L ' + options.locationSize
+                                }[options.aligner] + ' -s ' + options.seed + ' -locationSize ' + options.locationSize
 
 
     #---------------------------------------------------------------

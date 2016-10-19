@@ -14,6 +14,8 @@ class Species:
         def __init__(self, mfile, gene_file, transposon, gene):
 
                 self.raw = {}
+                self.chromn = 0
+                self.chromo = {}
 		self.gene_map = {}
 		self.transposon_map = {}
 		self.gene = gene
@@ -57,8 +59,8 @@ class Species:
 		
 
 		for line in gene_raw:
-
-			if len(line) == 0:
+                        #print line.split()
+			if len(line.split()) < 2:
 				continue
 
 			if  line[0] == '#':
@@ -81,7 +83,10 @@ class Species:
                 start = int(tmp[3])
                 stop = int(tmp[4])
                 chromosome = str(tmp[0])
-                region[gene_id] = [start, stop, strand, chromosome]
+                if chromosome not in self.chromo:
+                    self.chromn += 1
+		    self.chromo[chromosome] = str(self.chromn) 
+                region[gene_id] = [start, stop, strand, self.chromo[chromosome]]
 	
 	#def parse_genome_info(self, line, region):
 		
@@ -99,28 +104,29 @@ class Species:
 		nlevel = {}
 		for mtype in ['CG', 'CHH', 'CHG']:
 			self.mlevel[mtype] = {}
-			mlevel[mtype] = [0] * (nbin*4)
-			nlevel[mtype] = [0] * (nbin*4)
+			mlevel[mtype] = [0] * (nbin)
+			nlevel[mtype] = [0] * (nbin)
 	 
 		
 		if self.gene == True:
 			self.tabulate_rate_gene_map(self.gene_map, mlevel, nlevel, nbin)
-	
+	        #print self.gene_map
 		if self.transposon == True:
 			self.tabulate_rate_gene_map(self.transposon, mlevel, nlevel, nbin)
-
+                normalize = 1
 		if self.gene != True:
-			
+		        normalize = 0
+                        nbin = 1000	
 			for chromosome in self.raw:
 				full_len = max(self.raw[chromosome].keys())
-				interval = self.region_interval(0, full_len, 80)
+				interval = self.region_interval(0, full_len, nbin)
 
 				mlevel = {}
                 		nlevel = {}
 
                 		for mtype in ['CG', 'CHH', 'CHG']:
-                        		mlevel[mtype] = [0] * (80)
-                        		nlevel[mtype] = [0] * (80)
+                        		mlevel[mtype] = [0] * (nbin)
+                        		nlevel[mtype] = [0] * (nbin)
 			
 				self.tabulate_rate(interval, mlevel, nlevel, chromosome)	
 				
@@ -130,8 +136,10 @@ class Species:
 					if mtype not in self.methyl_level:
 						self.methyl_level[mtype] = [ 0.0  if (nlevel[mtype][i] == 0) else mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
 						continue
-                        		self.methyl_level[mtype] += [ 0.0  if (nlevel[mtype][i] == 0) else mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
-	        self.to_graph()	
+                        		self.methyl_level[mtype] = [ self.methyl_level[mtype][i]   if (nlevel[mtype][i] == 0) else self.methyl_level[mtype][i] + mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
+	                        normalize += 1
+		
+                self.to_graph(normalize, nbin, self.gene | self.transposon)	
 		for mtype in self.methyl_level:			
 			methyl = '\n'.join([str(i) for i in self.methyl_level[mtype]])
 	        	with open(mtype + '_' + sys.argv[1], 'w') as file:
@@ -146,30 +154,45 @@ class Species:
                 self.gene_map = None
     		self.print_mlevel(mlevel, nlevel) 
 
-	def to_graph(self):
+	def to_graph(self,normalize, nbin, is_gene):
 	
-                annot = ['c', 'r', 'b']
+                annot = {'CG':'r', 'CHH':'g', 'CHG':'b'}
                 fig, ax = plt.subplots()
+                ymax = 0
 		for i, mtype in enumerate(self.methyl_level):
-                        ax.plot(numpy.array(self.methyl_level[mtype]), annot[i], label=mtype)
+                    
+			temp = numpy.array(self.methyl_level[mtype]) / normalize
+		       
+		        if temp.max() > ymax:
+			    ymax = temp.max()
+                        ax.plot(temp, annot[mtype], label=mtype)
 		axes = plt.gca()
 		#axes.set_xlim([xmin,xmax])
-		axes.set_ylim([0, 1])	
-                plt.ylabel('CG Methylation Level', fontsize=16)
+		#axes.set_ylim([0, 1])
+		if ymax + .05 > 1:
+		    ymax = 1
+		else:
+		    ymax += .05
+                axes.set_ylim([0, ymax]) 	
+                plt.ylabel('Methylation Level', fontsize=16)
 		plt.tick_params(
     			axis='x',          # changes apply to the x-axis
     			which='both',      # both major and minor ticks are affected
     			bottom='off',      # ticks along the bottom edge are off
     			top='off',         # ticks along the top edge are off
     			labelbottom='off')
-                plt.axvline(20, color='k', linestyle='dashed', linewidth=2)
-                plt.axvline(60, color='k', linestyle='dashed', linewidth=2)
-		plt.xlabel('Upstream-----|----------Gene Body-------------|-Downstream', fontsize=16)
-		legend = ax.legend(shadow=True, fontsize=16)
+                if is_gene == True:
+                    plt.axvline(nbin/4, color='k', linestyle='dashed', linewidth=2)
+                    plt.axvline(nbin/4 *3, color='k', linestyle='dashed', linewidth=2)
+		    plt.xlabel('Upstream-----|----------Gene Body-------------|-Downstream', fontsize=16)
+	        else:
+		    plt.xlabel('Average Chromosomal View of Methylation Level')
+         	legend = ax.legend(shadow=True, fontsize=16)
 		fig.savefig('metaplot.png', dpi=600)
 		
 	def tabulate_rate_gene_map(self, region, mlevel, nlevel, nbin):
-
+                
+                nbin /= 4
 		for gene in region:
 
                    	chromosome = region[gene][3]
@@ -182,7 +205,7 @@ class Species:
                         gene_body = self.region_interval(region[gene][0], region[gene][1],  2 * nbin)
                         downstream = self.region_interval(region[gene][1], end,  nbin)
 			downstream.pop(0)
-
+                        #print len(upstream), nbin
                         if strand == '+':
                  	       intervals = upstream + gene_body + downstream
                 
@@ -208,7 +231,11 @@ class Species:
                                 if (i in self.raw[chromosome] ) & (i > 0) :
                                		
 					if self.raw[chromosome][i][2] in self.mlevel:
-											
+						#print mlevel, chromosome, i , 3
+                                                #print '\n\n'
+                                                #print k
+                                                #print mlevel[self.raw[chromosome][i][2]]
+                                                #print self.raw[chromosome][i][3]					
                                         	mlevel[self.raw[chromosome][i][2]][k] += self.raw[chromosome][i][3]
                                               	nlevel[self.raw[chromosome][i][2]][k] += 1
 	
@@ -310,7 +337,7 @@ def qc(file):
 def main():
 
 	parser = OptionParser()
-    	parser.add_option('-n', action="store", dest="nbin", type="int", help="Bin size for metagene plot", default = 80)
+    	parser.add_option('-n', action="store", dest="nbin", type="int", help="Bin size for metagene plot", default = 120)
     	parser.add_option('-m', action="store", dest ='met', help="Single-based-resolution methylation level file (CG format)")
         parser.add_option('-a', action="store", dest ='annotation', help ="Gene annotation file", default="None")
     	parser.add_option('-r', action="store", dest ="genome_region", help="Genomeic region to be plotted", choices=['transposon', 'gene',], default="gene")

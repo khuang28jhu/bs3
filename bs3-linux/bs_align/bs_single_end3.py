@@ -132,7 +132,7 @@ def extract_mapping2(ali_file, unique_hits):
         isComplementary = chrom_inf[1]
         line = buf[0 : 2] + [str(int(chr) + 1)] + buf[3:buf_len]
         line = '\t'.join(line) + '\n'
-        print line
+       
         
         #------------------------------
         if header != header0:
@@ -169,13 +169,13 @@ def extract_mapping2(ali_file, unique_hits):
 
 
 
-def process_reads_organize(name, info, original_bs_reads, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag):
+def process_reads_organize(name, info, original_bs_reads, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag, K):
     
     if asktag == 'N':
-        b4utils.process_reads(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr))
+        b4utils.process_reads(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), int(K))
 
     elif asktag == 'Y':
-        b4utils.process_reads2(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr))
+        b4utils.process_reads2(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), int(K))
   
 
 def main():
@@ -206,7 +206,7 @@ def main():
     show_multiple_hit = sys.argv[16]
     show_unmapped_hit = sys.argv[17]
     qc_len = int(sys.argv[19])
-
+    K = int(float(sys.argv[20]))
 
     if show_multiple_hit == 'None':
         show_multiple_hit = None
@@ -358,7 +358,7 @@ def main():
 
     qc = [0 for x in range(qc_len)]
 
-    partition = [(RC_C2T_uniq_lst[ section * len(RC_C2T_uniq_lst) // numjob : (section + 1) * len(RC_C2T_uniq_lst) // numjob ],RC_C2T_U, original_bs_reads, db_path, int(float(max_mismatch_no)), int(XS_count), float(XS_pct), chr_info, int(1), qc, outfilename +'_stat' + '-' + str(section + 1), outfilename + '_sam' + '-' + str(section + 1), len(chr_info), asktag) for section in range(numjob)]
+    partition = [(RC_C2T_uniq_lst[ section * len(RC_C2T_uniq_lst) // numjob : (section + 1) * len(RC_C2T_uniq_lst) // numjob ],RC_C2T_U, original_bs_reads, db_path, int(float(max_mismatch_no)), int(XS_count), float(XS_pct), chr_info, int(1), qc, outfilename +'_stat' + '-' + str(section + 1), outfilename + '_sam' + '-' + str(section + 1), len(chr_info), asktag, K) for section in range(numjob)]
 	    
     for info in partition:
         p = multiprocessing.Process(target=process_reads_organize, args=(info))

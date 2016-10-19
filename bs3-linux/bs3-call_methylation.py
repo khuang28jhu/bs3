@@ -102,15 +102,19 @@ if __name__ == '__main__':
         sorted_input_filename = options.infilename
     else :
         logm('sorting BS-Seeker alignments')
-        intermediate = options.infilename.split('.')[0] + '.sam'
-        sorted_input_filename = intermediate+'_sorted'
+        intermediate = options.infilename.split('.')[0] + '.bam'
+        #sorted_input_filename = options.infilename.split('.')[0]+'_sorted'
         #print intermediate
-        fh = open(sorted_input_filename, 'w')
-	fh.write('')
-	fh.close()
-	#print options.infilename
+        #fh = open(sorted_input_filename, 'w')
+	#fh.write('')
+	#fh.close()
+	#print options.infilenamei
+        pysam.view("-Sb", "-o%s" % intermediate, options.infilename)
+        #print sorted_input_filename, intermediate
         #samfile = pysam.AlignmentFile(options.infilename, "rb") 
-	pysam.sort("-o", sorted_input_filename, options.infilename)
+	#pysam.sort(intermediate, sorted_input_filename)
+        pysam.sort(intermediate, 'output')
+        sorted_input_filename = 'output.bam'
         #pysam.sort(options.infilename, sorted_input_filename)
         #sorted_input_filename += '.sam'
     # end_of if
@@ -118,7 +122,7 @@ if __name__ == '__main__':
         #subprocess.call('samtools sort ' + intermediate + ' -o ' + sorted_input_filename, shell = True)
     logm('indexing sorted alignments')
     pysam.index(sorted_input_filename)
-
+    pysam.index('output.bam')
     logm('calculating methylation levels')
     if options.text :
         ATCGmap_fname = options.ATCGmap_file or ((options.output_prefix or options.infilename) + '.ATCGmap')
