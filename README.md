@@ -41,12 +41,14 @@ Type the following commands in an Unix Terminal:
 git clone https://github.com/khuang28jhu/bs3
 mv bs3/bs3-mac .
 cd bs3-mac
+chmod u+x ./snap
 ```
 * To download the Linux version:
 ```
 git clone https://github.com/khuang28jhu/bs3
 mv bs3/bs3-linux .
 cd bs3-linux
+chmod u+x ./snap
 ```
 
 ###<a name="Index Building"></a>Index Buidling
