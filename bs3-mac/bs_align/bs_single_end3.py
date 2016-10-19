@@ -182,13 +182,13 @@ def extract_mapping2(ali_file, unique_hits):
 
 def process_reads_organize(name, info, original_bs_reads, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag, K):
      
-    print K    
+       
     if asktag == 'N':
                 
         b4utils.process_reads(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), int(K))
         
     elif asktag == 'Y':
-	print 'fuck2'
+
         b4utils.process_reads2(name, info, original_bs_reads, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), int(K))
   
 
