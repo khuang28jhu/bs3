@@ -28,7 +28,7 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 pip install pysam
 ``` 
 ```
-pip install metplolib
+pip install Metplolib
 ```
 
 #<a name="Running BS-Seeker3"></a>Running BS-Seeker3
