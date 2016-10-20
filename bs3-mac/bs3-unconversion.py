@@ -8,7 +8,7 @@ parser.add_option('-g', action="store", dest="genome", type="string", help="Plea
 options, args = parser.parse_args()
         
 
-align_cmd = 'python bs3-align.py -i ' + options.input  + '  --aligner=snap -o lamda_unconversion -g ' +   options.genome
+align_cmd = 'python bs3-align.py -i ' + options.input  + '  -o lamda_unconversion -g ' +   options.genome
 call_methyl_cmd = 'python bs3-call_methylation.py -i lamda_unconversion -o lamda_unconversion  --db bs_align/bs_utils/reference_genomes/lamdba.fa_snap/'
 print_graph_cmd =  'python bs3-methyl_display.py -u y -m lamda_unconversion.CGmap.gz'
 
