@@ -318,7 +318,7 @@ Usage: ./bs3-unconversion -h [options]
 ```
 This returns an average chromosomal distribution of the methylation level for the reads (the annotation file is not supplied ).
 ```
-./bs3-align -i test_data/WGBS.fa --aligner=snap -o WGBS -f sam -g test_data/genome.fa --qcf 100
+./bs3-align -i test_data/WGBS.fa -o WGBS -f sam -g test_data/genome.fa --qcf 100
 ```
 ```
 ./bs3-methyl_display -q WGBS.qc
