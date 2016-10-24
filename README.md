@@ -326,7 +326,7 @@ This returns an average chromosomal distribution of the methylation level for th
 This returns a quality contol plot of the reads based on the number of mismatches per read position.
 #### Calculate the Unconversion Rate of the Data 
 ```
-./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamda.fa
+./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamdba.fa
 ```
    This will map the sample reads against the lamda phage library and output the [graph](#Example) ```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
 
