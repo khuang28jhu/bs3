@@ -346,23 +346,25 @@ if __name__ == '__main__':
                      stats[i] += float(item)	
                 subprocess.call('rm -r ' + filename, shell = True)
 
+            
+	
             if (qc_len > 5):
                 qc_bin = [0 for qc_num  in range(qc_len)]
                 path = 'qc-temp-' + options.outfilename + '-*_stat-*'
-
                 for filename in glob.glob(path):
-                
+            
                     if filename == path :
                         continue
-                
-                    for i, item in enumerate(open(filename).readline().split()):
+                    fh = open(filename)
+                    fh.readline()
+                    for i, item in enumerate(fh.readline().split()):
                         qc_bin[i] += float(item)
                     subprocess.call('rm -r ' + filename, shell = True)
-            
+                  
                 qc_print = open(options.outfilename + '.qc', 'w')
                 qc_print.write(str(stats[7]) + '\n')
                 qc_print.write('\n'.join([str(qc_entry) for qc_entry in qc_bin]))
-
+		
             f = open(options.outfilename + '.stat', 'w')
             f.write("Number of reads in total: " + str(all_raw_reads) + '\n') 
             f.write("Number of unique-hits reads (before post-filtering): " + str(stats[8]) + '\n')
@@ -479,8 +481,9 @@ if __name__ == '__main__':
             
                 if filename == path :
                     continue
-
-                for i, item in enumerate(open(filename).readline().split()):
+                fh = open(filename)
+                fh.readline()
+                for i, item in enumerate(fh.readline().split()):
                     qc_bin[i] += float(item)
                 subprocess.call('rm -r ' + filename, shell = True)
                 
