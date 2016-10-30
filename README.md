@@ -28,7 +28,7 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 pip install pysam
 ``` 
 ```
-pip install Metplolib
+pip install Matplolib
 ```
 
 #<a name="Running BS-Seeker3"></a>Running BS-Seeker3
@@ -108,10 +108,12 @@ For pair end reads:
 
 Important General options:
 
+-K ALIGNMENT LENGTH, Neglect the alignments with length below this value
+
 -g GENOME,           Name of the reference genome (should be the same as "-f" in bs3-build.py ) [ex.
                      chr21_hg18.fa]
 
--m NO_MISMATCHES,    Set the number(>=1)/percentage([0, 1)) of mismatches in a read. Ex: 4 (allow 8 
+-m NO_MISMATCHES,    Set the number(>=1)/percentage([0, 1)) of mismatches in a read. Ex: 8 (allow 8 
                      mismatches) or 0.08 (allow 8% mismatches) [Default: 12]
                      
 -l INT,              Split the input file into smaller files based on this number. Each smaller file 
@@ -122,11 +124,10 @@ Important General options:
 Relevant Aligner Options:
 
 --snap-h             MaxHits, (default: 250 on the Mac version, 300 on Linux) a SNAP option; There 
-                     are often patterns that occur within multiple locations of a genome. Processing
-                     the hashtable index hits with seeds that match these patterns is time-consuming. 
-                     This option sets a threshold on the number of locations that a seed can match 
-                     to. Seeds matching to locations more than this number are considered never 
-                     existed during the alignment step.
+                     are often seeds matching to multiple locations in the genomes. Sorting throught all
+                     the putative hits is a time-consuming process. This option sets a threshold on the 
+                     number of locations that a seed can match to. Seeds matching to locations more than 
+                     this number are ignored during the alignment step.
                      
 Methylation Rate Statistics Display Option:
 
@@ -165,7 +166,7 @@ Options:
 
 -i INFILE,          Input alinged reads file in SAM format; output from bs3-align.py
 
--d DBPATH,          Path to the reference genome library (generated during index-buidling) (optional)
+-d DBPATH,          Path to the reference genome index (generated during index-buidling) (optional)
 
 -o OUTFILE,         The output prefix to create the CGmap, ATCGmap and wiggle files
 
