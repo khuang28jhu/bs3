@@ -267,8 +267,8 @@ Usage: ./bs3-methyl_display -h [options]
                    
 -a ANNOTATION      Suppply the gene annotation file to build the meta-plot (in gff3 format)
 
--r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot, transposon or gene. 
-                   Select each with the option ```-r gene``` or ```-r transposon```; (default: gene)
+-r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot of gene. 
+                   Select each with the option ```-r gene```; (default: gene)
                    
 -q QC_F            Plot Quality Control Graph, supply the .qc file generated during the alignment 
                    step
