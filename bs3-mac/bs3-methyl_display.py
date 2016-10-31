@@ -161,7 +161,7 @@ class Species:
                 ymax = 0
 		for i, mtype in enumerate(self.methyl_level):
                     
-			temp = numpy.array(self.methyl_level[mtype]) / normalize
+			temp = numpy.array(self.methyl_level[mtype]) / normalize * 100
 		       
 		        if temp.max() > ymax:
 			    ymax = temp.max()
@@ -169,10 +169,10 @@ class Species:
 		axes = plt.gca()
 		#axes.set_xlim([xmin,xmax])
 		#axes.set_ylim([0, 1])
-		if ymax + .05 > 1:
-		    ymax = 1
+		if ymax + 5 > 100:
+		    ymax = 100
 		else:
-		    ymax += .05
+		    ymax += 5
                 axes.set_ylim([0, ymax]) 	
                 plt.ylabel('Methylation Level', fontsize=16)
 		plt.tick_params(
@@ -340,7 +340,7 @@ def main():
     	parser.add_option('-n', action="store", dest="nbin", type="int", help="Bin size for metagene plot", default = 120)
     	parser.add_option('-m', action="store", dest ='met', help="Single-based-resolution methylation level file (CG format)")
         parser.add_option('-a', action="store", dest ='annotation', help ="Gene annotation file", default="None")
-    	parser.add_option('-r', action="store", dest ="genome_region", help="Genomeic region to be plotted", choices=['transposon', 'gene',], default="gene")
+    	parser.add_option('-r', action="store", dest ="genome_region", help="Genomeic region to be plotted", choices=['gene',], default="gene")
         parser.add_option('-u', action="store", dest ="isunconversion", help="Plot Unconverstion Graph", choices=['y', 'n'], default="n")
         parser.add_option('-q', action="store", dest ="qc_f", help="Plot Quality Control Graph, supply qc file", default= '')
 	parser.add_option('--meta', action="store", dest ="meta", help="Plot metagene file",choices=['y', ''],default= '')
