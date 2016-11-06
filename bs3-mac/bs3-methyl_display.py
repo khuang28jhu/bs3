@@ -309,7 +309,7 @@ def unconversion(file):
 	plt.hist(unconverted, bins=[float(i) * .01 for i in xrange(0, 102, 2)], color=(1.0,0.5,0.62))
         print np.average(unconverted) 
 	plt.title("Unconversion Rate by Phage Control: " + str(round(np.average(unconverted) * 100, 2)) + '%', fontsize=16)
-	plt.xlabel("mCH/CH", fontsize=16)
+	plt.xlabel("1 - mC/C", fontsize=16)
 	plt.ylabel("Counts", fontsize=16)
         plt.yscale('log')
 	plt.savefig('Unconversion_Rate.png', dpi=600)
