@@ -352,7 +352,7 @@ def main():
 
 	if options.isunconversion == 'y':
                 if 'gz' == options.met[len(options.met) - 2 : len(options.met)]:
-			subprocess.call('gunzip -k ' + options.met, shell=True)
+			subprocess.call('gunzip -d ' + options.met, shell=True)
 		        options.met = options.met[0:len(options.met) -3]
                 unconversion(options.met)
 
