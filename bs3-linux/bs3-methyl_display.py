@@ -4,6 +4,8 @@ from math import log
 from scipy.cluster.hierarchy import dendrogram, linkage
 import pdb
 from optparse import OptionParser
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy
@@ -360,7 +362,7 @@ def main():
         if options.meta != '':
             
 		if 'gz' == options.met[len(options.met) - 2 : len(options.met)]:
-                        subprocess.call('gunzip -k ' + options.met, shell=True)
+                        subprocess.call('gunzip -d ' + options.met, shell=True)
                         options.met = options.met[0:len(options.met) -3]
                 
 	        if options.annotation == 'None':
