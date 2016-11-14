@@ -4,8 +4,6 @@ from math import log
 from scipy.cluster.hierarchy import dendrogram, linkage
 import pdb
 from optparse import OptionParser
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy
@@ -118,7 +116,8 @@ class Species:
                 normalize = 1
 		if self.gene != True:
 		        normalize = 0
-                        nbin = 1000	
+                        nbin = 1000
+			
 			for chromosome in self.raw:
 				full_len = max(self.raw[chromosome].keys())
 				interval = self.region_interval(0, full_len, nbin)
@@ -138,7 +137,10 @@ class Species:
 					if mtype not in self.methyl_level:
 						self.methyl_level[mtype] = [ 0.0  if (nlevel[mtype][i] == 0) else mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
 						continue
-                        		self.methyl_level[mtype] = [ self.methyl_level[mtype][i]   if (nlevel[mtype][i] == 0) else self.methyl_level[mtype][i] + mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
+				        if nlevel[mtype][i] == 0:
+						self.methyl_level[mtype] = [ self.methyl_level[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
+					else:
+						self.methyl_level[mtype] += [ mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
 	                        normalize += 1
 		
                 self.to_graph(normalize, nbin, self.gene | self.transposon)	
@@ -176,7 +178,7 @@ class Species:
 		else:
 		    ymax += 5
                 axes.set_ylim([0, ymax]) 	
-                plt.ylabel('Methylation Level', fontsize=16)
+                plt.ylabel('Methylation Level (%)', fontsize=16)
 		plt.tick_params(
     			axis='x',          # changes apply to the x-axis
     			which='both',      # both major and minor ticks are affected
@@ -188,7 +190,18 @@ class Species:
                     plt.axvline(nbin/4 *3, color='k', linestyle='dashed', linewidth=2)
 		    plt.xlabel('Upstream-----|----------Gene Body-------------|-Downstream', fontsize=16)
 	        else:
-		    plt.xlabel('Average Chromosomal View of Methylation Level')
+                    plt.tick_params(
+			axis = 'x',
+			which = 'both',
+			labelbottom= 'on')
+		    for i in range(normalize - 1):
+			plt.axvline(nbin/normalize * (i + 1), color='k', linestyle='dashed', linewidth=2)
+		    plt.xlabel('Average Methylation Level per Chromosome')
+                    my_xticks = ['' for i in range(nbin)]
+		    xticks = [i for i in range(nbin)]
+		    for i, chromname in enumerate(self.raw):
+		        my_xticks[int((i + .5) * nbin)] = 'chr' + str(chromname)
+		    plt.xticks(xticks, my_xticks)
          	legend = ax.legend(shadow=True, fontsize=16)
 		fig.savefig('metaplot.png', dpi=600)
 		
@@ -311,7 +324,7 @@ def unconversion(file):
 	plt.hist(unconverted, bins=[float(i) * .01 for i in xrange(0, 102, 2)], color=(1.0,0.5,0.62))
         print np.average(unconverted) 
 	plt.title("Unconversion Rate by Phage Control: " + str(round(np.average(unconverted) * 100, 2)) + '%', fontsize=16)
-	plt.xlabel("mCH/CH", fontsize=16)
+	plt.xlabel("1 - mC/C", fontsize=16)
 	plt.ylabel("Counts", fontsize=16)
         plt.yscale('log')
 	plt.savefig('Unconversion_Rate.png', dpi=600)
@@ -328,11 +341,11 @@ def qc(file):
 			break
                 qc.append(float(tmp.strip()) / all_mapped_passed)
 
-        qc = np.array(qc)
+        qc = np.array(qc)* 100
         plt.bar(range(np.size(qc)), qc, 1/1.5, color=(0.2588,0.4433,1.0))
         plt.title("Mismatches Distribution per Read", fontsize=16)
         plt.xlabel("Single BP Position", fontsize=16)
-        plt.ylabel("Average Freuency per Read ", fontsize=16)
+        plt.ylabel("Rate of Mismatch per Read(%)", fontsize=16)
         plt.savefig('QC_Plot', dpi=600)
 
 
@@ -352,7 +365,7 @@ def main():
 
 	if options.isunconversion == 'y':
                 if 'gz' == options.met[len(options.met) - 2 : len(options.met)]:
-			subprocess.call('gunzip -d ' + options.met, shell=True)
+			subprocess.call('gunzip -k ' + options.met, shell=True)
 		        options.met = options.met[0:len(options.met) -3]
                 unconversion(options.met)
 
@@ -362,7 +375,7 @@ def main():
         if options.meta != '':
             
 		if 'gz' == options.met[len(options.met) - 2 : len(options.met)]:
-                        subprocess.call('gunzip -d ' + options.met, shell=True)
+                        subprocess.call('gunzip -k ' + options.met, shell=True)
                         options.met = options.met[0:len(options.met) -3]
                 
 	        if options.annotation == 'None':
