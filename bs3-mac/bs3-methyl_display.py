@@ -178,7 +178,7 @@ class Species:
 		else:
 		    ymax += 5
                 axes.set_ylim([0, ymax]) 	
-                plt.ylabel('Methylation Level', fontsize=16)
+                plt.ylabel('Methylation Level (%)', fontsize=16)
 		plt.tick_params(
     			axis='x',          # changes apply to the x-axis
     			which='both',      # both major and minor ticks are affected
@@ -190,11 +190,17 @@ class Species:
                     plt.axvline(nbin/4 *3, color='k', linestyle='dashed', linewidth=2)
 		    plt.xlabel('Upstream-----|----------Gene Body-------------|-Downstream', fontsize=16)
 	        else:
+                    plt.tick_params(
+			axis = 'x',
+			which = 'both',
+			labelbottom= 'on')
 		    for i in range(normalize - 1):
 			plt.axvline(nbin/normalize * (i + 1), color='k', linestyle='dashed', linewidth=2)
 		    plt.xlabel('Average Methylation Level per Chromosome')
-		    my_xticks = [chromname for chromname in self.raw]
-		    xticks = [i for i in range(normalize) ]
+                    my_xticks = ['' for i in range(nbin)]
+		    xticks = [i for i in range(nbin)]
+		    for i, chromname in enumerate(self.raw):
+		        my_xticks[int((i + .5) * nbin)] = 'chr' + str(chromname)
 		    plt.xticks(xticks, my_xticks)
          	legend = ax.legend(shadow=True, fontsize=16)
 		fig.savefig('metaplot.png', dpi=600)
@@ -335,11 +341,11 @@ def qc(file):
 			break
                 qc.append(float(tmp.strip()) / all_mapped_passed)
 
-        qc = np.array(qc)
+        qc = np.array(qc)* 100
         plt.bar(range(np.size(qc)), qc, 1/1.5, color=(0.2588,0.4433,1.0))
         plt.title("Mismatches Distribution per Read", fontsize=16)
         plt.xlabel("Single BP Position", fontsize=16)
-        plt.ylabel("Average Freuency per Read ", fontsize=16)
+        plt.ylabel("Rate of Mismatch per Read(%)", fontsize=16)
         plt.savefig('QC_Plot', dpi=600)
 
 
