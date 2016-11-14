@@ -195,7 +195,7 @@ class Species:
 		    plt.xlabel('Average Methylation Level per Chromosome')
 		    my_xticks = [chromname for chromname in self.raw]
 		    xticks = [i for i in range(normalize) ]
-		    plt.xticks(x, my_xticks)
+		    plt.xticks(xticks, my_xticks)
          	legend = ax.legend(shadow=True, fontsize=16)
 		fig.savefig('metaplot.png', dpi=600)
 		
