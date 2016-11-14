@@ -4,6 +4,8 @@ from math import log
 from scipy.cluster.hierarchy import dendrogram, linkage
 import pdb
 from optparse import OptionParser
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy
