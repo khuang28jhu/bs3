@@ -116,7 +116,8 @@ class Species:
                 normalize = 1
 		if self.gene != True:
 		        normalize = 0
-                        nbin = 1000	
+                        nbin = 1000
+			
 			for chromosome in self.raw:
 				full_len = max(self.raw[chromosome].keys())
 				interval = self.region_interval(0, full_len, nbin)
@@ -136,7 +137,10 @@ class Species:
 					if mtype not in self.methyl_level:
 						self.methyl_level[mtype] = [ 0.0  if (nlevel[mtype][i] == 0) else mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
 						continue
-                        		self.methyl_level[mtype] = [ self.methyl_level[mtype][i]   if (nlevel[mtype][i] == 0) else self.methyl_level[mtype][i] + mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
+				        if nlevel[mtype][i] == 0:
+						self.methyl_level[mtype] = [ self.methyl_level[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
+					else:
+						self.methyl_level[mtype] += [ mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
 	                        normalize += 1
 		
                 self.to_graph(normalize, nbin, self.gene | self.transposon)	
@@ -186,7 +190,12 @@ class Species:
                     plt.axvline(nbin/4 *3, color='k', linestyle='dashed', linewidth=2)
 		    plt.xlabel('Upstream-----|----------Gene Body-------------|-Downstream', fontsize=16)
 	        else:
-		    plt.xlabel('Average Chromosomal View of Methylation Level')
+		    for i in range(normalize - 1):
+			plt.axvline(nbin/normalize * (i + 1), color='k', linestyle='dashed', linewidth=2)
+		    plt.xlabel('Average Methylation Level per Chromosome')
+		    my_xticks = [chromname for chromname in self.raw]
+		    xticks = [i for i in range(normalize) ]
+		    plt.xticks(x, my_xticks)
          	legend = ax.legend(shadow=True, fontsize=16)
 		fig.savefig('metaplot.png', dpi=600)
 		
