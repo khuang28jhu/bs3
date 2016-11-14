@@ -278,6 +278,8 @@ Usage: ./bs3-methyl_display -h [options]
 **Output**
 * Example Meta-gene Plot
 ![meta] (https://github.com/khuang28jhu/bs3/blob/master/metaplot1.png)
+* Example Meta-gene Plot based on an Average Chromosomal View
+![meta] (https://github.com/khuang28jhu/bs3/blob/master/metaplot2.png)
 * Example Quality Control Plot
 ![qclot] (https://github.com/khuang28jhu/bs3/blob/master/QC_Plot.png)
 
