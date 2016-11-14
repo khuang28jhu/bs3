@@ -4,8 +4,6 @@ from math import log
 from scipy.cluster.hierarchy import dendrogram, linkage
 import pdb
 from optparse import OptionParser
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy
@@ -119,8 +117,10 @@ class Species:
 		if self.gene != True:
 		        normalize = 0
                         nbin = 1000
-			
-			for chromosome in self.raw:
+                        chromlab = self.raw.keys()
+                        chromlab.sort()			
+				
+			for chromosome in chromlab:
 				full_len = max(self.raw[chromosome].keys())
 				interval = self.region_interval(0, full_len, nbin)
 
@@ -136,13 +136,15 @@ class Species:
 				
 				for mtype in self.mlevel.keys():
 					#pdb.set_trace()
+                                        
 					if mtype not in self.methyl_level:
 						self.methyl_level[mtype] = [ 0.0  if (nlevel[mtype][i] == 0) else mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
 						continue
-				        if nlevel[mtype][i] == 0:
-						self.methyl_level[mtype] = [ self.methyl_level[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
-					else:
-						self.methyl_level[mtype] += [ mlevel[mtype][i] / nlevel[mtype][i] for i in range(len(mlevel[mtype]) - 1) ]
+                                        for i in range(len(mlevel[mtype]) - 1):
+				        	if nlevel[mtype][i] == 0:
+							self.methyl_level[mtype].append(0)
+						else:
+							self.methyl_level[mtype].append( mlevel[mtype][i] / nlevel[mtype][i])
 	                        normalize += 1
 		
                 self.to_graph(normalize, nbin, self.gene | self.transposon)	
@@ -168,7 +170,7 @@ class Species:
 		for i, mtype in enumerate(self.methyl_level):
                     
 			temp = numpy.array(self.methyl_level[mtype]) / normalize * 100
-		       
+		         
 		        if temp.max() > ymax:
 			    ymax = temp.max()
                         ax.plot(temp, annot[mtype], label=mtype)
@@ -192,17 +194,21 @@ class Species:
                     plt.axvline(nbin/4 *3, color='k', linestyle='dashed', linewidth=2)
 		    plt.xlabel('Upstream-----|----------Gene Body-------------|-Downstream', fontsize=16)
 	        else:
+                   
                     plt.tick_params(
 			axis = 'x',
 			which = 'both',
 			labelbottom= 'on')
 		    for i in range(normalize - 1):
-			plt.axvline(nbin/normalize * (i + 1), color='k', linestyle='dashed', linewidth=2)
+			plt.axvline(nbin * (i + 1), color='k', linestyle='dashed', linewidth=2)
 		    plt.xlabel('Average Methylation Level per Chromosome')
-                    my_xticks = ['' for i in range(nbin)]
-		    xticks = [i for i in range(nbin)]
-		    for i, chromname in enumerate(self.raw):
-		        my_xticks[int((i + .5) * nbin)] = 'chr' + str(chromname)
+                    my_xticks = ['' for i in range(len(temp))]
+		    xticks = [i for i in range(len(temp))]
+                    chromlab = self.raw.keys()
+                    chromlab.sort()
+		    for i in range(len(chromlab)):
+                        
+		        my_xticks[int((i + .5) * nbin)] = 'chr' + str(chromlab[i])
 		    plt.xticks(xticks, my_xticks)
          	legend = ax.legend(shadow=True, fontsize=16)
 		fig.savefig('metaplot.png', dpi=600)
