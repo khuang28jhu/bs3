@@ -332,6 +332,7 @@ This returns a quality contol plot of the reads based on the number of mismatche
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamdba.fa
 ```
    This will map the sample reads against the lamda phage library and output the [graph](#Example) ```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
+# <a name="Linking w/ MethGo"></a>Methgo
 
 
 
