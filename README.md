@@ -334,7 +334,7 @@ This returns a quality contol plot of the reads based on the number of mismatche
 ```
    This will map the sample reads against the lamda phage library and output the [graph](#Example) ```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
 # <a name="Linking w/ MethGo"></a>MethGo
-For a complete tutorial of Methgo and download of its dependcies, please go to here: ([MethGo Description] (https://methgo.readthedocs.io/en/latest/))
+For a complete introduction of Methgo and download of its dependcies, please go to here: [MethGo Description] (https://methgo.readthedocs.io/en/latest/)
 
 
 
