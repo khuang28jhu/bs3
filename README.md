@@ -338,6 +338,40 @@ For a complete introduction to Methgo and download of its dependcies, please go 
 
 Please use toMethgo.py to transition to MethGo. toMethgo.py takes in and delivers to the MethGo pipeline the .sam ouput from the [Alignment](#Alignment) stage.
 
+See the instructions below to perform the relevant MethGo modules: 
+
+```
+$ python toMethGo.py -h 
+Usage: python toMethGo.py [module tag] y --[relevant input tags] [input filenames]
+
+ex: python toMethGo.py -CNV y --cnv ex.refindex -i ex.sam
+
+  -i INFILE,      --input=INFILE   SAM output from bs_seeker3-align
+  
+  -m MET                            Single-based-resolution methylation level file (CG format)
+  
+  -g FILE,        --genome=FILE     Genome File Name
+  
+  --gtf=FILE,     --gtf=FILE        Gene Annotation File Name
+  
+  --txn=FILE,     --txn=FILE        Txn Labels File Name
+  
+  --bind=FILE,    --bind=FILE       Motif Binding Site File Name
+  
+  --cnv=FILE,     --cnv=FILE        Input rference genome index file
+  
+  
+  --MET=METM            To perform MET module of MethGo
+  
+  --SNP=SNPM            To perform SNP module of MethGo
+  
+  --TXN=TXNM            To perform TXN module of MethGo
+  
+  --COV=COVM            To perform COV module of MethGo
+  
+  --CNV=CNVM            To perform CNV module of MethGo
+ 
+```
 
 
 
