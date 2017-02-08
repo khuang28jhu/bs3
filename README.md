@@ -338,9 +338,13 @@ This returns a quality contol plot of the reads based on the number of mismatche
 MethGo is a simple and effective tool designed for the analysis of data from whole genome bisulfite sequencing (WGBS) and reduced representation bisulfite sequencing (RRBS). MethGo provides 5 major modules:
 
 COV: Coverage distribution of each cytosine
+
 MET: Both global and gene-centric cytosince methylation levels
+
 TXN: Cytosine methylation levels at transcription factor binding sites (TFBSs)
+
 SNP: Single nucleotide polymorphism (SNP) calling
+
 CNV: Copy number variation calling
 
 For a complete introduction to Methgo and download of its dependcies, please go to here: [MethGo Tutorial] (https://methgo.readthedocs.io/en/latest/)
