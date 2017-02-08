@@ -334,6 +334,15 @@ This returns a quality contol plot of the reads based on the number of mismatche
 ```
    This will map the sample reads against the lamda phage library and output the [graph](#Example) ```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
 # <a name="Linking w/ MethGo"></a>MethGo
+
+MethGo is a simple and effective tool designed for the analysis of data from whole genome bisulfite sequencing (WGBS) and reduced representation bisulfite sequencing (RRBS). MethGo provides 5 major modules:
+
+COV: Coverage distribution of each cytosine
+MET: Both global and gene-centric cytosince methylation levels
+TXN: Cytosine methylation levels at transcription factor binding sites (TFBSs)
+SNP: Single nucleotide polymorphism (SNP) calling
+CNV: Copy number variation calling
+
 For a complete introduction to Methgo and download of its dependcies, please go to here: [MethGo Tutorial] (https://methgo.readthedocs.io/en/latest/)
 
 Please use toMethgo.py to transition to MethGo. toMethgo.py takes in and delivers to the MethGo pipeline the .sam ouput from the [Alignment](#Alignment) stage.
