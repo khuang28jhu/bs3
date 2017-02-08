@@ -349,7 +349,7 @@ CNV: Copy number variation calling
 
 For a complete introduction to Methgo and download of its dependcies, please go to here: [MethGo Tutorial] (https://methgo.readthedocs.io/en/latest/)
 
-Please use toMethgo.py to transition to MethGo. toMethgo.py takes in and delivers to the MethGo pipeline the .sam ouput from the [Alignment](#Alignment) stage.
+Please use toMethgo.py to transition to MethGo. toMethgo.py takes in and delivers to the MethGo pipeline the .sam ouput from the [Alignment](#Alignment) stage and the .CGmap file from the [Methylation Rate Calculation](#Methylation Rate Calculation) stage.
 
 See the instructions below to perform the relevant MethGo modules: 
 
