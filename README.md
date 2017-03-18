@@ -1,6 +1,6 @@
-#BS-Seeker3 
+# BS-Seeker3 
 BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. It incorporates a series of new features to achieve significantly faster speed and better accuracy compared to other available bisulfite reads aligners. It is 1.5 time faster than BSMAP and 10 times faster than Bismark and maps twice the reads than both aligners. BS-Seeker3 also offers additional analysis of bisulphite read data to further investigate and visualize the methylation pattern after alignment.
-#Table of Contents
+# Table of Contents
 - [New Features](#New Features)
 - [System Requirements](#System Requirements)
 - [BS-Seeker3 Usage](#Running BS-Seeker3)
@@ -13,7 +13,7 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 - [Linking with MethGo](#Linking w/ MethGo)
 
 
-#<a name="New Features"></a>New Features
+# <a name="New Features"></a>New Features
 * Implements Improved Indexing, Fast Alignment with SNAP, and Highly Optimized SNAP Output Post-Processing
     * Produces an ultra-fast bisulfite read maping pipeline
 * Executes Local Alignment through the Unnoken Algorithm
@@ -21,7 +21,7 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 * Plots Quality Control Graph, Meta-gene Plot, and Bisulfite Unconversion Rate Histogram
     * Allows better visualization of the methylation data
 
-#<a name="System Requirements"></a>System Requirements
+# <a name="System Requirements"></a>System Requirements
 * Linux or Mac OS Environment
 * Python2 (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python2 could be downloaded from http://www.python.org/download/ )
 * Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
@@ -32,10 +32,10 @@ pip install pysam
 pip install Matplolib
 ```
 
-#<a name="Running BS-Seeker3"></a>Running BS-Seeker3
+# <a name="Running BS-Seeker3"></a>Running BS-Seeker3
 BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should adjust some parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
 
-###<a name="Download BS-Seeker3"></a>Download BS-Seeker3
+### <a name="Download BS-Seeker3"></a>Download BS-Seeker3
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
 ```
@@ -52,7 +52,7 @@ cd bs3-linux
 chmod u+x ./snap
 ```
 
-###<a name="Index Building"></a>Index Buidling
+### <a name="Index Building"></a>Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
 
 **Usage:**<br / >
@@ -250,7 +250,7 @@ Options:
 
 
 
-###<a name="Methylation Rate Statistics Display"></a>Methylation Rate Statistics Display
+### <a name="Methylation Rate Statistics Display"></a>Methylation Rate Statistics Display
 Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / > 
 
 **Input:**
