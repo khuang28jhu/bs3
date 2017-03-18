@@ -75,7 +75,7 @@ Usage: ./bs3-build -h [options]
                      location size should be used; for example, to build an index based on the human 
                      genome, a location size of 5 bytes is recommended. 
 ```
-###<a name="Alignment"></a>Alignment
+### <a name="Alignment"></a>Alignment
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input:**<br / >
 * BS reads file in fastq
