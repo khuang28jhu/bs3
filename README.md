@@ -1,8 +1,8 @@
 # BS-Seeker3 
 BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. It incorporates a series of new features to achieve significantly faster speed and better accuracy compared to other available bisulfite reads aligners. It is 1.5 time faster than BSMAP and 10 times faster than Bismark and maps twice the reads than both aligners. BS-Seeker3 also offers additional analysis of bisulphite read data to further investigate and visualize the methylation pattern after alignment.
 # Table of Contents
-- [New Features](# New Features)
-- [System Requirements](# System Requirements)
+- [New Features](#New Features)
+- [System Requirements](#System Requirements)
 - [BS-Seeker3 Usage](# Running BS-Seeker3)
    - [Download BS-Seeker3](# Download BS-Seeker3)
    - [Index Buidling](# Index Buidling)
@@ -136,7 +136,7 @@ Methylation Rate Statistics Display Option:
                      quality control plot tabulates the average rate of mismatches of each position 
                      on a raw read.
 ```
-**Output:**<br / >
+** Output: ** <br / >
 * Alignment Summary in .stat file
 ```
 Number of reads in total: 10000000
