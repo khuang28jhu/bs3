@@ -136,7 +136,7 @@ Methylation Rate Statistics Display Option:
                      quality control plot tabulates the average rate of mismatches of each position 
                      on a raw read.
 ```
-** Output: ** <br / >
+**Output:** 
 * Alignment Summary in .stat file
 ```
 Number of reads in total: 10000000
