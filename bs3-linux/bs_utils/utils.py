@@ -289,9 +289,12 @@ def read_fasta(fasta_file):
 def serialize(obj, filename):
     """ Be careful what you serialize and deseriazlize! marshal.load is not secure!
     """
+    
     output = open(filename, 'w')
-    output.write(obj)
-    #marshal.dump(obj, output)
+    try:
+        output.write(obj)
+    except TypeError:
+        marshal.dump(obj, output)
     output.close()
 
 def serialize_m(obj, filename):
