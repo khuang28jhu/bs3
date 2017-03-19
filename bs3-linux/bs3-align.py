@@ -268,7 +268,8 @@ if __name__ == '__main__':
         
 
 
-        if options.rrbs: # RRBS scan
+        '''
+	if options.rrbs: # RRBS scan
             bs_rrbs('snap', options.infilename,
                     asktag,
                     options.adapter_file,
@@ -287,7 +288,8 @@ if __name__ == '__main__':
                     options.Output_unmapped_hit,
                     options.cut_format
                     )
-        else: # Normal single end scan
+	'''	    
+        if 1 == 1: # Normal single end scan
         
         
             input_fname = os.path.split(options.infilename)[1]
