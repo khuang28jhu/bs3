@@ -165,7 +165,7 @@ def rrbs_build(fasta_file, build_command, ref_path, low_bound, up_bound, aligner
         w_g2a.write('>%s_c_g\n%s\n' % (str(chrom_num), chrom_seq.replace("G","A")))
 
         elapsed('Preprocessing '+chrom_id)
-	    chrom_num += 1
+	chrom_num += 1
 
     for outf in [w_c2t, w_g2a]:
         outf.close()
