@@ -27,12 +27,13 @@ def rrbs_build(fasta_file, build_command, ref_path, low_bound, up_bound, aligner
     open_log(ref_p('log'))
 
     refd = {}
-    w_c2t = open(ref_p('W_C2T.fa'),'w')
-    c_c2t = open(ref_p('C_C2T.fa'),'w')
+    
+    w_c2t = open(os.path.join(ref_path, 'W_C2T.fa'),'w')
+    
+    chrom_conv = open(os.path.join(ref_path, 'chrom_conv_table'),'w')
+    w_g2a = open(os.path.join(ref_path, 'W_G2A.fa'),'w')
 
-    w_g2a = open(ref_p('W_G2A.fa'),'w')
-    c_g2a = open(ref_p('C_G2A.fa'),'w')
-
+    chrom_num = 0
     mappable_regions_output_file = open(ref_p("RRBS_mappable_regions.txt"),"w")
 
     all_L = 0
@@ -50,7 +51,7 @@ def rrbs_build(fasta_file, build_command, ref_path, low_bound, up_bound, aligner
 
     for chrom_id, chrom_seq in read_fasta(fasta_file):
         total_chromosomes += 1
-        refd[chrom_id] = len(chrom_seq)
+        
 
         fwd_chr_regions = {}
         rev_chr_regions = {}
@@ -140,15 +141,9 @@ def rrbs_build(fasta_file, build_command, ref_path, low_bound, up_bound, aligner
         #-----------------------------------
 
         chrom_seq = ''.join(_map_seq)
-        serialize(chrom_seq, ref_p(chrom_id))
-
-        w_c2t.write('>%s\n%s\n' % (chrom_id, chrom_seq.replace("C","T")))
-        w_g2a.write('>%s\n%s\n' % (chrom_id, chrom_seq.replace("G","A")))
-
-        chrom_seq = reverse_compl_seq(chrom_seq)
-
-        c_c2t.write('>%s\n%s\n' % (chrom_id, chrom_seq.replace("C","T")))
-        c_g2a.write('>%s\n%s\n' % (chrom_id, chrom_seq.replace("G","A")))
+        marshal.dump(chrom_seq, open(os.path.join(ref_path, str(chrom_num + 1)+'.data'), 'wb'))
+        serialize(chrom_seq, os.path.join(ref_path, str(chrom_num)))
+        
 
         #-----------------------------------
         logm("# %s : all (%d) : unmappable (%d) : mappable (%d) : ratio (%1.5f)"%(chrom_id,
@@ -161,9 +156,18 @@ def rrbs_build(fasta_file, build_command, ref_path, low_bound, up_bound, aligner
         all_unmappable_length += unmappable_length
 
         elapsed('Finished initial pre-processing of ' + chrom_id)
+        refd[str(chrom_num)] = len(chrom_seq)
+        chrom_conv.write(chrom_id + ': ' + str(chrom_num) + '\n')
+        w_c2t.write('>%s_w_c\n%s\n' % (str(chrom_num), chrom_seq.replace("C","T")))
+        w_g2a.write('>%s_c_c\n%s\n' % (str(chrom_num), chrom_seq.replace("G","A")))
+        chrom_seq = reverse_compl_seq(chrom_seq)
+        w_c2t.write('>%s_w_g\n%s\n' % (str(chrom_num), chrom_seq.replace("C","T")))
+        w_g2a.write('>%s_c_g\n%s\n' % (str(chrom_num), chrom_seq.replace("G","A")))
 
+        elapsed('Preprocessing '+chrom_id)
+	    chrom_num += 1
 
-    for outf in [w_c2t, c_c2t, w_g2a, c_g2a]:
+    for outf in [w_c2t, w_g2a]:
         outf.close()
 
 
@@ -173,22 +177,24 @@ def rrbs_build(fasta_file, build_command, ref_path, low_bound, up_bound, aligner
                                                                                        all_mappable_length,
                                                                                        float(all_mappable_length)/all_L) )
     logm("# eligible fragments : %d" % no_mappable_region )
-
-    serialize(refd, ref_p("refname"))
-
+    serialize_m(refd, os.path.join(ref_path,"refname"))
     mappable_regions_output_file.close()
     elapsed('Storing mappable regions and genome')
 
     #---------------- bowtie-build -------------------------------------------
 
     # append ref_path to all elements of to_bowtie
-    to_bowtie = map(lambda f: os.path.join(ref_path, f), ['W_C2T', 'W_G2A', 'C_C2T', 'C_G2A'])
+    to_snap = map(lambda f: os.path.join(ref_path, f), ['W_C2T', 'W_G2A'])
 
-    run_in_parallel([(build_command % { 'fname' : fname }, fname + '.log') for fname in to_bowtie])
+    # start bowtie-build for all converted genomes and wait for the processes to finish
 
-    elapsed('Index building')
-    # delete all fasta files
-    delete_files( f +'.fa' for f in to_bowtie)
-
-    elapsed('END')
+    #run_in_parallel([(build_command % { 'fname' : fname }) for fname in to_bowtie])
+    subprocess.call(build_command % { 'fname' : os.path.join(ref_path, 'W_C2T') }, shell = True)
+    subprocess.call(build_command % { 'fname' : os.path.join(ref_path, 'W_G2A') }, shell = True)
+    # delete fasta files of converted genomes
+    if aligner != "rmap" :
+        #delete_files(f+'.fa' for f in to_bowtie)
+        delete_files(os.path.join(ref_path, 'W_C2T.fa'))
+	delete_files(os.path.join(ref_path, 'W_G2A.fa'))
+    elapsed('Done')
 
