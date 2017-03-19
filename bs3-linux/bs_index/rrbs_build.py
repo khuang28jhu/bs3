@@ -85,8 +85,8 @@ def rrbs_build(fasta_file, build_command, ref_path, low_bound, up_bound, aligner
                                             XXXX_sites[j][0], XXXX_sites[j+1][1], mappable_seq))
         # storing region information to file
         # format: A[left_CCGG_pos]=[right_CCGG_pos, number_of_mappable_region]
-        serialize(fwd_chr_regions, ref_p(FWD_MAPPABLE_REGIONS(chrom_id)))
-        serialize(rev_chr_regions, ref_p(REV_MAPPABLE_REGIONS(chrom_id)))
+        #serialize(fwd_chr_regions, ref_p(FWD_MAPPABLE_REGIONS(chrom_id)))
+        #serialize(rev_chr_regions, ref_p(REV_MAPPABLE_REGIONS(chrom_id)))
 
         #-----------------------------------
         # mask the genome
