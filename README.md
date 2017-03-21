@@ -12,16 +12,16 @@ BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fa
 
 # Table of Contents
 
-* ## [New Features](#NewFeatures)
-* ## [System Requirements](#SystemRequirements)
-* ## [BS-Seeker3 Usage](#RunningBS-Seeker3)
-   * [Download BS-Seeker3](#DownloadBS-Seeker3)
-   * [Index Buidling](#IndexBuidling)
-   * [Alignment](#Alignment)
-   * [Methylation Rate Calculation](#MethylationRateCalculation)
-   * [Methylation Rate Statistics Display](#MethylationRateStatisticsDisplay)
-* [Example Use Case](#ExampleUseCase)
-* [Linking with MethGo](#Linkingw/MethGo)
+* ### [New Features](#NewFeatures)
+* ### [System Requirements](#SystemRequirements)
+* ### [BS-Seeker3 Usage](#RunningBS-Seeker3)
+   * ### [Download BS-Seeker3](#DownloadBS-Seeker3)
+   * ### [Index Buidling](#IndexBuidling)
+   * ### [Alignment](#Alignment)
+   * ### [Methylation Rate Calculation](#MethylationRateCalculation)
+   * ### [Methylation Rate Statistics Display](#MethylationRateStatisticsDisplay)
+* ### [Example Use Case](#ExampleUseCase)
+* ### [Linking with MethGo](#Linkingw/MethGo)
 
 # <a name="SystemRequirements"></a>System Requirements
 * Linux or Mac OS Environment
