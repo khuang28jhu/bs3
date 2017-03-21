@@ -302,7 +302,7 @@ Usage: ./bs3-unconversion -h [options]
 ![unconversion](https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="ExampleUseCase"></a>Example Use Case
-#### [Download BS-Seeker3](#Download BS-Seeker3)
+#### [Download BS-Seeker3](#DownloadBS-Seeker3)
 #### Build Indexes for the Reference Genome
 ```
 ./bs3-build -f test_data/genome.fa --aligner=snap
