@@ -332,7 +332,7 @@ This returns a quality contol plot of the reads based on the number of mismatche
 ```
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamdba.fa
 ```
-   This will map the sample reads against the lamda phage library and output the [graph](#Example) ```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
+   This will map the sample reads against the lamda phage library and output the [graph](#Example)```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
 # <a name="Linking w/ MethGo"></a>MethGo
 
 MethGo is a simple and effective tool designed for the analysis of data from whole genome bisulfite sequencing (WGBS) and reduced representation bisulfite sequencing (RRBS). MethGo provides 5 major modules:
