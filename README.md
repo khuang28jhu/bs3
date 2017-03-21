@@ -75,6 +75,7 @@ Usage: ./bs3-build -h [options]
 ```
 ### <a name="Alignment"></a>Alignment
 Use the script **bs3-align.py** to map the raw bisulfite reads. 
+
 **Input:**
 * BS reads file in fastq
 ```
@@ -152,7 +153,8 @@ SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAAT
 ```
 
 ### <a name= "MethylationRateCalculation" ></a> Methylation Rate Calculation
-Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
+Use the script **bs3-align.py** to map the raw bisulfite reads.
+
 **Input:**
 * SAM file from the previous step
 
