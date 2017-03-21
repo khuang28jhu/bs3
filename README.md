@@ -3,19 +3,19 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 
 # Table of Contents
 
-- [New Features](#New Features)
-- [System Requirements](#System Requirements)
-- [BS-Seeker3 Usage](#Running BS-Seeker3)
+- [New Features](#NewFeatures)
+- [System Requirements](#SystemRequirements)
+- [BS-Seeker3 Usage](#RunningBS-Seeker3)
    - [Download BS-Seeker3](#DownloadBS-Seeker3)
-   - [Index Buidling](#Index Buidling)
+   - [Index Buidling](#IndexBuidling)
    - [Alignment](#Alignment)
-   - [Methylation Rate Calculation](#Methylation Rate Calculation)
-   - [Methylation Rate Statistics Display](# Methylation Rate Statistics Display)
-- [Example Use Case](#Example Use Case)
-- [Linking with MethGo](#Linking w/ MethGo)
+   - [Methylation Rate Calculation](#MethylationRateCalculation)
+   - [Methylation Rate Statistics Display](#MethylationRateStatisticsDisplay)
+- [Example Use Case](#ExampleUseCase)
+- [Linking with MethGo](#Linkingw/MethGo)
 
 
-# <a name="New Features"></a>New Features
+# <a name="NewFeatures"></a>New Features
 * Implements Improved Indexing, Fast Alignment with SNAP, and Highly Optimized SNAP Output Post-Processing
     * Produces an ultra-fast bisulfite read maping pipeline
 * Executes Local Alignment through the Unnoken Algorithm
@@ -23,7 +23,7 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 * Plots Quality Control Graph, Meta-gene Plot, and Bisulfite Unconversion Rate Histogram
     * Allows better visualization of the methylation data
 
-# <a name="System Requirements"></a>System Requirements
+# <a name="SystemRequirements"></a>System Requirements
 * Linux or Mac OS Environment
 * Python2 (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python2 could be downloaded from http://www.python.org/download/ )
 * Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
@@ -34,7 +34,7 @@ pip install pysam
 pip install Matplolib
 ```
 
-# <a name="Running BS-Seeker3"></a>Running BS-Seeker3
+# <a name="RunningBS-Seeker3"></a>Running BS-Seeker3
 BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should adjust some parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
 
 ### <a name="DownloadBS-Seeker3"></a>Download BS-Seeker3
@@ -54,7 +54,7 @@ cd bs3-linux
 chmod u+x ./snap
 ```
 
-### <a name="Index Building"></a>Index Buidling
+### <a name="IndexBuilding"></a>Index Buidling
 Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
 
 **Usage:**<br / >
@@ -155,7 +155,7 @@ Methylated C in mapped reads
 SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAATTGAATGGAATTATTGAATGGATTTGAATGGAATAATTATTGAATGGAATTGAATGGAA	IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII	PG:Z:SNAP	NM:i:3	RG:Z:FASTQ	PL:Z:Illumina	PU:Z:pu	LB:Z:lb	SM:Z:sm
 ```
 
-### <a name= "Methylation Rate Calculation" ></a> Methylation Rate Calculation
+### <a name= "MethylationRateCalculation" ></a> Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input:**
 * SAM file from the previous step
@@ -252,7 +252,7 @@ Options:
 
 
 
-### <a name="Methylation Rate Statistics Display"></a>Methylation Rate Statistics Display
+### <a name="MethylationRateStatisticsDisplay"></a>Methylation Rate Statistics Display
 Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / > 
 
 **Input:**
@@ -335,7 +335,7 @@ This returns a quality contol plot of the reads based on the number of mismatche
 ./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamdba.fa
 ```
    This will map the sample reads against the lamda phage library and output the [graph](#Example)```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
-# <a name="Linking w/ MethGo"></a>MethGo
+# <a name="Linkingw/MethGo"></a>MethGo
 
 MethGo is a simple and effective tool designed for the analysis of data from whole genome bisulfite sequencing (WGBS) and reduced representation bisulfite sequencing (RRBS). MethGo provides 5 major modules:
 
@@ -351,7 +351,7 @@ CNV: Copy number variation calling
 
 For a complete introduction to Methgo and download of its dependcies, please go to here: [MethGo Tutorial] (https://methgo.readthedocs.io/en/latest/)
 
-Please use toMethgo.py to transition to MethGo. toMethgo.py takes in and delivers to the MethGo pipeline the .sam ouput from the [Alignment](#Alignment) stage and the .CGmap file from the [Methylation Rate Calculation](#Methylation Rate Calculation) stage.
+Please use toMethgo.py to transition to MethGo. toMethgo.py takes in and delivers to the MethGo pipeline the .sam ouput from the [Alignment](#Alignment) stage and the .CGmap file from the [Methylation Rate Calculation](#MethylationRateCalculation) stage.
 
 See the instructions below to perform the relevant MethGo modules: 
 
