@@ -51,7 +51,7 @@ chmod u+x ./snap
 ```
 
 ### <a name="IndexBuilding"></a>Index Buidling
-Use the script **bs3-build.py** to build an index from a reference genome. <br / ><br / >
+Use the script **bs3-build.py** to build an index from a reference genome. 
 
 **Usage:**<br / >
 ```
@@ -74,7 +74,7 @@ Usage: ./bs3-build -h [options]
                      genome, a location size of 5 bytes is recommended. 
 ```
 ### <a name="Alignment"></a>Alignment
-Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
+Use the script **bs3-align.py** to map the raw bisulfite reads. 
 **Input:**<br / >
 * BS reads file in fastq
 ```
