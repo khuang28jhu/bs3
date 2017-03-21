@@ -6,7 +6,7 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 - [New Features](#New Features)
 - [System Requirements](#System Requirements)
 - [BS-Seeker3 Usage](#Running BS-Seeker3)
-   - [Download BS-Seeker3](#Download BS-Seeker3)
+   - [Download BS-Seeker3](#DownloadBS-Seeker3)
    - [Index Buidling](#Index Buidling)
    - [Alignment](#Alignment)
    - [Methylation Rate Calculation](#Methylation Rate Calculation)
@@ -37,7 +37,7 @@ pip install Matplolib
 # <a name="Running BS-Seeker3"></a>Running BS-Seeker3
 BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should adjust some parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
 
-### <a name="Download BS-Seeker3"></a>Download BS-Seeker3
+### <a name="DownloadBS-Seeker3"></a>Download BS-Seeker3
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
 ```
