@@ -3,25 +3,23 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 
 # Table of Contents
 
-- [New Features](#NewFeatures)
-- [System Requirements](#SystemRequirements)
-- [BS-Seeker3 Usage](#RunningBS-Seeker3)
-   - [Download BS-Seeker3](#DownloadBS-Seeker3)
-   - [Index Buidling](#IndexBuidling)
-   - [Alignment](#Alignment)
-   - [Methylation Rate Calculation](#MethylationRateCalculation)
-   - [Methylation Rate Statistics Display](#MethylationRateStatisticsDisplay)
-- [Example Use Case](#ExampleUseCase)
-- [Linking with MethGo](#Linkingw/MethGo)
+* [New Features](#NewFeatures)
+* [System Requirements](#SystemRequirements)
+* [BS-Seeker3 Usage](#RunningBS-Seeker3)
+   * [Download BS-Seeker3](#DownloadBS-Seeker3)
+   * [Index Buidling](#IndexBuidling)
+   * [Alignment](#Alignment)
+   * [Methylation Rate Calculation](#MethylationRateCalculation)
+   * [Methylation Rate Statistics Display](#MethylationRateStatisticsDisplay)
+* [Example Use Case](#ExampleUseCase)
+* [Linking with MethGo](#Linkingw/MethGo)
 
 
 # <a name="NewFeatures"></a>New Features
-* Implements Improved Indexing, Fast Alignment with SNAP, and Highly Optimized SNAP Output Post-Processing
-    * Produces an ultra-fast bisulfite read maping pipeline
-* Executes Local Alignment through the Unnoken Algorithm
-    * Achieves high mappability and accuracy
-* Plots Quality Control Graph, Meta-gene Plot, and Bisulfite Unconversion Rate Histogram
-    * Allows better visualization of the methylation data
+* BS-seeker3 now employs an improved index, conducts fast alignment with SNAP, and incorporates a highly optimized pipeline to process SNAP pseudo-alginment outputs. This results in an ultra-fast bisulfite read mapping pipeline
+* BS-seeker3 now executes local alignment through the Unnoken Algorithm, which allows high mappability and accuracy while not sacrificing too much runtime. 
+* BS-seeke3 also plots a quality control graph, meta-gene plot, and bisulfite unconversion rate histogram, which allos better visulatization of the methylation data. 
+    
 
 # <a name="SystemRequirements"></a>System Requirements
 * Linux or Mac OS Environment
