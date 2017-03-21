@@ -8,7 +8,7 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 - [BS-Seeker3 Usage](#Running BS-Seeker3)
    - [Download BS-Seeker3](# Download BS-Seeker3)
    - [Index Buidling](# Index Buidling)
-   - [Alignment](# Alignment)
+   - [Alignment](#Alignment)
    - [Methylation Rate Calculation](#Methylation Rate Calculation)
    - [Methylation Rate Statistics Display](# Methylation Rate Statistics Display)
 - [Example Use Case](#Example Use Case)
