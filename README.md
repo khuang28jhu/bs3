@@ -153,7 +153,7 @@ Methylated C in mapped reads
 SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAATTGAATGGAATTATTGAATGGATTTGAATGGAATAATTATTGAATGGAATTGAATGGAA	IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII	PG:Z:SNAP	NM:i:3	RG:Z:FASTQ	PL:Z:Illumina	PU:Z:pu	LB:Z:lb	SM:Z:sm
 ```
 
-### <a name="Methylation Rate Calculation"></a>Methylation Rate Calculation
+### <a name= "Methylation Rate Calculation" > </a> Methylation Rate Calculation
 Use the script **bs3-align.py** to map the raw bisulfite reads. <br / ><br / >
 **Input:**
 * SAM file from the previous step
