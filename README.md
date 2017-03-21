@@ -297,7 +297,7 @@ Usage: ./bs3-unconversion -h [options]
 ```
 **Output**
 * <a name="Example"></a>Example Unconversion Rate Plot
-![unconversion] (https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
+![unconversion](https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="Example Use Case"></a>Example Use Case
 #### [Download BS-Seeker3](#Download BS-Seeker3)
