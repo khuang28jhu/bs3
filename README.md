@@ -1,6 +1,11 @@
 # BS-Seeker3 
 BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fast speed. While being 1.5 time faster than BSMAP and 10 times faster than Bismark, BS-Seeker3 is abel to maps twice as many reads as both aligners. In addition to its high-throughput performance, BS-Seeker3 offers additional downstream analysis of bs-seq to further investigate and visualize methylation pattern post-alignment.
 
+# <a name="NewFeatures"></a>New Features
+* BS-seeker3 now employs an improved index, conducts fast alignment with SNAP, and incorporates a highly optimized pipeline to process SNAP pseudo-alginment outputs. 
+* BS-seeker3 now executes local alignment through the Unnoken Algorithm, which allows high mappability and accuracy and does not waste too much runtime. 
+* BS-seeke3 also outputs a quality control graph, meta-gene plot, and bisulfite unconversion rate histogram, which allows better visulatization of the methylation pattern. 
+
 # Table of Contents
 
 * [New Features](#NewFeatures)
@@ -13,13 +18,6 @@ BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fa
    * [Methylation Rate Statistics Display](#MethylationRateStatisticsDisplay)
 * [Example Use Case](#ExampleUseCase)
 * [Linking with MethGo](#Linkingw/MethGo)
-
-
-# <a name="NewFeatures"></a>New Features
-* BS-seeker3 now employs an improved index, conducts fast alignment with SNAP, and incorporates a highly optimized pipeline to process SNAP pseudo-alginment outputs. 
-* BS-seeker3 now executes local alignment through the Unnoken Algorithm, which allows high mappability and accuracy and does not waste too much runtime. 
-* BS-seeke3 also outputs a quality control graph, meta-gene plot, and bisulfite unconversion rate histogram, which allows better visulatization of the methylation pattern. 
-    
 
 # <a name="SystemRequirements"></a>System Requirements
 * Linux or Mac OS Environment
