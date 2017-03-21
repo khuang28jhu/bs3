@@ -6,7 +6,7 @@ BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fa
 * BS-seeker3 now executes local alignment through the Unnoken Algorithm, which allows high mappability and accuracy and does not waste too much runtime. 
 * BS-seeke3 also outputs a quality control graph, meta-gene plot, and bisulfite unconversion rate histogram, which allows better visulatization of the methylation pattern. 
 
-![overview](https://github.com/khuang28jhu/bs3/blob/master/overview.png)
+![overview](https://github.com/khuang28jhu/bs3/blob/master/Overview.png)
 
 # Table of Contents
 
