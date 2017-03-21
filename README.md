@@ -1,5 +1,5 @@
 # BS-Seeker3 
-BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. It incorporates a series of new features to achieve significantly faster speed and better accuracy compared to other available bisulfite reads aligners. It is 1.5 time faster than BSMAP and 10 times faster than Bismark and maps twice the reads than both aligners. BS-Seeker3 also offers additional analysis of bisulphite read data to further investigate and visualize the methylation pattern after alignment.
+BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fast speed. While being 1.5 time faster than BSMAP and 10 times faster than Bismark, BS-Seeker3 is abel to maps twice as many reads as both aligners. In addition to its high-throughput performance, BS-Seeker3 offers additional downstream analysis of bs-seq to further investigate and visualize methylation pattern post-alignment.
 
 # Table of Contents
 
@@ -16,9 +16,9 @@ BS-Seeker3 performs accurate and fast mapping of bisulfite-treated short reads. 
 
 
 # <a name="NewFeatures"></a>New Features
-* BS-seeker3 now employs an improved index, conducts fast alignment with SNAP, and incorporates a highly optimized pipeline to process SNAP pseudo-alginment outputs. This results in an ultra-fast bisulfite read mapping pipeline
-* BS-seeker3 now executes local alignment through the Unnoken Algorithm, which allows high mappability and accuracy while not sacrificing too much runtime. 
-* BS-seeke3 also plots a quality control graph, meta-gene plot, and bisulfite unconversion rate histogram, which allos better visulatization of the methylation data. 
+* BS-seeker3 now employs an improved index, conducts fast alignment with SNAP, and incorporates a highly optimized pipeline to process SNAP pseudo-alginment outputs. 
+* BS-seeker3 now executes local alignment through the Unnoken Algorithm, which allows high mappability and accuracy and does not waste too much runtime. 
+* BS-seeke3 also outputs a quality control graph, meta-gene plot, and bisulfite unconversion rate histogram, which allows better visulatization of the methylation pattern. 
     
 
 # <a name="SystemRequirements"></a>System Requirements
@@ -33,7 +33,7 @@ pip install Matplolib
 ```
 
 # <a name="RunningBS-Seeker3"></a>Running BS-Seeker3
-BS-Seeker3 is a 3 steps process: 1) Index-building, 2) Alignment of the bisulfite reads, and 3) Methylation Rate Calculation. Index-buidling only has to be done once, and the user should adjust some parameters based on the reference genome size (See below for details). The alignment step uses SNAP to map the bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. The methylation rate calculation step takes in the output from the alignment step and calcualtes the methylation rate at the single-base resolution
+BS-Seeker3 is a 3-steps pipeline: index-building, bs-seq alignment, and methylation rate calculation. For a given genome, the index only has to be built once, and the user should adjust certain parameters based on the size of the genome (See below for details). The alignment step uses SNAP to map bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. After alignment, methylation rate is then calcualted at single-base resolution.
 
 ### <a name="DownloadBS-Seeker3"></a>Download BS-Seeker3
 Type the following commands in an Unix Terminal:
