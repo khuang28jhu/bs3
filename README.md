@@ -1,10 +1,10 @@
 # BS-Seeker3 
-BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fast speed. While being 1.5 time faster than BSMAP and 10 times faster than Bismark, BS-Seeker3 is abel to maps twice as many reads as both aligners. In addition to its high-throughput performance, BS-Seeker3 offers additional downstream analysis of bs-seq to further investigate and visualize methylation pattern post-alignment.
+BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fast speed. While being 1.5 time faster than BSMAP and 10 times faster than Bismark, BS-Seeker3 can map twice as many reads than both aligners. In addition to its high-throughput performance, BS-Seeker3 offers additional downstream analysis to further investigate and visualize methylation pattern post-alignment.
 
 # <a name="NewFeatures"></a>New Features
-* BS-seeker3 now employs an improved index, conducts fast alignment with SNAP, and incorporates a highly optimized pipeline to process SNAP pseudo-alginment outputs. 
-* BS-seeker3 now executes local alignment through the Unnoken Algorithm, which allows high mappability and accuracy and does not waste too much runtime. 
-* BS-seeke3 also outputs a quality control graph, meta-gene plot, and bisulfite unconversion rate histogram, which allows better visulatization of the methylation pattern. 
+* BS-seeker3 now employs an improved index, conducts fast alignment with SNAP, and incorporates a highly optimized pipeline to process SNAP outputs. 
+* BS-seeker3 now executes local alignment through the Unnoken Algorithm, which allows high mappability and accuracy without sacrificing too much runtime. 
+* BS-seeke3 also outputs a preliminary quality control graph, a meta-gene plot, and a bisulfite unconversion rate histogram. Additional downstream methylation analysis is supported by MethGo. 
 
 # BS-Seeker3 Pipeline
 
@@ -35,7 +35,7 @@ pip install Matplolib
 ```
 
 # <a name="RunningBS-Seeker3"></a>Running BS-Seeker3
-BS-Seeker3 is a 3-steps pipeline: index-building, bs-seq alignment, and methylation rate calculation. For a given genome, the index only has to be built once, and the user should adjust certain parameters based on the size of the genome (See below for details). The alignment step uses SNAP to map bisulfite reads to the reference genome, and then further removes the non-unique and incorrectly converted mappings. After alignment, methylation rate is then calcualted at single-base resolution.
+BS-Seeker3 is a 3-steps pipeline: index-building, bs-seq alignment, and methylation rate calculation. Prior to alignment, BS3 first builds a custom-index for the reference genome (the user should adjust specific index-building parameters based on the reference genome size, see below for details). During alignment, BS3 uses SNAP to map bisulfite reads, and then sorts through the non-unique and incorrectly converted mappings. After alignment, methylation rate is then calcualted at the single-base resolution.
 
 ### <a name="DownloadBS-Seeker3"></a>Download BS-Seeker3
 Type the following commands in an Unix Terminal:
@@ -55,7 +55,7 @@ chmod u+x ./snap
 ```
 
 ### <a name="IndexBuilding"></a>Index Buidling
-Use the script **bs3-build.py** to build an index from a reference genome. 
+Use the script **bs3-build.py** to build an index for a reference genome. 
 
 **Usage:**
 ```
@@ -64,15 +64,15 @@ Usage: ./bs3-build -h [options]
 
 -f                   Path to the reference genome; the reference genome should be in fasta format
 
--s                   Seed size (default: 20), a SNAP option; SNAP is based on a hashtable data 
-                     strucutre. It builds its index by breaking the reference genome into seqeunces
-                     (seed) of a specific length. This option determines the length of each 
-                     seqeunce (seed size), and SNAP can deal with seed sizes to 23. A seed size of
+-s                   Seed size (default: 20), a SNAP option; SNAP uses a hashtable strucutre. 
+                     It builds the index by breaking the reference genome into multiple seqeunces
+                     (seed) of a set length. This option determines the length of each 
+                     seqeunce (seed size), and SNAP can process seed sizes to 23. A seed size of
                      20 is recommended for bisulfite reads of 100 bp long; a longer size should be
                      used for raw reads of longer length. 
                      
--L                   (default: 4), a SNAP option specific to the Linux implementation; This options 
-                     determines the byte size used to store the location of each seed along the 
+-L                   (default: 4), a SNAP option specific to the Linux implementation; This option 
+                     determines the byte size to store the location of each seed along the 
                      reference genome. It ranges from 4 to 8 bytes. For larger genomes, a larger 
                      location size should be used; for example, to build an index based on the human 
                      genome, a location size of 5 bytes is recommended. 
@@ -112,12 +112,12 @@ For pair end reads:
 
 Important General options:
 
--K ALIGNMENT LENGTH, Neglect the alignments with length below this value
+-K ALIGNMENT LENGTH, Neglect alignments with length below this value
 
 -g GENOME,           Name of the reference genome (should be the same as "-f" in bs3-build.py ) [ex.
                      chr21_hg18.fa]
 
--m NO_MISMATCHES,    Set the number(>=1)/percentage([0, 1)) of mismatches in a read. Ex: 8 (allow 8 
+-m NO_MISMATCHES,    Set the number(>=1)/percentage([0, 1)) of mismatche in a read. Ex: 8 (allow 8 
                      mismatches) or 0.08 (allow 8% mismatches) [Default: 12]
                      
 -l INT,              Split the input file into smaller files based on this number. Each smaller file 
@@ -131,12 +131,12 @@ Relevant Aligner Options:
                      are often seeds matching to multiple locations in the genomes. Sorting throught all
                      the putative hits is a time-consuming process. This option sets a threshold on the 
                      number of locations that a seed can match to. Seeds matching to locations more than 
-                     this number are ignored during the alignment step.
+                     this number are ignored during the alignment.
                      
 Methylation Rate Statistics Display Option:
 
 --qcf=QC_F           Supply the length of the raw bisulfite reads to plot a quality control plot. A 
-                     quality control plot tabulates the average rate of mismatches of each position 
+                     quality control plot tabulates the average rate of mismatche at each position 
                      on a raw read.
 ```
 **Output:** 
@@ -157,7 +157,7 @@ SRR2058107.412129	0	10_w_c	42386003	1	90M	*	0	0	TGGATTGGAAGGTAATTATTATTGAATGGAAT
 ```
 
 ### <a name= "MethylationRateCalculation" ></a> Methylation Rate Calculation
-Use the script **bs3-align.py** to map the raw bisulfite reads.
+Use the script **bs3-align.py** to map raw bisulfite reads.
 
 **Input:**
 * SAM file from the previous step
@@ -169,7 +169,7 @@ Usage: ./bs3-call_methylation -h [options]
 
 Options:
 
--i INFILE,          Input alinged reads file in SAM format; output from bs3-align.py
+-i INFILE,          Input alinged read file in SAM format; output from bs3-align.py
 
 -d DBPATH,          Path to the reference genome index (generated during index-buidling) (optional)
 
@@ -255,7 +255,7 @@ Options:
 
 
 ### <a name="MethylationRateStatisticsDisplay"></a>Methylation Rate Statistics Display
-Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quality control plot.<br / ><br / > 
+Use the script **bs3-methyl_display.py** to plot a meta-gene plot or a quality control plot.<br / ><br / > 
 
 **Input:**
 * 'CGmap' file from the 'Methylation Rate Calculation' step
@@ -267,12 +267,12 @@ Use the script **bs3-methyl_display.py** to plot the meta-gene file or the quali
 $ ./bs3-methyl_display -h 
 Usage: ./bs3-methyl_display -h [options] 
 
--m MET             Supply the single-base resolution methylation level file generated during the 
-                   methylation rate calculation (in CG format)
+-m MET             Supply the single-base resolution methylation level report from the 
+                   methylation rate calculation step (in CG format)
                    
--a ANNOTATION      Suppply the gene annotation file to build the meta-plot (in gff3 format)
+-a ANNOTATION      Suppply the gene annotation file to build a meta-plot (in gff3 format)
 
--r GENOME_REGION   Select the genomeic region to be plotted for the meta-plot of gene. 
+-r GENOME_REGION   Select the genomeic region to plot for the meta-plot of gene. 
                    Select each with the option ```-r gene```; (default: gene)
                    
 -q QC_F            Plot Quality Control Graph, supply the .qc file generated during the alignment 
@@ -289,7 +289,7 @@ Usage: ./bs3-methyl_display -h [options]
 ![qclot](https://github.com/khuang28jhu/bs3/blob/master/QC_Plot.png)
 
 
-Use the script **bs3-unconversion.py** to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is believed to be free of DNA methylation, so all cytosine of the genome should be converted to uracil in an ideal situation. Any unconverted cytosines of the mapped reads thus reveal the unconversionr rate
+Use the script **bs3-unconversion.py** to calculate the unconversion rate of the bisulfite reads if your data contains control reads from the lambda phage library. The lambda phage DNA is free of DNA methylation, so all cytosine of the genome should have been converted to uracil. The unconverted cytosines thus reveal the unconversionr rate.
 <br / ><br / >**Usage:**
 ```
 $ ./bs3-unconversion -h
@@ -339,7 +339,7 @@ This returns a quality contol plot of the reads based on the number of mismatche
    This will map the sample reads against the lamda phage library and output the [graph](#Example)```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
 # <a name="Linkingw/MethGo"></a>MethGo
 
-MethGo is a simple and effective tool designed for the analysis of data from whole genome bisulfite sequencing (WGBS) and reduced representation bisulfite sequencing (RRBS). MethGo provides 5 major modules:
+MethGo is a simple and effective tool designed to analyze data from whole genome bisulfite sequencing (WGBS) and reduced representation bisulfite sequencing (RRBS). MethGo provides 5 major modules:
 
 COV: Coverage distribution of each cytosine
 
@@ -351,7 +351,7 @@ SNP: Single nucleotide polymorphism (SNP) calling
 
 CNV: Copy number variation calling
 
-For a complete introduction to Methgo and download of its dependcies, please go to here: [MethGo Tutorial] (https://methgo.readthedocs.io/en/latest/)
+For a complete introduction of Methgo and to download of its dependcies, please go to here: [MethGo Tutorial] (https://methgo.readthedocs.io/en/latest/)
 
 Please use toMethgo.py to transition to MethGo. toMethgo.py takes in and delivers to the MethGo pipeline the .sam ouput from the [Alignment](#Alignment) stage and the .CGmap file from the [Methylation Rate Calculation](#MethylationRateCalculation) stage.
 
