@@ -54,7 +54,7 @@ def context_calling(seq, position):
 if __name__ == '__main__':
 
     parser = OptionParser()
-    parser.add_option("-i", "--input", type="string", dest="infilename",help="BAM output from bs_seeker2-align.py", metavar="INFILE")
+    parser.add_option("-i", "--input", type="string", dest="infilename",help="BAM output from bs3-align", metavar="INFILE")
     parser.add_option("-d", "--db", type="string", dest="dbpath",help="Path to the reference genome library (generated in preprocessing genome) [Default: %default]" , metavar="DBPATH", default = reference_genome_path)
     parser.add_option("-o", "--output-prefix", type="string", dest="output_prefix",help="The output prefix to create ATCGmap and wiggle files [INFILE]", metavar="OUTFILE")
     parser.add_option("--sorted", action="store_true", dest="sorted",help="Specify when the input bam file is already sorted, the sorting step will be skipped [Default: %default]", default = False)
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     parser.add_option("--txt", action="store_true", dest="text",help="Show CGmap and ATCGmap in .gz [Default: %default]", default = False)
 
     parser.add_option("-r", "--read-no",type = "int", dest="read_no",help="The least number of reads covering one site to be shown in wig file [Default: %default]", default = 1)
-    parser.add_option("-v", "--version", action="store_true", dest="version",help="show version of BS-Seeker2", metavar="version", default = False)
+    parser.add_option("-v", "--version", action="store_true", dest="version",help="show version of BS-Seeker3", metavar="version", default = False)
 
     (options, args) = parser.parse_args()
 
