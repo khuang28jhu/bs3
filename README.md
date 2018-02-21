@@ -27,7 +27,7 @@ BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fa
 * Linux or Mac OS Environment
 * Python2 (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python2 could be downloaded from http://www.python.org/download/ )
 * GCC 5.4.0 +
-* SNAP-aligner, which could be downloaded from https://github.com/amplab/snap
+* SNAP version 1.0beta.23, which could be downloaded from https://github.com/amplab/snap
 * Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
 ```
 pip install pysam
@@ -306,24 +306,28 @@ Usage: ./bs3-unconversion -h [options]
 ![unconversion](https://github.com/khuang28jhu/bs3/blob/master/Unconversion_Rate.png)
 
 # <a name="ExampleUseCase"></a>Example Use Case
-Please download SNAP from  https://github.com/amplab/snap, move ```snap-aligner``` to BSseeker3 home directory, and rename ```snap-aligner```  ```snap```.
+Please download SNAP version 1.0beta.23 from  https://github.com/amplab/snap, move ```snap-aligner``` to BSseeker3 home directory, and rename ```snap-aligner```  ```snap```.
 ```
 mv snap-aligner snap
 ```
 #### [Download BS-Seeker3](#DownloadBS-Seeker3)
 #### Build Indexes for the Reference Genome
 ```
-./bs3-build -f test_data/genome.fa --aligner=snap
+./bs3-build -f reference_genome/genome.fa --aligner=snap
 ```
    This will build SNAP indexes in the directory bs_align/bs_utils/reference_genomes/genome.fa_snap
 #### Map the Sample Reads 
 ```
-./bs3-align -i test_data/WGBS.fa -o WGBS -f sam -g test_data/genome.fa
+./bs3-align -i test_data/WGBS.fa -o WGBS -f sam -g reference_genome/genome.fa
+```
+Piared-end reads:
+```
+./bs3-align -1 test_data/pair1.fq -2 test_data/pair2.fq -o WGBC -f sam -g reference_genome/genome.fa
 ```
    This will produce the output file ``` WGBS.sam ```, which contains the aligned reads in SAM format ([SAM Fields Description](https://samtools.github.io/hts-specs/SAMv1.pdf))
 #### Return Genome-wide Methylation Report for the Sample Reads 
 ```
-./bs3-call_methylation -i WGBS -o output  --db bs_align/reference_genomes/genome.fa_snap/
+./bs3-call_methylation -i WGBS -o output  --db bs_align/reference_genome/genome.fa_snap/
 ```
    This will produce a genome-wide methylation report of the data, ```output.wig.gz```,```output.ATCGmap.gz``` and ```output.CGmap.gz```; Description of the file formats is [here](#Outputaa).
 ####  Plot QC Plot and Metagene Graph for the Sample Reads
@@ -332,7 +336,7 @@ mv snap-aligner snap
 ```
 This returns an average chromosomal distribution of the methylation level for the reads (the annotation file is not supplied ).
 ```
-./bs3-align -i test_data/WGBS.fa -o WGBS -f sam -g test_data/genome.fa --qcf 100
+./bs3-align -i test_data/WGBS.fa -o WGBS -f sam -g reference_genome/genome.fa --qcf 100
 ```
 ```
 ./bs3-methyl_display -q WGBS.qc
@@ -340,7 +344,7 @@ This returns an average chromosomal distribution of the methylation level for th
 This returns a quality contol plot of the reads based on the number of mismatches per read position.
 #### Calculate the Unconversion Rate of the Data 
 ```
-./bs3-unconversion -f test_data/WGBS.fa -g test_data/lamdba.fa
+./bs3-unconversion -f test_data/WGBS.fa -g reference_genome/lamdba.fa
 ```
    This will map the sample reads against the lamda phage library and output the [graph](#Example)```Unconversion_Rate.png``` summarizing the unconversion rate of the data.
 # <a name="Linkingw/MethGo"></a>MethGo
