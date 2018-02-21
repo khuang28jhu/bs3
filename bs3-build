@@ -1,0 +1,1 @@
+python bs3-build.py $*
