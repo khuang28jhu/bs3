@@ -43,17 +43,12 @@ BS-Seeker3 is a 3-steps pipeline: index-building, bs-seq alignment, and methylat
 Type the following commands in an Unix Terminal:
 * To download the Mac verion:
 ```
-git clone https://github.com/khuang28jhu/bs3
-mv bs3/bs3-mac .
-cd bs3-mac
-chmod u+x ./snap
+Stay tuned.
 ```
 * To download the Linux version:
 ```
 git clone https://github.com/khuang28jhu/bs3
-mv bs3/bs3-linux .
-cd bs3-linux
-chmod u+x ./snap
+
 ```
 
 ### <a name="IndexBuilding"></a>Index Buidling
