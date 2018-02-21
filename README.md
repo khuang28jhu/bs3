@@ -307,6 +307,9 @@ Usage: ./bs3-unconversion -h [options]
 
 # <a name="ExampleUseCase"></a>Example Use Case
 Please download SNAP from  https://github.com/amplab/snap, move ```snap-aligner``` to BSseeker3 home directory, and rename ```snap-aligner```  ```snap```.
+```
+mv snap-aligner snap
+```
 #### [Download BS-Seeker3](#DownloadBS-Seeker3)
 #### Build Indexes for the Reference Genome
 ```
