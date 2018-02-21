@@ -26,6 +26,8 @@ BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fa
 # <a name="SystemRequirements"></a>System Requirements
 * Linux or Mac OS Environment
 * Python2 (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python2 could be downloaded from http://www.python.org/download/ )
+* GCC 5.4.0 +
+* SNAP-aligner, which could be downloaded from https://github.com/amplab/snap
 * Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
 ```
 pip install pysam
