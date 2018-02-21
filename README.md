@@ -139,13 +139,29 @@ Methylation Rate Statistics Display Option:
 **Output:** 
 * Alignment Summary in .stat file
 ```
-Number of reads in total: 10000000
-Number of unique-hits reads (before post-filtering): 9359751.0
-Number of reads mapped after post-filtering 3343919.0
-Methylated C in mapped reads
- mCG  0.685%
- mCHG  0.031%
- mCHH  0.030%
+	BS-seeker3 Result
+
+	Final Alignment Report
+================================================
+
+Number of reads in total: 20000
+Number of unique-hits reads (before post-filtering): 9990.0
+Number of reads mapped after post-filtering 9934.0
+
+Alignment Time: 1.14915108681secs
+
+	Final Cytosine Report
+================================================
+
+Total Number of Cytosines: 348392.0
+Total Number of Cs in CpG context: 45242.0
+Total Number of Cs in CHG context: 49610.0
+Total Number of Cs in CHH context: 253540.0
+
+Rate of Methylation
+ mCG  0.999%
+ mCHG  0.999%
+ mCHH  0.999%
 ```
 * List of Aligned Reads in SAM Format ([SAM Fields Description](https://samtools.github.io/hts-specs/SAMv1.pdf))
 
