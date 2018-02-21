@@ -320,7 +320,7 @@ mv snap-aligner snap
 ```
 ./bs3-align -i test_data/WGBS.fa -o WGBS -f sam -g reference_genome/genome.fa
 ```
-Piared-end reads:
+Paired-end reads:
 ```
 ./bs3-align -1 test_data/pair1.fq -2 test_data/pair2.fq -o WGBC -f sam -g reference_genome/genome.fa
 ```
