@@ -265,7 +265,8 @@ Options:
         (16) methylation_level = #C/(#C+#T) = C8/(C7+C8) for Watson strand, =C14/(C11+C14) for Crick strand;
         "nan" means none reads support C/T at this position.
 
-
+**Convert Output to Bismark BedGraph Format**
+```sh toBismarkBedgraph.sh output.CGmap.gz```
 
 ### <a name="MethylationRateStatisticsDisplay"></a>Methylation Rate Statistics Display
 Use the script **bs3-methyl_display.py** to plot a meta-gene plot or a quality control plot.<br / ><br / > 
