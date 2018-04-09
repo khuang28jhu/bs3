@@ -368,9 +368,9 @@ if __name__ == '__main__':
             f.write('Total Number of Cs in CHG context: ' + str(stats[2] + stats[5]) + '\n')
             print 'Total Number of Cs in CHH context: ' + str(stats[3] + stats[6])
             f.write('Total Number of Cs in CHH context: ' + str(stats[3] + stats[6]) + '\n')
-            n_CG  = stats[1] / (stats[1] + stats[4]) if stats[1] + stats[4] != 0 else 0
-            n_CHG = stats[2] / (stats[2] + stats[5]) if stats[2] + stats[5] != 0 else 0
-            n_CHH = stats[3] / (stats[3] + stats[6]) if stats[3] + stats[6] != 0 else 0
+            n_CG  = stats[1] / (stats[1] + stats[4]) * 100 if stats[1] + stats[4] != 0 else 0
+            n_CHG = stats[2] / (stats[2] + stats[5]) * 100 if stats[2] + stats[5] != 0 else 0
+            n_CHH = stats[3] / (stats[3] + stats[6]) * 100  if stats[3] + stats[6] != 0 else 0
             f.write("Rate of Methylation \n")
             print "\nRate of Methylation"
             f.write(" mCG  %1.3f%%\n" % n_CG)
@@ -518,9 +518,9 @@ if __name__ == '__main__':
         f.write('Total Number of Cs in CHG context: ' + str(stats[2] + stats[5]) + '\n')
         print 'Total Number of Cs in CHH context: ' + str(stats[3] + stats[6])
         f.write('Total Number of Cs in CHH context: ' + str(stats[3] + stats[6]) + '\n')
-        n_CG  = stats[1] / (stats[1] + stats[4]) if stats[1] + stats[4] != 0 else 0
-        n_CHG = stats[2] / (stats[2] + stats[5]) if stats[2] + stats[5] != 0 else 0
-        n_CHH = stats[3] / (stats[3] + stats[6]) if stats[3] + stats[6] != 0 else 0
+        n_CG  = stats[1] / (stats[1] + stats[4]) * 100 if stats[1] + stats[4] != 0 else 0
+        n_CHG = stats[2] / (stats[2] + stats[5]) * 100 if stats[2] + stats[5] != 0 else 0
+        n_CHH = stats[3] / (stats[3] + stats[6]) * 100 if stats[3] + stats[6] != 0 else 0
         f.write("Rate of Methylation \n")
         print "\nRate of Methylation"
         f.write(" mCG  %1.3f%%\n" % n_CG)
