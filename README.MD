@@ -332,11 +332,11 @@ mv snap-aligner snap
    This will build SNAP indexes in the directory bs_align/bs_utils/reference_genomes/genome.fa_snap
 #### Map the Sample Reads 
 ```
-./bs3-align -i test_data/WGBS.fa -o WGBS -f sam -g reference_genome/genome.fa
+./bs3-align -i test_data/WGBS.fa -o WGBS -f sam -g reference_genome/genome.fa -d reference_genome/
 ```
 Paired-end reads:
 ```
-./bs3-align -1 test_data/pair1.fq -2 test_data/pair2.fq -o WGBC -f sam -g reference_genome/genome.fa
+./bs3-align -1 test_data/pair1.fq -2 test_data/pair2.fq -o WGBC -f sam -g reference_genome/genome.fa -d reference_genome/
 ```
    This will produce the output file ``` WGBS.sam ```, which contains the aligned reads in SAM format ([SAM Fields Description](https://samtools.github.io/hts-specs/SAMv1.pdf))
 #### Return Genome-wide Methylation Report for the Sample Reads 
