@@ -60,7 +60,7 @@ def extract_mapping1(ali_file, unique_hits):
         location1 = int(buf[POS]) - 1
         cigar1 = parse_cigar(buf[CIGAR])
         mapped_strand = chrom_inf[2]
-        line1 = buf[0 : 2] + [str(int(chr) + 1)] + buf[3: buf_len]
+        line1 = buf[0 : 2] + [str(int(chr))] + buf[3: buf_len]
         line1 = '\t'.join(line1) + '\n'
     
         line2 = input.next()
@@ -69,7 +69,7 @@ def extract_mapping1(ali_file, unique_hits):
         if (buf_len < 11) | (buf[0][0] == '@'):
             continue
    
-        line2 = buf[0 : 2] + [str(int(chr) + 1)] + buf[3: buf_len]
+        line2 = buf[0 : 2] + [str(int(chr))] + buf[3: buf_len]
         line2 = '\t'.join(line2) + '\n'
         flag2 = int(buf[FLAG])
         if flag2 & 0x4 : # or int(buf[MAPQ]) < 10:
