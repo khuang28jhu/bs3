@@ -1,6 +1,7 @@
 from bs_utils.utils import *
 import subprocess
 import marshal
+import pickle
 
 def wg_build(fasta_file, build_command, ref_path, aligner):
 
@@ -23,15 +24,16 @@ def wg_build(fasta_file, build_command, ref_path, aligner):
     w_g2a = open(os.path.join(ref_path, 'W_G2A.fa'),'w')
     #c_g2a = open(os.path.join(ref_path, 'ref.fa'),'w')
     chrom_num = 0
-    
+    chrom_dict = {} 
     for chrom_id, chrom_seq in read_fasta(fasta_file):
         serialize(chrom_seq, os.path.join(ref_path, str(chrom_num)))
         marshal.dump(chrom_seq, open(os.path.join(ref_path, str(chrom_num + 1)+'.data'), 'wb'))
-        print os.path.join(ref_path, str(int(chrom_num + 1))+'.data')
+        #print os.path.join(ref_path, str(int(chrom_num))+'.data')
         #print len(chrom_seq)
         #continue
         refd[str(chrom_num)] = len(chrom_seq)
         chrom_conv.write(chrom_id + ': ' + str(chrom_num) + '\n')
+        chrom_dict[str(chrom_num)] = chrom_id
         w_c2t.write('>%s_w_c\n%s\n' % (str(chrom_num), chrom_seq.replace("C","T")))
         w_g2a.write('>%s_c_c\n%s\n' % (str(chrom_num), chrom_seq.replace("G","A")))
         chrom_seq = reverse_compl_seq(chrom_seq)
@@ -45,7 +47,7 @@ def wg_build(fasta_file, build_command, ref_path, aligner):
 
         elapsed('Preprocessing '+chrom_id)
 	chrom_num += 1
-
+    pickle.dump(chrom_dict, open(os.path.join(ref_path, 'chrom_conv.p'),'w'))
     w_c2t.close()
     w_g2a.close()
     #for outf in [w_c2t, c_c2t, w_g2a, c_g2a]:
