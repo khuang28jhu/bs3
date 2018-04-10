@@ -55,7 +55,7 @@ def deserialize(filename):
     return obj
 
 
-def extract_mapping1(ali_file, unique_hits):
+def extract_mapping1(ali_file, unique_hits, chrom_conv):
     #unique_hits = {}
     #non_unique_hits = {}
     
@@ -95,7 +95,7 @@ def extract_mapping1(ali_file, unique_hits):
         location = int(buf[POS]) - 1
         cigar = parse_cigar(buf[CIGAR])
         mapped_strand = chrom_inf[2]
-        line = buf[0 : 2] + [str(int(chr) + 1)] + buf[3:buf_len]
+        line = buf[0 : 2] + [chrom_conv[chr]] + buf[3:buf_len]
         line = '\t'.join(line) + '\n'
        
         #------------------------------
@@ -132,7 +132,7 @@ def extract_mapping1(ali_file, unique_hits):
 
 
 
-def extract_mapping2(ali_file, unique_hits):
+def extract_mapping2(ali_file, unique_hits,chrom_conv):
     
     header0 = ""
     lst = []
@@ -170,7 +170,7 @@ def extract_mapping2(ali_file, unique_hits):
         cigar = parse_cigar(buf[CIGAR])
         mapped_strand = chrom_inf[2]
         isComplementary = chrom_inf[1]
-        line = buf[0 : 2] + [str(int(chr) + 1)] + buf[3:buf_len]
+        line = buf[0 : 2] + [chrom_conv[chr]] + buf[3:buf_len]
         line = '\t'.join(line) + '\n'
        
         
@@ -360,13 +360,13 @@ def main():
     RC_C2T_U = {}
     if asktag=="Y":
         RC_C2W_U = {}
-
+    chrom_conv = pickle.load(open(os.path.join(db_path, 'chrom_conv.p')))
 
     if asktag=="N":
-        extract_mapping1(CC2T, RC_C2T_U)
+        extract_mapping1(CC2T, RC_C2T_U, chrom_conv)
     else:
-        extract_mapping2(CW2A, RC_C2T_U)
-        extract_mapping2(CC2T, RC_C2T_U)
+        extract_mapping2(CW2A, RC_C2T_U, chrom_conv)
+        extract_mapping2(CC2T, RC_C2T_U, chrom_conv)
 
     RC_C2T_uniq_lst= list(RC_C2T_U.keys())
 

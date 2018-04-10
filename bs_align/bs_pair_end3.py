@@ -17,7 +17,7 @@ import pickle
 
 
 
-def extract_mapping1(ali_file, unique_hits):
+def extract_mapping1(ali_file, unique_hits, chrom_conv):
     #unique_hits = {}
     #non_unique_hits = {}
     header0 = ""
@@ -60,7 +60,7 @@ def extract_mapping1(ali_file, unique_hits):
         location1 = int(buf[POS]) - 1
         cigar1 = parse_cigar(buf[CIGAR])
         mapped_strand = chrom_inf[2]
-        line1 = buf[0 : 2] + [str(int(chr))] + buf[3: buf_len]
+        line1 = buf[0 : 2] + [chrom_conv[chr] ] + buf[3: buf_len]
         line1 = '\t'.join(line1) + '\n'
     
         line2 = input.next()
@@ -69,7 +69,7 @@ def extract_mapping1(ali_file, unique_hits):
         if (buf_len < 11) | (buf[0][0] == '@'):
             continue
    
-        line2 = buf[0 : 2] + [str(int(chr))] + buf[3: buf_len]
+        line2 = buf[0 : 2] + [chrom_conv[chr]] + buf[3: buf_len]
         line2 = '\t'.join(line2) + '\n'
         flag2 = int(buf[FLAG])
         if flag2 & 0x4 : # or int(buf[MAPQ]) < 10:
@@ -131,7 +131,7 @@ def extract_mapping1(ali_file, unique_hits):
 
 
 def process_reads_organize(name, info, original_bs_reads1, original_bs_reads2, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag, K):
-   
+    #pickle.dump((name, info, original_bs_reads1, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), original_bs_reads2, int(K)), open('tst.p', 'w'))   
     if asktag == 'N':
         b5utils.process_pair_reads(name, info, original_bs_reads1, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), original_bs_reads2, int(K))
             
@@ -171,7 +171,8 @@ def main():
     if show_unmapped_hit == 'None':
         show_unmapped_hit = None
 
-
+    chrom_conv = pickle.load(open(os.path.join(db_path, 'chrom_conv.p')))
+    
     # helper method to join fname with tmp_path
     tmp_d = lambda fname: os.path.join(tmp_path, fname)
     db_d = lambda fname:  os.path.join(db_path, fname)
@@ -284,10 +285,10 @@ def main():
         RC_C2W_U = {}
 
     if asktag=="N":
-        extract_mapping1(CC2T, RC_C2T_U)
+        extract_mapping1(CC2T, RC_C2T_U, chrom_conv)
     else:
-        extract_mapping2(CW2A, RC_C2T_U)
-        extract_mapping2(CC2T, RC_C2T_U)
+        extract_mapping2(CW2A, RC_C2T_U, chorm_conv)
+        extract_mapping2(CC2T, RC_C2T_U, chrom_conv)
     
     RC_C2T_uniq_lst= list(RC_C2T_U.keys())
     
