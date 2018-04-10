@@ -14,7 +14,7 @@ import subprocess
 import marshal
 #import re
 #from bs_utils.utils import *
-
+import pickle
 
 if __name__ == '__main__':
 
@@ -388,9 +388,11 @@ if __name__ == '__main__':
             f = open('temp_header', 'w')
             f.write('@HD\tVN:1.0\tSO:unsorted'+ '\n')
             cmd_line = ' '.join(sys.argv)
+         
+            chrom_conv = pickle.load(open(os.path.join(db_path, 'chrom_conv.p')))
             
             for c in sorted(chrom_len):
-                f.write('@SQ\tSN:' + str(int(c) + 1) +'\tLN:' + str(chrom_len[c])+'\n')
+                f.write('@SQ\tSN:' + chrom_conv[c] +'\tLN:' + str(chrom_len[c])+'\n')
             f.write('@PG\tID:1\tPN:BS Seeker 3\tCL:'+ '\"' + cmd_line+'\"' + '\n')
             f.close()
 
@@ -465,7 +467,8 @@ if __name__ == '__main__':
             print p.pop().communicate("process " + str(part)+ " running\n")
             part += 1
     
-    
+
+        chrom_conv = pickle.load(open(os.path.join(db_path, 'chrom_conv.p')))    
         stats = [0 for i in range(13)]
         
         
@@ -539,7 +542,7 @@ if __name__ == '__main__':
         f.write('@HD\tVN:1.0\tSO:unsorted'+ '\n')
         cmd_line = ' '.join(sys.argv)
         for c in sorted(chrom_len):
-            f.write('@SQ\tSN:' + str(c) +'\tLN:' + str(chrom_len[c])+'\n')
+            f.write('@SQ\tSN:' + chrom_conv[str(c)] +'\tLN:' + str(chrom_len[c])+'\n')
         f.write('@PG\tID:1\tPN:BS Seeker 3\tCL:'+ '\"' + cmd_line+'\"' + '\n')
         f.close()
 
