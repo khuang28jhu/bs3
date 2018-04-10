@@ -480,7 +480,7 @@ if __name__ == '__main__':
                 continue
             for i, item in enumerate(open(filename).readline().split()):
                 stats[i] += float(item)
-            #subprocess.call('rm -r ' + filename, shell = True)
+            subprocess.call('rm -r ' + filename, shell = True)
 
         if (qc_len > 5):
             qc_bin = [0 for qc_num  in range(qc_len)]
