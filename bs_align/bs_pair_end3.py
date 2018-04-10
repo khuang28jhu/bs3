@@ -8,6 +8,7 @@ import itertools
 from functools import partial
 import sys
 import b4utils
+import b5utils
 import os
 import pickle
 #----------------------------------------------------------------
@@ -108,13 +109,11 @@ def extract_mapping1(ali_file, unique_hits):
         
             #print header, header0
             header0 = header
-            lst = [[no_mismatch + no_mismatch2, chr, location1, cigar1, location2, cigar2, line, line2, mapped_strand, mapped_strand2]]
-            #lst = [[no_mismatch, chr, location1, cigar1, line, mapped_strand], [no_mismatch2, chr, location2, cigar2, line2, mapped_strand2]]
+            lst = [[no_mismatch + no_mismatch2, chr, location1, cigar1, location2, cigar2, line1, line2, mapped_strand, mapped_strand2]]
+           
         else:
-            lst.append([no_mismatch + no_mismatch2, chr, location1, cigar1, location2, cigar2, line, line2, mapped_strand, mapped_strand2])
-            #lst.append([no_mismatch, chr, location1, cigar1, line, mapped_strand])
-            #lst.append([no_mismatch2, chr, location2, cigar2, line2, mapped_strand2])
-            #print no_mismatch + no_mismatch2, chr, location1, cigar1, location2, cigar2, line, line2, mapped_strand, mapped_strand2
+            lst.append([no_mismatch + no_mismatch2, chr, location1, cigar1, location2, cigar2, line1, line2, mapped_strand, mapped_strand2])
+         
 
     if len(lst) == 1:
         unique_hits[header0] = lst[0]
@@ -133,9 +132,8 @@ def extract_mapping1(ali_file, unique_hits):
 
 def process_reads_organize(name, info, original_bs_reads1, original_bs_reads2, db_path, mm_no, XS_count, XS_pct, chr_info, nn, qc, stat_out, sam_out, num_chr, asktag, K):
    
-    #pickle.dump((name, info, original_bs_reads1, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), original_bs_reads2, int(K)), open('tst.p', 'w'))
     if asktag == 'N':
-        b4utils.process_pair_reads(name, info, original_bs_reads1, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), original_bs_reads2, int(K))
+        b5utils.process_pair_reads(name, info, original_bs_reads1, db_path, int(mm_no), int(XS_count), XS_pct, chr_info, int(nn), qc, stat_out, sam_out, int(num_chr), original_bs_reads2, int(K))
             
   
 
