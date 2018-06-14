@@ -4,16 +4,11 @@ from optparse import OptionParser, OptionGroup
 import re
 import tempfile
 from bs_align import output
-#from bs_align.bs_pair_end3 import *
-#from bs_align.bs_single_end import *
 from bs_align.bs_rrbs import *
 import os
-import pdb
 import glob
 import subprocess
 import marshal
-#import re
-#from bs_utils.utils import *
 import pickle
 
 if __name__ == '__main__':
@@ -33,12 +28,12 @@ if __name__ == '__main__':
     parser.add_option_group(opt_group)
 
     # option group 3
-    opt_group = OptionGroup(parser, "Reduced Representation Bisulfite Sequencing Options")
-    opt_group.add_option("-r", "--rrbs", action="store_true", dest="rrbs", default = False, help = 'Map reads to the Reduced Representation genome')
-    opt_group.add_option("-c", "--cut-site", type="string",dest="cut_format", help="Cutting sites of restriction enzyme. Ex: MspI(C-CGG), Mael:(C-TAG), double-enzyme MspI&Mael:(C-CGG,C-TAG). [Default: %default]", metavar="pattern", default = "C-CGG")
-    opt_group.add_option("-L", "--low", type = "int", dest="rrbs_low_bound", help="Lower bound of fragment length (excluding C-CGG ends) [Default: %default]", default = 20)
-    opt_group.add_option("-U", "--up", type = "int", dest="rrbs_up_bound", help="Upper bound of fragment length (excluding C-CGG ends) [Default: %default]", default = 500)
-    parser.add_option_group(opt_group)
+    #opt_group = OptionGroup(parser, "Reduced Representation Bisulfite Sequencing Options")
+    #opt_group.add_option("-r", "--rrbs", action="store_true", dest="rrbs", default = False, help = 'Map reads to the Reduced Representation genome')
+    #opt_group.add_option("-c", "--cut-site", type="string",dest="cut_format", help="Cutting sites of restriction enzyme. Ex: MspI(C-CGG), Mael:(C-TAG), double-enzyme MspI&Mael:(C-CGG,C-TAG). [Default: %default]", metavar="pattern", default = "C-CGG")
+    #opt_group.add_option("-L", "--low", type = "int", dest="rrbs_low_bound", help="Lower bound of fragment length (excluding C-CGG ends) [Default: %default]", default = 20)
+    #opt_group.add_option("-U", "--up", type = "int", dest="rrbs_up_bound", help="Upper bound of fragment length (excluding C-CGG ends) [Default: %default]", default = 500)
+    #parser.add_option_group(opt_group)
 
     # option group 4
     opt_group = OptionGroup(parser, "General options")
@@ -183,6 +178,7 @@ if __name__ == '__main__':
     
 
     # try to guess the location of the reference genome for RRBS
+    '''
     if options.rrbs:
         if options.rrbs_low_bound and options.rrbs_up_bound:
             if options.cut_format == "C-CGG" :
@@ -197,7 +193,7 @@ if __name__ == '__main__':
                 error('Cannot localize unambiguously the reference genome for RRBS. '
                       'Please, specify the options \"--low\" and \"--up\" that you used at the index-building step.\n'
                       'Possible choices are:\n' + '\n'.join([pr.split('_rrbs_')[-1].replace('_',', ') for pr in possible_refs]))
-
+    '''
     db_path = os.path.expanduser(os.path.join(options.dbpath, genome_subdir + '_' + 'snap'))
     
     if not os.path.isdir(db_path):
@@ -230,17 +226,17 @@ if __name__ == '__main__':
     options.output_format = options.output_format.lower()
     if options.output_format not in output.formats:
         error('Output format should be one of: ' + ', '.join(output.formats))
-
+    
     if options.outfilename:
         outfilename = options.outfilename
         logfilename = outfilename
     elif options.infilename is not None:
-        logfilename = options.infilename+'_'+ ('rr' if options.rrbs else '') + 'bsse'
+        logfilename = options.infilename+'_'+ ('rr' if False else '') + 'bsse'
         outfilename = logfilename + '.' + options.output_format
     else:
-        logfilename = options.infilename_1+'_'+ ('rr' if options.rrbs else '') + 'bspe'
+        logfilename = options.infilename_1+'_'+ ('rr' if False else '') + 'bspe'
         outfilename = logfilename + '.' + options.output_format
-
+    
     outfilename = os.path.expanduser(outfilename)
     logfilename = os.path.expanduser(logfilename)
     outfile = output.outfile(outfilename, options.output_format, deserialize(os.path.join(db_path, 'refname')), ' '.join(sys.argv), options.no_SAM_header)
