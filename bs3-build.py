@@ -19,13 +19,13 @@ if __name__ == '__main__':
     
    
     # RRBS options
-    rrbs_opts = OptionGroup(parser, "Reduced Representation Bisulfite Sequencing Options",
+    #rrbs_opts = OptionGroup(parser, "Reduced Representation Bisulfite Sequencing Options",
                                 "Use this options with conjuction of -r [--rrbs]")
-    rrbs_opts.add_option("-r", "--rrbs", action="store_true", dest="rrbs", help = 'Build index specially for Reduced Representation Bisulfite Sequencing experiments. Genome other than certain fragments will be masked. [Default: %default]', default = False)
-    rrbs_opts.add_option("-l", "--low",type= "int", dest="low_bound", help="lower bound of fragment length (excluding recognition sequence such as C-CGG) [Default: %default]", default = 20)
-    rrbs_opts.add_option("-u", "--up", type= "int", dest="up_bound", help="upper bound of fragment length (excluding recognition sequence such as C-CGG ends) [Default: %default]", default = 500)
-    rrbs_opts.add_option("-c", "--cut-site", type= "string", dest="cut_format", help="Cut sites of restriction enzyme. Ex: MspI(C-CGG), Mael:(C-TAG), double-enzyme MspI&Mael:(C-CGG,C-TAG). [Default: %default]", default = "C-CGG")
-    parser.add_option_group(rrbs_opts)
+    #rrbs_opts.add_option("-r", "--rrbs", action="store_true", dest="rrbs", help = 'Build index specially for Reduced Representation Bisulfite Sequencing experiments. Genome other than certain fragments will be masked. [Default: %default]', default = False)
+    #rrbs_opts.add_option("-l", "--low",type= "int", dest="low_bound", help="lower bound of fragment length (excluding recognition sequence such as C-CGG) [Default: %default]", default = 20)
+    #rrbs_opts.add_option("-u", "--up", type= "int", dest="up_bound", help="upper bound of fragment length (excluding recognition sequence such as C-CGG ends) [Default: %default]", default = 500)
+    #rrbs_opts.add_option("-c", "--cut-site", type= "string", dest="cut_format", help="Cut sites of restriction enzyme. Ex: MspI(C-CGG), Mael:(C-TAG), double-enzyme MspI&Mael:(C-CGG,C-TAG). [Default: %default]", default = "C-CGG")
+    #parser.add_option_group(rrbs_opts)
 
 
     (options, args) = parser.parse_args()
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     else :
         show_version()
 
-    rrbs = options.rrbs
+    #rrbs = options.rrbs
 
     if options.filename is not None :
         fasta_file=os.path.expanduser(options.filename)
@@ -82,10 +82,10 @@ if __name__ == '__main__':
     else:
         os.mkdir(ref_path)
 
-    if rrbs: # RRBS preprocessing
-        rrbs_build(fasta_file, build_command, ref_path, options.low_bound, options.up_bound, options.aligner, options.cut_format)
-    else: # Whole genome preprocessing
-	start_time = time.time()
-        wg_build(fasta_file, build_command, ref_path, options.aligner)
-	print("Build Whole genome preprocessing \n--- %s seconds ---" % (time.time() - start_time))
+    #if rrbs: # RRBS preprocessing
+    #    rrbs_build(fasta_file, build_command, ref_path, options.low_bound, options.up_bound, options.aligner, options.cut_format)
+    #else: # Whole genome preprocessing
+    start_time = time.time()
+    wg_build(fasta_file, build_command, ref_path, options.aligner)
+    print("Build Whole genome preprocessing \n--- %s seconds ---" % (time.time() - start_time))
 	
