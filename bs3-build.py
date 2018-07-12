@@ -20,7 +20,7 @@ if __name__ == '__main__':
    
     # RRBS options
     #rrbs_opts = OptionGroup(parser, "Reduced Representation Bisulfite Sequencing Options",
-                                "Use this options with conjuction of -r [--rrbs]")
+    #                           "Use this options with conjuction of -r [--rrbs]")
     #rrbs_opts.add_option("-r", "--rrbs", action="store_true", dest="rrbs", help = 'Build index specially for Reduced Representation Bisulfite Sequencing experiments. Genome other than certain fragments will be masked. [Default: %default]', default = False)
     #rrbs_opts.add_option("-l", "--low",type= "int", dest="low_bound", help="lower bound of fragment length (excluding recognition sequence such as C-CGG) [Default: %default]", default = 20)
     #rrbs_opts.add_option("-u", "--up", type= "int", dest="up_bound", help="upper bound of fragment length (excluding recognition sequence such as C-CGG ends) [Default: %default]", default = 500)
