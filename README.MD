@@ -10,7 +10,7 @@ BS-Seeker3 maps bisulfite-treated reads (bs-seq) with high accuracy and ultra-fa
 
 ![overview](https://github.com/khuang28jhu/bs3/blob/master/Overview.png)
 
-## Annoucement
+### Annoucement
 
 I am aware and fixing a file-directory problem that's preventing the code to be run in a more flexible manner. Also improving the RRBS segment and problem with matching short reads (length < 50). MS1 obgligations are making this go slowly but it's getting there.
 
