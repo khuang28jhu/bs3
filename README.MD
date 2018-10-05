@@ -32,12 +32,12 @@ I am aware and fixing a file-directory problem that's preventing the code to be 
 * Python2 (version 2.5.2 or above; it should be pre-installed in both Linux and Mac). Type 'Python' to see the installed version. Python2 could be downloaded from http://www.python.org/download/ )
 * GCC 5.4.0 +
 * SNAP version 1.0beta.23, which could be downloaded from https://github.com/amplab/snap
-* Python Modules 'Pysam' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
+* Python Modules 'Pysam' and 'Matplotlib'. To install the packages, use the following commands on an UNIX terminal:
 ```
 pip install pysam
 ``` 
 ```
-pip install Matplolib
+pip install Matplotlib
 ```
 
 # <a name="RunningBS-Seeker3"></a>Running BS-Seeker3
