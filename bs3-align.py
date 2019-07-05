@@ -260,7 +260,7 @@ if __name__ == '__main__':
 
 
         #if options.aligner == 'snap':
-        aligner_command = './snap single %(reference_genome)s -fastq %(input_file)s -o -sam %(output_file)s -h 630 -d 20 -t 32 -b' +  aligner_options_string() 
+        aligner_command = 'snap single %(reference_genome)s -fastq %(input_file)s -o -sam %(output_file)s -h 630 -d 20 -t 32 -b' +  aligner_options_string() 
         
  
         if 1 == 1: # Normal single end scan
@@ -410,7 +410,7 @@ if __name__ == '__main__':
         
 
         #if options.aligner == 'snap':
-        aligner_command = './snap paired %(reference_genome)s -t 32 -b -fastq %(input_file_1)s   %(input_file_2)s -o -sam  %(output_file)s ' + aligner_options_string() + ' -s ' + str(options.min_insert_size) + ' ' + str(options.max_insert_size)
+        aligner_command = 'snap paired %(reference_genome)s -t 32 -b -fastq %(input_file_1)s   %(input_file_2)s -o -sam  %(output_file)s ' + aligner_options_string() + ' -s ' + str(options.min_insert_size) + ' ' + str(options.max_insert_size)
 
         input_fname = os.path.split(options.infilename_1)[1]
         tmp_d = lambda fname: os.path.join(tmp_path, fname)
