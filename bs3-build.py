@@ -62,7 +62,7 @@ if __name__ == '__main__':
         error('-a option should be: %s' % ' ,'.join(supported_aligners)+'.')
 
 
-    builder_exec =  './snap'
+    builder_exec =  'snap'
                                 
     build_command = builder_exec + {
                                      SNAP     : ' index    %(fname)s.fa %(fname)s '
